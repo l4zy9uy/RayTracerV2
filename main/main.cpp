@@ -5,18 +5,24 @@
 #include <glm/gtx/string_cast.hpp>
 int main() {
 
-    auto start = glm::vec3(0.0f, 1.0f, 0.0f);
-    auto velocity = glm::normalize(glm::vec3(1.0f, 1.8f, 0.0f)) * 11.25f;
-    auto p = Projectile(start, velocity);
-    glm::vec3 gravity(0.0f, -0.1f, 0.0f);
-    glm::vec3 wind(-0.01f, 0.0f, 0.0f);
-    auto e = Environment(gravity, wind);
-    Canvas c(900, 550);
-    while(p.position.y >= 0)
+    int window_width = 500;
+    int window_height = 500;
+    Canvas c(window_width, window_height);
+    float rotation = 0;
+    float radius = 200;
+    int center_y = window_height/2;
+    int center_x = window_width/2;
+    auto position = glm::vec4(-radius, 0.0f, 0.0f, 1.0f);
+    while(rotation < 360)
     {
-        std::cout << glm::to_string(p.position) << "\n";
-        c.writePixel(static_cast<int>(p.position.x), c.getWindowHeight() - static_cast<int>(p.position.y), glm::vec3(1.0f, 0.0f, 0.0f));
-        p = tick(e, p);
+        auto transform = position *
+                         glm::transpose(glm::rotate(glm::mat4(1), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))) *
+                         glm::transpose(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f))) *
+                         glm::transpose(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
+        auto pixel = transform + glm::vec4(center_x, center_y, 0.0f, 0.0f);
+        std::cout << glm::to_string(pixel) << "\n";
+        c.writePixel(static_cast<int>(pixel.x), static_cast<int>(pixel.y), glm::vec3(1.0f));
+        rotation += 30;
     }
     c.canvas_to_ppm();
     return 0;

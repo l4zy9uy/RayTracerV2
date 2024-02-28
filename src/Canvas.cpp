@@ -19,13 +19,13 @@ void Canvas::writePixel(const int &y, const int &x, const glm::vec3 &color) {
     image_[x][y] = color;
 }
 
-const glm::vec3 &Canvas::pixelAt(const int &x, const int &y) const {
+const glm::vec3 &Canvas::pixelAt(const int &y, const int &x) const {
     return image_[x][y];
 }
 
 void Canvas::canvas_to_ppm() {
     std::fstream myFile;
-    myFile.open("../../image_.ppm", std::ios::out);
+    myFile.open("../../image.ppm", std::ios::out);
     myFile << "P3\n" << window_width_ << " " << window_height_ << "\n" << "255" << "\n";
     for(int i = 0; i < window_height_; i++)
     {
