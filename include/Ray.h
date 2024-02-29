@@ -5,6 +5,7 @@
 #ifndef RAYTRACERV2_RAY_H
 #define RAYTRACERV2_RAY_H
 #include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 class Ray {
 public:
@@ -13,6 +14,7 @@ public:
     const glm::vec4 &getDirectionVector() const;
     void setDirectionVector(const glm::vec4 &directionVector);
     Ray(const glm::vec4 &originPoint, const glm::vec4 &directionVector);
+    Ray transform(const glm::mat4 &transform_matrix) const;
 private:
     glm::vec4 direction_vector_;
     glm::vec4 origin_point_;

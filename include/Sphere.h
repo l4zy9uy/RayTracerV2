@@ -9,13 +9,15 @@
 #include<glm/gtc/matrix_transform.hpp>
 #include "Intersections.h"
 #include "Ray.h"
+#include <memory>
+class Intersections;
 
-class Sphere {
+class Sphere{
 public:
     Sphere(const glm::mat4 &model, const float &radius, const glm::vec4 &position);
 
     explicit Sphere();
-
+    void setTransform(const glm::mat4 &transform_matrix);
     Intersections intersect(const Ray &ray);
 private:
     glm::mat4 model_ = glm::identity<glm::mat4>();
