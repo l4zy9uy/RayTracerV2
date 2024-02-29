@@ -14,7 +14,7 @@ class Intersection {
 private:
     float t_;
 public:
-    float getT() const;
+    [[nodiscard]] float getT() const;
 
     void setT(float t);
 

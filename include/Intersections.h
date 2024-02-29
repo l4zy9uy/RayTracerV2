@@ -12,22 +12,21 @@ class Sphere;
 
 class Intersections {
 private:
-    std::vector<Intersection> intersections_;
-    bool sorted;
+  std::vector<Intersection> intersections_;
+  bool sorted;
 public:
-    Intersections(const std::vector<Intersection> &intersections, bool sorted);
-    Intersections();
-    const std::vector<Intersection> &getIntersections() const;
+  Intersections(const std::vector<Intersection> &intersections, bool sorted);
+  Intersections();
+  [[nodiscard]] const std::vector<Intersection> &getIntersections() const;
 
-    void setIntersections(const std::vector<Intersection> &intersections);
-    std::optional<Intersection> hit();
+  void setIntersections(const std::vector<Intersection> &intersections);
+  std::optional<Intersection> hit();
 
 public:
-    void addIntersection(float &distance, Sphere* sphere);
-    void addIntersection(const Intersection &intersection);
-    void addIntersections(const Intersections &intersections);
-    void sort();
+  void addIntersection(float &distance, Sphere *sphere);
+  void addIntersection(const Intersection &intersection);
+  void addIntersections(const Intersections &intersections);
+  void sort();
 };
-
 
 #endif //RAYTRACERV2_INTERSECTIONS_H

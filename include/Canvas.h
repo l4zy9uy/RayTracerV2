@@ -11,16 +11,16 @@ class Canvas {
 public:
     Canvas(int windowWidth, int windowHeight);
     void writePixel(const int &y, const int &x, const glm::vec3 &color);
-    const glm::vec3 &pixelAt(const int &y, const int &x) const;
+    [[nodiscard]] const glm::vec3 &pixelAt(const int &y, const int &x) const;
     void canvas_to_ppm();
 private:
     int window_width_;
 public:
-    int getWindowWidth() const;
+    [[nodiscard]] int getWindowWidth() const;
 
     void setWindowWidth(int windowWidth);
 
-    int getWindowHeight() const;
+    [[nodiscard]] int getWindowHeight() const;
 
     void setWindowHeight(int windowHeight);
 
