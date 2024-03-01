@@ -34,7 +34,7 @@ public:
 
     void setPosition(const glm::vec4 &position);
 
-    [[nodiscard]] const Material &getMaterial() const;
+    [[nodiscard]] const Material getMaterial() const;
 
     void setMaterial(const Material &material);
 

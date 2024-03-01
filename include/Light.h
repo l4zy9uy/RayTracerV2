@@ -9,10 +9,12 @@
 #include "Material.h"
 class Light {
 public:
+    Light();
+
     Light(const glm::vec3 &intensity, const glm::vec4 &position);
 
 private:
-    glm::vec3 intensity_;
+    glm::vec3 intensity_{};
 public:
     const glm::vec3 &getIntensity() const;
 
@@ -24,7 +26,7 @@ public:
     glm::vec3 lighting(const Material &material, const glm::vec4 &position, const glm::vec4 &eyev, const glm::vec4 &normalv);
 
 private:
-    glm::vec4 position_;
+    glm::vec4 position_{};
 
 };
 

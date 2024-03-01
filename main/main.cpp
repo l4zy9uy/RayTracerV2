@@ -7,9 +7,10 @@
 #include <string>
 #include "Sphere.h"
 #include "Light.h"
+#include "World.h"
 
 int main() {
-    glm::vec4 ray_origin(0.0f, 0.0f, -5.0f, 1.0f);
+    /*glm::vec4 ray_origin(0.0f, 0.0f, -5.0f, 1.0f);
     float wall_z = 10.0f;
     float wall_size = 7.0f;
     int canvas_pixels = 500;
@@ -47,7 +48,30 @@ int main() {
             }
         }
     }
-    canvas.canvas_to_ppm();
-
+    canvas.canvas_to_ppm();*/
+    World world;
+    world.setDefault();
+    //world.setLight(Light(glm::vec3(1.0f), glm::vec4(0.0f, 0.25f, 0.0f, 1.0f)));
+    Ray r(glm::vec4(0.0f, 0.0f, 0.75f, 1.0f), glm::vec4(0.0f, 0.0f, -1.0f, 0.0f));
+    /*Sphere sphere = world.getSpheres()[1];
+    Intersection i(0.5, &sphere);
+    auto comps = i.prepare_computations(r);
+    auto color = world.shade_hit(comps);
+    std::cout << glm::to_string(color) << "\n";
+    std::cout << comps.getT() << "\n";
+    std::cout << glm::to_string(comps.getPoint()) << "\n";
+    std::cout << glm::to_string(comps.getEyev()) << "\n";
+    std::cout << glm::to_string(comps.getNormalv()) << "\n";
+    std::cout << std::boolalpha << comps.isInside() << "\n";*/
+    Material mat;
+    mat.setAmbient(1.0f);
+    auto outerMat = world.getSpheres()[0];
+    outerMat.setMaterial(mat);
+    std::cout << world.getSpheres()[0].getMaterial().getAmbient() << "\n";
+    Material innerMat = world.getSpheres()[1].getMaterial();
+    innerMat.setAmbient(1.0f);
+    innerMat.setColor(glm::vec3(0.23f, 0.34f, 0.45f));
+    auto c = world.color_at(r);
+    std::cout << glm::to_string(c) << "\n";
     return 0;
 }

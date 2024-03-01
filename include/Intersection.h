@@ -7,8 +7,11 @@
 
 #include <memory>
 #include "Sphere.h"
+#include "Computation.h"
 
 class Sphere;
+class Computation;
+class Ray;
 
 class Intersection {
 private:
@@ -21,7 +24,7 @@ public:
     [[nodiscard]] const Sphere* getSpherePtr() const;
 
     void setSpherePtr(Sphere* spherePtr);
-
+    Computation prepare_computations(const Ray &ray);
 private:
     Sphere* sphere_ptr_;
 public:

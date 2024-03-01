@@ -64,7 +64,7 @@ void Sphere::setPosition(const glm::vec4 &position) {
     position_ = position;
 }
 
-const Material &Sphere::getMaterial() const {
+const Material Sphere::getMaterial() const {
     return material_;
 }
 

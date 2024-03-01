@@ -48,3 +48,5 @@ Light::lighting(const Material &material, const glm::vec4 &position, const glm::
     }
     return ambient + diffuse + specular;
 }
+
+Light::Light() = default;

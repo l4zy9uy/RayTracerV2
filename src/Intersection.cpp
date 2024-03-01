@@ -22,3 +22,13 @@ const Sphere* Intersection::getSpherePtr() const {
 void Intersection::setSpherePtr( Sphere *spherePtr) {
     sphere_ptr_ = spherePtr;
 }
+
+Computation Intersection::prepare_computations(const Ray &ray) {
+    return {
+      t_,
+      sphere_ptr_,
+      position(ray, t_),
+      -ray.getDirectionVector(),
+      sphere_ptr_->normal_at(position(ray, t_))
+    };
+}
