@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 2/27/24.
 //
 
-#include "../include/ExtVec3.h"
+#include "ExtVec3.h"
 
 Projectile tick(const Environment &env, const Projectile &proj) {
     auto position = proj.position + proj.velocity;

@@ -2,9 +2,8 @@
 // Created by l4zy9uy on 2/28/24.
 //
 
-#include <utility>
 
-#include "../include/Intersection.h"
+#include "Intersection.h"
 
 Intersection::Intersection(float t, Sphere* sphere) : t_(t), sphere_ptr_(sphere) {}
 

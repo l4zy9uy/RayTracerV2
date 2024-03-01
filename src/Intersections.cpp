@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 2/28/24.
 //
 
-#include "../include/Intersections.h"
+#include "Intersections.h"
 #include <algorithm>
 
 void Intersections::addIntersection(float &distance, Sphere *sphere) {

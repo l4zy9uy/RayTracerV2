@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 2/27/24.
 //
 
-#include "../include/Canvas.h"
+#include "Canvas.h"
 #include <fstream>
 #include <algorithm>
 Canvas::Canvas(int windowWidth, int windowHeight) : window_width_(
