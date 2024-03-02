@@ -77,3 +77,7 @@ void World::changeSphereMaterial(size_t sphereIndex, const Material &newMaterial
         spheres_[sphereIndex].setMaterial(newMaterial);
     }
 }
+
+void World::addSphere(const Sphere &sphere) {
+    spheres_.push_back(sphere);
+}

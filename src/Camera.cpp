@@ -90,9 +90,9 @@ Ray Camera::ray_for_pixel(const float &px, const float &py) {
 
 Canvas Camera::render(World &world) {
     Canvas image(hsize_, vsize_);
-    for(int y = 0; y < vsize_; y++) {
-        for(int x = 0; x < hsize_; x++) {
-            auto ray = ray_for_pixel(x, y);
+    for(int y = 0; y < hsize_; y++) {
+        for(int x = 0; x < vsize_; x++) {
+            auto ray = ray_for_pixel(y, x);
             auto color = world.color_at(ray);
             image.writePixel(y, x, color);
         }

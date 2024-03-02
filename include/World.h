@@ -17,7 +17,7 @@ public:
     [[nodiscard]] const std::vector<Sphere> &getSpheres() const;
 
     void setSpheres(const std::vector<Sphere> &spheres);
-
+    void addSphere(const Sphere &sphere);
     [[nodiscard]] const Light &getLight() const;
 
     void setLight(const Light &light);
