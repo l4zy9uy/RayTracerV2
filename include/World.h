@@ -25,6 +25,7 @@ public:
     Intersections intersect_world(const Ray &ray);
     glm::vec3 shade_hit(const Computation &computation);
     glm::vec3 color_at(const Ray &ray);
+    void changeSphereMaterial(size_t sphereIndex, const Material& newMaterial);
 };
 
 

@@ -8,6 +8,7 @@
 #include "Sphere.h"
 #include "Light.h"
 #include "World.h"
+#include "Camera.h"
 
 int main() {
     /*glm::vec4 ray_origin(0.0f, 0.0f, -5.0f, 1.0f);
@@ -49,10 +50,10 @@ int main() {
         }
     }
     canvas.canvas_to_ppm();*/
-    World world;
-    world.setDefault();
+    //World world;
+    //world.setDefault();
     //world.setLight(Light(glm::vec3(1.0f), glm::vec4(0.0f, 0.25f, 0.0f, 1.0f)));
-    Ray r(glm::vec4(0.0f, 0.0f, 0.75f, 1.0f), glm::vec4(0.0f, 0.0f, -1.0f, 0.0f));
+    //Ray r(glm::vec4(0.0f, 0.0f, 0.75f, 1.0f), glm::vec4(0.0f, 0.0f, -1.0f, 0.0f));
     /*Sphere sphere = world.getSpheres()[1];
     Intersection i(0.5, &sphere);
     auto comps = i.prepare_computations(r);
@@ -63,15 +64,35 @@ int main() {
     std::cout << glm::to_string(comps.getEyev()) << "\n";
     std::cout << glm::to_string(comps.getNormalv()) << "\n";
     std::cout << std::boolalpha << comps.isInside() << "\n";*/
-    Material mat;
+    /*Material mat;
     mat.setAmbient(1.0f);
-    auto outerMat = world.getSpheres()[0];
-    outerMat.setMaterial(mat);
+    world.changeSphereMaterial(0, mat);
     std::cout << world.getSpheres()[0].getMaterial().getAmbient() << "\n";
-    Material innerMat = world.getSpheres()[1].getMaterial();
-    innerMat.setAmbient(1.0f);
-    innerMat.setColor(glm::vec3(0.23f, 0.34f, 0.45f));
+    mat.setColor(glm::vec3(0.23f, 0.34f, 0.45f));
+    world.changeSphereMaterial(1, mat);
     auto c = world.color_at(r);
-    std::cout << glm::to_string(c) << "\n";
+    std::cout << glm::to_string(c) << "\n";*/
+    /*glm::vec4 from(0.0f, 0.0f, 8.0f, 1.0f);
+    glm::vec4 to(0.0f, 0.0f, 0.0f, 1.0f);
+    glm::vec4 up(0.0f, 1.0f, 0.0f, 0.0f);
+    auto t = view_transform(from, to, up);
+    std::cout << glm::to_string(t) << "\n";*/
+    /*Camera camera(201, 101, glm::pi<float>()/2);
+    auto mat = glm::rotate(glm::mat4(1.0f), glm::pi<float>()/4, glm::vec3(0.0f, 1.0f, 0.0f)) *
+            glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.0f, 5.0f));
+    camera.setTransformMatrix(mat);
+    Ray r = camera.ray_for_pixel(100, 50);
+
+    std::cout << glm::to_string(r.getOriginPoint()) << "\n";
+    std::cout << glm::to_string(r.getDirectionVector()) << "\n";*/
+    World world;
+    world.setDefault();
+    Camera c(11, 11, glm::pi<float>()/2);
+    glm::vec4 from(0.0f, 0.0f, -5.0f, 1.0f);
+    glm::vec4 to(0.0f, 0.0f, 0.0f, 1.0f);
+    glm::vec4 up(0.0f, 1.0f, 0.0f, 0.0f);
+    c.setTransformMatrix(view_transform(from, to, up));
+    auto image = c.render(world);
+    std::cout << glm::to_string(image.pixelAt(5, 5));
     return 0;
 }

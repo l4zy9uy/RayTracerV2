@@ -71,3 +71,9 @@ glm::vec3 World::color_at(const Ray &ray) {
         return {0.0f, 0.0f, 0.0f};
     }
 }
+
+void World::changeSphereMaterial(size_t sphereIndex, const Material &newMaterial) {
+    if (sphereIndex < spheres_.size()) {
+        spheres_[sphereIndex].setMaterial(newMaterial);
+    }
+}
