@@ -9,25 +9,24 @@
 
 class Canvas {
 public:
-    Canvas(int windowWidth, int windowHeight);
-    void writePixel(const int &y, const int &x, const glm::vec3 &color);
-    [[nodiscard]] const glm::vec3 &pixelAt(const int &y, const int &x) const;
-    void canvas_to_ppm();
+  Canvas(int windowWidth, int windowHeight);
+  void writePixel(const int &y, const int &x, const glm::vec3 &color);
+  [[nodiscard]] const glm::vec3 &pixelAt(const int &y, const int &x) const;
+  void canvas_to_ppm();
 private:
-    int window_width_;
+  int window_width_;
 public:
-    [[nodiscard]] int getWindowWidth() const;
+  [[nodiscard]] int getWindowWidth() const;
 
-    void setWindowWidth(int windowWidth);
+  void setWindowWidth(int windowWidth);
 
-    [[nodiscard]] int getWindowHeight() const;
+  [[nodiscard]] int getWindowHeight() const;
 
-    void setWindowHeight(int windowHeight);
+  void setWindowHeight(int windowHeight);
 
 private:
-    int window_height_;
-    std::vector<std::vector<glm::vec3>> image_;
+  int window_height_;
+  std::vector<std::vector<glm::vec3>> image_;
 };
-
 
 #endif //RAYTRACERV2_CANVAS_H

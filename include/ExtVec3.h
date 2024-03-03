@@ -8,17 +8,17 @@
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>
 struct Projectile {
-    Projectile(const glm::vec3 &position, const glm::vec3 &velocity);
+  Projectile(const glm::vec3 &position, const glm::vec3 &velocity);
 
-    glm::vec3 position;
-    glm::vec3 velocity;
+  glm::vec3 position;
+  glm::vec3 velocity;
 };
 
 struct Environment {
-    Environment(const glm::vec3 &gravity, const glm::vec3 &wind);
+  Environment(const glm::vec3 &gravity, const glm::vec3 &wind);
 
-    glm::vec3 gravity;
-    glm::vec3 wind;
+  glm::vec3 gravity;
+  glm::vec3 wind;
 };
 
 Projectile tick(const Environment &env, const Projectile &proj);

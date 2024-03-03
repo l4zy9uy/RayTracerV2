@@ -25,7 +25,6 @@ public:
 private:
   glm::vec4 direction_vector_;
   glm::vec4 origin_point_;
-public:
 };
 
 glm::vec4 position(const Ray &ray, const float &t);

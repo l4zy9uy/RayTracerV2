@@ -7,51 +7,51 @@
 
 void Intersections::addIntersection(float &distance, Sphere *sphere) {
   sorted = false;
-  intersections_.emplace_back(distance, sphere);
+  list_.emplace_back(distance, sphere);
 }
 
-void Intersections::addIntersections(const Intersections &intersections) {
-  for (const auto &intersection : intersections.intersections_) {
-	intersections_.push_back(intersection);
+void Intersections::addList(const Intersections &list) {
+  for (const auto &intersection : list.list_) {
+    list_.push_back(intersection);
   }
   sorted = false;
 }
 
-const std::vector<Intersection> &Intersections::getIntersections() const {
-  return intersections_;
+const std::vector<Intersection> &Intersections::getList() const {
+  return list_;
 }
 
-void Intersections::setIntersections(const std::vector<Intersection> &intersections) {
-  intersections_ = intersections;
+void Intersections::setList(const std::vector<Intersection> &list) {
+  list_ = list;
 }
 
 std::optional<Intersection> Intersections::hit() {
   if (!sorted)
-	sort();
+    sort();
 
-  if (intersections_.empty())
-	return std::nullopt;
-  auto result = std::find_if(intersections_.begin(), intersections_.end(), [&](const Intersection &i) {
-	return i.getT() > 0;
+  if (list_.empty())
+    return std::nullopt;
+  auto result = std::find_if(list_.begin(), list_.end(), [&](const Intersection &i) {
+    return i.getT() > 0;
   });
 
-  if (result == intersections_.end())
-	return std::nullopt;
+  if (result == list_.end())
+    return std::nullopt;
   return std::make_optional<Intersection>(*result);
 }
 
 void Intersections::sort() {
-  std::sort(intersections_.begin(), intersections_.end(), [&](const Intersection &lhs, const Intersection &rhs) {
-	return lhs.getT() < rhs.getT();
+  std::sort(list_.begin(), list_.end(), [&](const Intersection &lhs, const Intersection &rhs) {
+    return lhs.getT() < rhs.getT();
   });
 }
 
 void Intersections::addIntersection(const Intersection &intersection) {
-  intersections_.push_back(intersection);
+  list_.push_back(intersection);
 }
 
-Intersections::Intersections(const std::vector<Intersection> &intersections, bool sorted) : intersections_(
-	intersections), sorted(sorted) {}
+Intersections::Intersections(const std::vector<Intersection> &list, bool sorted) : list_(
+    list), sorted(sorted) {}
 
 Intersections::Intersections() : sorted(false) {
 

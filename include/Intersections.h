@@ -12,20 +12,20 @@ class Sphere;
 
 class Intersections {
 private:
-  std::vector<Intersection> intersections_;
+  std::vector<Intersection> list_;
   bool sorted;
 public:
-  Intersections(const std::vector<Intersection> &intersections, bool sorted);
+  Intersections(const std::vector<Intersection> &list, bool sorted);
   Intersections();
-  [[nodiscard]] const std::vector<Intersection> &getIntersections() const;
+  [[nodiscard]] const std::vector<Intersection> &getList() const;
 
-  void setIntersections(const std::vector<Intersection> &intersections);
+  void setList(const std::vector<Intersection> &list);
   std::optional<Intersection> hit();
 
 public:
   void addIntersection(float &distance, Sphere *sphere);
   void addIntersection(const Intersection &intersection);
-  void addIntersections(const Intersections &intersections);
+  void addList(const Intersections &list);
   void sort();
 };
 

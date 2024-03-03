@@ -5,7 +5,7 @@
 #include "Ray.h"
 
 Ray::Ray(const glm::vec4 &originPoint, const glm::vec4 &directionVector) : origin_point_(originPoint),
-																		   direction_vector_(directionVector) {}
+                                                                           direction_vector_(directionVector) {}
 
 const glm::vec4 &Ray::getOriginPoint() const {
   return origin_point_;

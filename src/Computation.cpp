@@ -4,60 +4,66 @@
 
 #include "Computation.h"
 
-Computation::Computation(float t, Sphere *spherePtr, const glm::vec4 &point, const glm::vec4 &eyev,
-                         const glm::vec4 &normalv) : t_(t), sphere_ptr(spherePtr), point_(point), eyev_(eyev),
-                                                     normalv_(normalv) {
-    if(glm::dot(normalv, eyev) < 0) {
-        inside_ = true;
-        normalv_ = -normalv;
-    }
-    else inside_ = false;
+Computation::Computation(float t, Sphere *spherePtr, const glm::vec4 &point, const glm::vec4 &eye_vector,
+                         const glm::vec4 &normal_vector) : t_(t), sphere_ptr(spherePtr), point_(point), eye_vector_(eye_vector),
+                                                           normal_vector_(normal_vector) {
+  if (glm::dot(normal_vector, eye_vector) < 0) {
+    inside_ = true;
+    normal_vector_ = -normal_vector;
+  } else
+    inside_ = false;
 }
 
 float Computation::getT() const {
-    return t_;
+  return t_;
 }
 
 void Computation::setT(float t) {
-    t_ = t;
+  t_ = t;
 }
 
 Sphere *Computation::getSpherePtr() const {
-    return sphere_ptr;
+  return sphere_ptr;
 }
 
 void Computation::setSpherePtr(Sphere *spherePtr) {
-    sphere_ptr = spherePtr;
+  sphere_ptr = spherePtr;
 }
 
 const glm::vec4 &Computation::getPoint() const {
-    return point_;
+  return point_;
 }
 
 void Computation::setPoint(const glm::vec4 &point) {
-    point_ = point;
+  point_ = point;
 }
 
-const glm::vec4 &Computation::getEyev() const {
-    return eyev_;
+const glm::vec4 &Computation::getEyeVector() const {
+  return eye_vector_;
 }
 
-void Computation::setEyev(const glm::vec4 &eyev) {
-    eyev_ = eyev;
+void Computation::setEyeVector(const glm::vec4 &eye_vector) {
+  eye_vector_ = eye_vector;
 }
 
-const glm::vec4 &Computation::getNormalv() const {
-    return normalv_;
+const glm::vec4 &Computation::getNormalVector() const {
+  return normal_vector_;
 }
 
-void Computation::setNormalv(const glm::vec4 &normalv) {
-    normalv_ = normalv;
+void Computation::setNormalVector(const glm::vec4 &normal_vector) {
+  normal_vector_ = normal_vector;
 }
 
 bool Computation::isInside() const {
-    return inside_;
+  return inside_;
 }
 
 void Computation::setInside(bool inside) {
-    inside_ = inside;
+  inside_ = inside;
+}
+const glm::vec4 &Computation::getOverPoint() const {
+  return over_point_;
+}
+void Computation::setOverPoint(const glm::vec4 &OverPoint) {
+  over_point_ = OverPoint;
 }

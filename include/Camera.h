@@ -10,48 +10,46 @@
 #include "Canvas.h"
 
 class Camera {
-private:
-    int hsize_;
-    int vsize_;
-    float field_of_view_;
 public:
-    int getHsize() const;
+  [[nodiscard]] int getHorizontalSize() const;
 
-    void setHsize(int hsize);
+  void setHorizontalSize(int horizontal_size);
 
-    int getVsize() const;
+  [[nodiscard]] int getVerticalSize() const;
 
-    void setVsize(int vsize);
+  void setVerticalSize(int vertical_size);
 
-    float getFieldOfView() const;
+  [[nodiscard]] float getFieldOfView() const;
 
-    void setFieldOfView(float fieldOfView);
+  void setFieldOfView(float fieldOfView);
 
-    const glm::mat4 &getTransformMatrix() const;
+  [[nodiscard]] const glm::mat4 &getTransformMatrix() const;
 
-    void setTransformMatrix(const glm::mat4 &transformMatrix);
+  void setTransformMatrix(const glm::mat4 &transformMatrix);
 
-    float getHalfWidth() const;
+  [[nodiscard]] float getHalfWidth() const;
 
-    void setHalfWidth(float halfWidth);
+  void setHalfWidth(float halfWidth);
 
-    float getHalfHeight() const;
+  [[nodiscard]] float getHalfHeight() const;
 
-    void setHalfHeight(float halfHeight);
+  void setHalfHeight(float halfHeight);
 
-    float getPixelSize() const;
+  [[nodiscard]] float getPixelSize() const;
 
-    void setPixelSize(float pixelSize);
-    Ray ray_for_pixel(const float &px, const float &py);
-    Canvas render(World &world);
+  void setPixelSize(float pixelSize);
+  Ray ray_for_pixel(const float &px, const float &py);
+  Canvas render(World &world);
 private:
-    glm::mat4 transform_matrix_;
-    float half_width_;
-    float half_height_;
-    float pixel_size_;
+  glm::mat4 transform_matrix_{};
+  float half_width_;
+  float half_height_;
+  float pixel_size_;
+  int horizontal_size_;
+  int vertical_size_;
+  float field_of_view_;
 public:
-    Camera(int hsize, int vsize, float fieldOfView);
+  Camera(int horizontal_size, int vertical_size, float fieldOfView);
 };
-
 
 #endif //RAYTRACERV2_CAMERA_H
