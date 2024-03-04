@@ -11,42 +11,42 @@ class Ray;
 
 class Computation {
 private:
-  float t_;
+  double t_;
   Sphere *sphere_ptr;
-  glm::vec4 normal_vector_;
-  glm::vec4 point_;
-  glm::vec4 eye_vector_;
+  glm::dvec4 normal_vector_;
+  glm::dvec4 point_;
+  glm::dvec4 eye_vector_;
   bool inside_;
-  glm::vec4 over_point_;
+  glm::dvec4 over_point_;
 public:
-  const glm::vec4 &getOverPoint() const;
-  void setOverPoint(const glm::vec4 &OverPoint);
+  [[nodiscard]] const glm::dvec4 &getOverPoint() const;
+  void setOverPoint(const glm::dvec4 &OverPoint);
 public:
-  Computation(float t, Sphere *spherePtr, const glm::vec4 &point, const glm::vec4 &eye_vector, const glm::vec4 &normal_vector);
+  Computation(double t, Sphere *spherePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector, const glm::dvec4 &normal_vector);
 
   [[nodiscard]] bool isInside() const;
 
   void setInside(bool inside);
 
-  [[nodiscard]] float getT() const;
+  [[nodiscard]] double getT() const;
 
-  void setT(float t);
+  void setT(double t);
 
   [[nodiscard]] Sphere *getSpherePtr() const;
 
   void setSpherePtr(Sphere *spherePtr);
 
-  [[nodiscard]] const glm::vec4 &getPoint() const;
+  [[nodiscard]] const glm::dvec4 &getPoint() const;
 
-  void setPoint(const glm::vec4 &point);
+  void setPoint(const glm::dvec4 &point);
 
-  [[nodiscard]] const glm::vec4 &getEyeVector() const;
+  [[nodiscard]] const glm::dvec4 &getEyeVector() const;
 
-  void setEyeVector(const glm::vec4 &eye_vector);
+  void setEyeVector(const glm::dvec4 &eye_vector);
 
-  [[nodiscard]] const glm::vec4 &getNormalVector() const;
+  [[nodiscard]] const glm::dvec4 &getNormalVector() const;
 
-  void setNormalVector(const glm::vec4 &normal_vector);
+  void setNormalVector(const glm::dvec4 &normal_vector);
 };
 
 #endif //RAYTRACERV2_COMPUTATION_H

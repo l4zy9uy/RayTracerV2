@@ -11,26 +11,26 @@ class Light {
 public:
   Light();
 
-  Light(const glm::vec3 &intensity, const glm::vec4 &position);
+  Light(const glm::dvec3 &intensity, const glm::dvec4 &position);
 
 private:
-  glm::vec3 intensity_{};
+  glm::dvec3 intensity_{};
 public:
-  [[nodiscard]] const glm::vec3 &getIntensity() const;
+  [[nodiscard]] const glm::dvec3 &getIntensity() const;
 
-  void setIntensity(const glm::vec3 &intensity);
+  void setIntensity(const glm::dvec3 &intensity);
 
-  [[nodiscard]] const glm::vec4 &getPosition() const;
+  [[nodiscard]] const glm::dvec4 &getPosition() const;
 
-  void setPosition(const glm::vec4 &position);
-  glm::vec3 lighting(const Material &material,
-                     const glm::vec4 &position,
-                     const glm::vec4 &eye_vector,
-                     const glm::vec4 &normal_vector,
+  void setPosition(const glm::dvec4 &position);
+  glm::dvec3 lighting(const Material &material,
+                     const glm::dvec4 &position,
+                     const glm::dvec4 &eye_vector,
+                     const glm::dvec4 &normal_vector,
                      const bool &isInShadow);
 
 private:
-  glm::vec4 position_{};
+  glm::dvec4 position_{};
 
 };
 

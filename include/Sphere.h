@@ -15,33 +15,33 @@ class Intersections;
 
 class Sphere {
 public:
-  Sphere(const glm::mat4 &model, const float &radius, const glm::vec4 &position, const Material &material);
+  Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material);
 
   explicit Sphere();
-  void setTransform(const glm::mat4 &transform_matrix);
+  void setTransform(const glm::dmat4 &transform_matrix);
   Intersections intersect(const Ray &ray);
-  [[nodiscard]] glm::vec4 normal_at(const glm::vec4 &point) const;
+  [[nodiscard]] glm::dvec4 normal_at(const glm::dvec4 &point) const;
 
-    [[nodiscard]] const glm::mat4 &getModel() const;
+    [[nodiscard]] const glm::dmat4 &getModel() const;
 
-    void setModel(const glm::mat4 &model);
+    void setModel(const glm::dmat4 &model);
 
-    [[nodiscard]] float getRadius() const;
+    [[nodiscard]] double getRadius() const;
 
-    void setRadius(float radius);
+    void setRadius(double radius);
 
-    [[nodiscard]] const glm::vec4 &getPosition() const;
+    [[nodiscard]] const glm::dvec4 &getPosition() const;
 
-    void setPosition(const glm::vec4 &position);
+    void setPosition(const glm::dvec4 &position);
 
     [[nodiscard]] Material getMaterial() const;
 
     void setMaterial(const Material &material);
 
 private:
-  glm::mat4 model_ = glm::identity<glm::mat4>();
-  float radius_ = 1.0f;
-  glm::vec4 position_ = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+  glm::dmat4 model_ = glm::identity<glm::dmat4>();
+  double radius_ = 1.0;
+  glm::dvec4 position_ = glm::dvec4(0.0, 0.0, 0.0, 1.0);
   Material material_;
 };
 

@@ -4,14 +4,15 @@
 
 
 #include "Intersection.h"
+#include <limits>
 
-Intersection::Intersection(float t, Sphere *sphere) : t_(t), sphere_ptr_(sphere) {}
+Intersection::Intersection(double t, Sphere *sphere) : t_(t), sphere_ptr_(sphere) {}
 
-float Intersection::getT() const {
+double Intersection::getT() const {
   return t_;
 }
 
-void Intersection::setT(float t) {
+void Intersection::setT(double t) {
   t_ = t;
 }
 
@@ -29,6 +30,6 @@ Computation Intersection::prepare_computations(const Ray &ray) {
               position(ray, t_),
               -ray.getDirectionVector(),
               sphere_ptr_->normal_at(position(ray, t_)));
-  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * 0.000001f);
+  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * std::numeric_limits<double>::epsilon() * 100000.0);
   return comps;
 }

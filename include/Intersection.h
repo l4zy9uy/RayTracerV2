@@ -15,11 +15,11 @@ class Ray;
 
 class Intersection {
 private:
-  float t_;
+  double t_;
 public:
-  [[nodiscard]] float getT() const;
+  [[nodiscard]] double getT() const;
 
-  void setT(float t);
+  void setT(double t);
 
   [[nodiscard]] const Sphere *getSpherePtr() const;
 
@@ -28,7 +28,7 @@ public:
 private:
   Sphere *sphere_ptr_;
 public:
-  Intersection(float t, Sphere *sphere);
+  Intersection(double t, Sphere *sphere);
 };
 
 #endif //RAYTRACERV2_INTERSECTION_H

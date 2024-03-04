@@ -10,23 +10,23 @@
 
 class Ray {
 public:
-  [[nodiscard]] const glm::vec4 &getOriginPoint() const;
+  [[nodiscard]] const glm::dvec4 &getOriginPoint() const;
 
-  void setOriginPoint(const glm::vec4 &originPoint);
+  void setOriginPoint(const glm::dvec4 &originPoint);
 
-  [[nodiscard]] const glm::vec4 &getDirectionVector() const;
+  [[nodiscard]] const glm::dvec4 &getDirectionVector() const;
 
-  void setDirectionVector(const glm::vec4 &directionVector);
+  void setDirectionVector(const glm::dvec4 &directionVector);
 
-  Ray(const glm::vec4 &originPoint, const glm::vec4 &directionVector);
+  Ray(const glm::dvec4 &originPoint, const glm::dvec4 &directionVector);
 
-  [[nodiscard]] Ray transform(const glm::mat4 &transform_matrix) const;
+  [[nodiscard]] Ray transform(const glm::dmat4 &transform_matrix) const;
 
 private:
-  glm::vec4 direction_vector_;
-  glm::vec4 origin_point_;
+  glm::dvec4 direction_vector_;
+  glm::dvec4 origin_point_;
 };
 
-glm::vec4 position(const Ray &ray, const float &t);
+glm::dvec4 position(const Ray &ray, const double &t);
 
 #endif //RAYTRACERV2_RAY_H

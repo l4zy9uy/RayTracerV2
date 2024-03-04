@@ -5,7 +5,7 @@
 #include "Intersections.h"
 #include <algorithm>
 
-void Intersections::addIntersection(float &distance, Sphere *sphere) {
+void Intersections::addIntersection(double &distance, Sphere *sphere) {
   sorted = false;
   list_.emplace_back(distance, sphere);
 }

@@ -9,36 +9,36 @@
 
 class Material {
 public:
-  Material(const glm::vec3 &color, float ambient, float diffuse, float specular, float shininess);
+  Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess);
 
   Material();
 
 private:
-  glm::vec3 color_;
-  float ambient_;
-  float diffuse_;
-  float specular_;
-  float shininess_;
+  glm::dvec3 color_;
+  double ambient_;
+  double diffuse_;
+  double specular_;
+  double shininess_;
 public:
-  [[nodiscard]] const glm::vec3 &getColor() const;
+  [[nodiscard]] const glm::dvec3 &getColor() const;
 
-  void setColor(const glm::vec3 &color);
+  void setColor(const glm::dvec3 &color);
 
-  [[nodiscard]] float getAmbient() const;
+  [[nodiscard]] double getAmbient() const;
 
-  void setAmbient(float ambient);
+  void setAmbient(double ambient);
 
-  [[nodiscard]] float getDiffuse() const;
+  [[nodiscard]] double getDiffuse() const;
 
-  void setDiffuse(float diffuse);
+  void setDiffuse(double diffuse);
 
-  [[nodiscard]] float getSpecular() const;
+  [[nodiscard]] double getSpecular() const;
 
-  void setSpecular(float specular);
+  void setSpecular(double specular);
 
-  [[nodiscard]] float getShininess() const;
+  [[nodiscard]] double getShininess() const;
 
-  void setShininess(float shininess);
+  void setShininess(double shininess);
 };
 
 #endif //RAYTRACERV2_MATERIAL_H

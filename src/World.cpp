@@ -21,12 +21,12 @@ void World::setLight(const Light &light) {
 }
 
 void World::setDefault() {
-  light_ = Light(glm::vec3(1.0f), glm::vec4(-10.0f, 10.0f, -10.0f, 1.0f));
+  light_ = Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0));
   Sphere s1, s2;
-  Material material(glm::vec3(0.8f, 1.0f, 0.6f), 0.1f, 0.7f, 0.2f, 200.0f);
+  Material material(glm::dvec3(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0);
   s1.setMaterial(material);
   spheres_.push_back(s1);
-  s2.setTransform(glm::scale(glm::identity<glm::mat4>(), glm::vec3(0.5f)));
+  s2.setTransform(glm::scale(glm::identity<glm::dmat4>(), glm::dvec3(0.5)));
   spheres_.push_back(s2);
 }
 
@@ -48,12 +48,13 @@ Intersections World::intersect_world(const Ray &ray) {
     result.addIntersection(t1, &sphere);
     result.addIntersection(t2, &sphere);
   }
+
   return result;
 }
 
 World::World() : spheres_(), light_() {}
 
-glm::vec3 World::shade_hit(const Computation &computation) {
+glm::dvec3 World::shade_hit(const Computation &computation) {
   auto shadowed = isShadowed(computation.getOverPoint());
   return light_.lighting(
       computation.getSpherePtr()->getMaterial(),
@@ -63,13 +64,13 @@ glm::vec3 World::shade_hit(const Computation &computation) {
       shadowed);
 }
 
-glm::vec3 World::color_at(const Ray &ray) {
+glm::dvec3 World::color_at(const Ray &ray) {
   auto intersections = intersect_world(ray);
   auto hit = intersections.hit();
   if (hit.has_value()) {
     return shade_hit(hit->prepare_computations(ray));
   } else {
-    return {0.0f, 0.0f, 0.0f};
+    return {0.0, 0.0, 0.0};
   }
 }
 
@@ -82,7 +83,7 @@ void World::changeSphereMaterial(size_t sphereIndex, const Material &newMaterial
 void World::addSphere(const Sphere &sphere) {
   spheres_.push_back(sphere);
 }
-bool World::isShadowed(const glm::vec4 &point) {
+bool World::isShadowed(const glm::dvec4 &point) {
   auto v = light_.getPosition() - point;
   auto distance = glm::length(v);
   auto direction = glm::normalize(v);

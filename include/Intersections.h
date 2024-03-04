@@ -23,7 +23,7 @@ public:
   std::optional<Intersection> hit();
 
 public:
-  void addIntersection(float &distance, Sphere *sphere);
+  void addIntersection(double &distance, Sphere *sphere);
   void addIntersection(const Intersection &intersection);
   void addList(const Intersections &list);
   void sort();

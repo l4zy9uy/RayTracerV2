@@ -19,37 +19,37 @@ public:
 
   void setVerticalSize(int vertical_size);
 
-  [[nodiscard]] float getFieldOfView() const;
+  [[nodiscard]] double getFieldOfView() const;
 
-  void setFieldOfView(float fieldOfView);
+  void setFieldOfView(double fieldOfView);
 
-  [[nodiscard]] const glm::mat4 &getTransformMatrix() const;
+  [[nodiscard]] const glm::dmat4 &getTransformMatrix() const;
 
-  void setTransformMatrix(const glm::mat4 &transformMatrix);
+  void setTransformMatrix(const glm::dmat4 &transformMatrix);
 
-  [[nodiscard]] float getHalfWidth() const;
+  [[nodiscard]] double getHalfWidth() const;
 
-  void setHalfWidth(float halfWidth);
+  void setHalfWidth(double halfWidth);
 
-  [[nodiscard]] float getHalfHeight() const;
+  [[nodiscard]] double getHalfHeight() const;
 
-  void setHalfHeight(float halfHeight);
+  void setHalfHeight(double halfHeight);
 
-  [[nodiscard]] float getPixelSize() const;
+  [[nodiscard]] double getPixelSize() const;
 
-  void setPixelSize(float pixelSize);
-  Ray ray_for_pixel(const float &px, const float &py);
+  void setPixelSize(double pixelSize);
+  Ray ray_for_pixel(const double &px, const double &py);
   Canvas render(World &world);
 private:
-  glm::mat4 transform_matrix_{};
-  float half_width_;
-  float half_height_;
-  float pixel_size_;
+  glm::dmat4 transform_matrix_{};
+  double half_width_;
+  double half_height_;
+  double pixel_size_;
   int horizontal_size_;
   int vertical_size_;
-  float field_of_view_;
+  double field_of_view_;
 public:
-  Camera(int horizontal_size, int vertical_size, float fieldOfView);
+  Camera(int horizontal_size, int vertical_size, double fieldOfView);
 };
 
 #endif //RAYTRACERV2_CAMERA_H
