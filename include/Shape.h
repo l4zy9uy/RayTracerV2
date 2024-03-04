@@ -4,9 +4,10 @@
 
 #ifndef RAYTRACERV2_INCLUDE_SHAPE_H
 #define RAYTRACERV2_INCLUDE_SHAPE_H
-#include "Intersection.h"
-
-class Intersections;
+#include "Intersections.h"
+#include "Material.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include "Ray.h"
 
 class Shape {
 public:

@@ -5,9 +5,9 @@
 #include "Intersections.h"
 #include <algorithm>
 
-void Intersections::addIntersection(double &distance, Sphere *sphere) {
+void Intersections::addIntersection(double &distance, Shape *shape) {
   sorted = false;
-  list_.emplace_back(distance, sphere);
+  list_.emplace_back(distance, shape);
 }
 
 void Intersections::addList(const Intersections &list) {

@@ -4,9 +4,9 @@
 
 #include "Computation.h"
 
-Computation::Computation(double t, Sphere *spherePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector,
-                         const glm::dvec4 &normal_vector) : t_(t), sphere_ptr(spherePtr), point_(point), eye_vector_(eye_vector),
-                                                           normal_vector_(normal_vector) {
+Computation::Computation(double t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector,
+                         const glm::dvec4 &normal_vector) : t_(t), shape_ptr(shapePtr), point_(point), eye_vector_(eye_vector),
+                                                            normal_vector_(normal_vector) {
   if (glm::dot(normal_vector, eye_vector) < 0) {
     inside_ = true;
     normal_vector_ = -normal_vector;
@@ -22,12 +22,12 @@ void Computation::setT(double t) {
   t_ = t;
 }
 
-Sphere *Computation::getSpherePtr() const {
-  return sphere_ptr;
+Shape * Computation::getShapePtr() const {
+  return shape_ptr;
 }
 
-void Computation::setSpherePtr(Sphere *spherePtr) {
-  sphere_ptr = spherePtr;
+void Computation::setShapePtr(Shape *shapePtr) {
+  shape_ptr = shapePtr;
 }
 
 const glm::dvec4 &Computation::getPoint() const {

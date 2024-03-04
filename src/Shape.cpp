@@ -3,17 +3,11 @@
 //
 
 #include "Shape.h"
+
 void Shape::setTransform(const glm::dmat4 &transform_matrix) {
   model_ = transform_matrix;
 }
-/*Intersections Shape::local_intersect(const Ray &ray) {
-  return Intersections();
-}*/
-/*glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point) const {
-  glm::dvec4 res(point);
-  res.w = 0.0;
-  return res;
-}*/
+
 const glm::dmat4 &Shape::getModel() const {
   return model_;
 }
@@ -40,7 +34,9 @@ void Shape::setMaterial(const Material &material) {
 }
 Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, const Material &Material) : model_(
     Model), radius_(Radius), position_(Position), material_(Material) {}
+
 Intersections Shape::intersect(const Ray &ray) {
+
   auto local_ray = ray.transform(glm::inverse(model_));
   return local_intersect(local_ray);
 }

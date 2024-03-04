@@ -7,18 +7,15 @@
 
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
-#include "Intersections.h"
-#include "Ray.h"
 #include <memory>
-#include "Material.h"
 #include "Shape.h"
 
 class Intersections;
 
 class Sphere : public Shape {
 public:
-  Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material);
-
+  /*Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material);
+*/
   explicit Sphere();
   Intersections local_intersect(const Ray &ray) override;
   [[nodiscard]] glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;

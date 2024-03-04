@@ -2,15 +2,9 @@
 // Created by l4zy9uy on 3/1/24.
 //
 
+#include <glm/ext/matrix_transform.hpp>
 #include "World.h"
-
-const std::vector<Sphere> &World::getSpheres() const {
-  return spheres_;
-}
-
-void World::setSpheres(const std::vector<Sphere> &spheres) {
-  spheres_ = spheres;
-}
+#include "Sphere.h"
 
 const Light &World::getLight() const {
   return light_;
@@ -25,16 +19,17 @@ void World::setDefault() {
   Sphere s1, s2;
   Material material(glm::dvec3(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0);
   s1.setMaterial(material);
-  spheres_.push_back(s1);
+
+  shape_ptr_list_.push_back(std::make_shared<Sphere>(s1));
   s2.setTransform(glm::scale(glm::identity<glm::dmat4>(), glm::dvec3(0.5)));
-  spheres_.push_back(s2);
+  shape_ptr_list_.push_back(std::make_shared<Sphere>(s2));
 }
 
 Intersections World::intersect_world(const Ray &ray) {
   Intersections result;
-  for (auto &sphere : spheres_) {
-    auto ray2 = ray.transform(glm::inverse(sphere.getModel()));
-    auto sphere_to_ray = ray2.getOriginPoint() - sphere.getPosition();
+  for (auto &shape_ptr : shape_ptr_list_) {
+    auto ray2 = ray.transform(glm::inverse(shape_ptr->getModel()));
+    auto sphere_to_ray = ray2.getOriginPoint() - shape_ptr->getPosition();
     auto a = glm::dot(ray2.getDirectionVector(), ray2.getDirectionVector());
     auto b = 2 * glm::dot(ray2.getDirectionVector(), sphere_to_ray);
     auto c = glm::dot(sphere_to_ray, sphere_to_ray) - 1;
@@ -45,19 +40,18 @@ Intersections World::intersect_world(const Ray &ray) {
     }
     auto t1 = (-b - glm::sqrt(discriminant)) / (2 * a);
     auto t2 = (-b + glm::sqrt(discriminant)) / (2 * a);
-    result.addIntersection(t1, &sphere);
-    result.addIntersection(t2, &sphere);
+    result.addIntersection(t1, shape_ptr.get());
+    result.addIntersection(t2, shape_ptr.get());
   }
 
   return result;
 }
 
-World::World() : spheres_(), light_() {}
 
 glm::dvec3 World::shade_hit(const Computation &computation) {
   auto shadowed = isShadowed(computation.getOverPoint());
   return light_.lighting(
-      computation.getSpherePtr()->getMaterial(),
+      computation.getShapePtr()->getMaterial(),
       computation.getPoint(),
       computation.getEyeVector(),
       computation.getNormalVector(),
@@ -74,23 +68,23 @@ glm::dvec3 World::color_at(const Ray &ray) {
   }
 }
 
-void World::changeSphereMaterial(size_t sphereIndex, const Material &newMaterial) {
-  if (sphereIndex < spheres_.size()) {
-    spheres_[sphereIndex].setMaterial(newMaterial);
+void World::changeShapeMaterial(size_t shapeIndex, const Material &newMaterial) {
+  if (shapeIndex < shape_ptr_list_.size()) {
+    shape_ptr_list_[shapeIndex]->setMaterial(newMaterial);
   }
 }
 
-void World::addSphere(const Sphere &sphere) {
-  spheres_.push_back(sphere);
-}
 bool World::isShadowed(const glm::dvec4 &point) {
   auto v = light_.getPosition() - point;
   auto distance = glm::length(v);
   auto direction = glm::normalize(v);
   Ray r(point, direction);
   auto intersections = intersect_world(r);
-  auto h = intersections.hit();
-  if(h.has_value() && h->getT() < distance)
+  std::optional<Intersection> ht = intersections.hit();
+  if(ht.has_value() && ht->getT() < distance)
     return true;
   return false;
+}
+void World::addShapes(std::shared_ptr<Shape> &shape) {
+  shape_ptr_list_.push_back(shape);
 }

@@ -5,19 +5,20 @@
 #ifndef RAYTRACERV2_WORLD_H
 #define RAYTRACERV2_WORLD_H
 #include "Light.h"
-#include "Sphere.h"
+#include "Shape.h"
+#include "Intersections.h"
+#include <vector>
+#include <memory>
+
+class Intersections;
 class World {
 public:
-  World();
 
 private:
-  std::vector<Sphere> spheres_;
+  std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
   Light light_;
 public:
-  [[nodiscard]] const std::vector<Sphere> &getSpheres() const;
-
-  void setSpheres(const std::vector<Sphere> &spheres);
-  void addSphere(const Sphere &sphere);
+  void addShapes(std::shared_ptr<Shape> &shape);
   [[nodiscard]] const Light &getLight() const;
 
   void setLight(const Light &light);
@@ -25,7 +26,7 @@ public:
   Intersections intersect_world(const Ray &ray);
   glm::dvec3 shade_hit(const Computation &computation);
   glm::dvec3 color_at(const Ray &ray);
-  void changeSphereMaterial(size_t sphereIndex, const Material &newMaterial);
+  void changeShapeMaterial(size_t shapeIndex, const Material &newMaterial);
   bool isShadowed(const glm::dvec4 &point);
 };
 

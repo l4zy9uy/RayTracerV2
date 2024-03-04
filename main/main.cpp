@@ -68,7 +68,7 @@ int main() {
   world.addSphere(right_wall);
   world.addSphere(middle);
   world.addSphere(right);
-  world.addSphere(left);
+  world.addShapes(left);
   Camera camera(1920, 1080, glm::pi<double>() / 3);
   camera.setTransformMatrix(view_transform(glm::dvec4(0.0f, 1.5f, -5.0f, 1.0f),
                                            glm::dvec4(0.0f, 1.0f, 0.0f, 1.0f),

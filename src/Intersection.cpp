@@ -6,7 +6,7 @@
 #include "Intersection.h"
 #include <limits>
 
-Intersection::Intersection(double t, Sphere *sphere) : t_(t), shape_ptr_(sphere) {}
+Intersection::Intersection(double t, Shape *shape) : t_(t), shape_ptr_(shape) {}
 
 double Intersection::getT() const {
   return t_;
@@ -16,12 +16,12 @@ void Intersection::setT(double t) {
   t_ = t;
 }
 
-const Sphere *Intersection::getSpherePtr() const {
+const Shape * Intersection::getShapePtr() const {
   return shape_ptr_;
 }
 
-void Intersection::setSpherePtr(Sphere *spherePtr) {
-  shape_ptr_ = spherePtr;
+void Intersection::setShapePtr(Shape *shapePtr) {
+  shape_ptr_ = shapePtr;
 }
 
 Computation Intersection::prepare_computations(const Ray &ray) {

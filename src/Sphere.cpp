@@ -41,7 +41,8 @@ glm::dvec4 Sphere::local_normal_at(const glm::dvec4 &point) const {
   res.w = 0.0;
   return res;
 }
-Sphere::Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material) : Shape(model, radius, position, material) {
+Sphere::Sphere() = default;
+/*Sphere::Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material) : Shape(model, radius, position, material) {
 
-}
+}*/
 

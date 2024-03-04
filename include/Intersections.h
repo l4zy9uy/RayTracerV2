@@ -8,7 +8,7 @@
 #include "Intersection.h"
 #include <optional>
 class Intersection;
-class Sphere;
+class Shape;
 
 class Intersections {
 private:
@@ -23,7 +23,7 @@ public:
   std::optional<Intersection> hit();
 
 public:
-  void addIntersection(double &distance, Sphere *sphere);
+  void addIntersection(double &distance, Shape *shape);
   void addIntersection(const Intersection &intersection);
   void addList(const Intersections &list);
   void sort();

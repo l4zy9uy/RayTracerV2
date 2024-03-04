@@ -4,7 +4,8 @@
 
 #ifndef RAYTRACERV2_COMPUTATION_H
 #define RAYTRACERV2_COMPUTATION_H
-#include "Sphere.h"
+#include "Shape.h"
+#include <glm/glm.hpp>
 
 class Sphere;
 class Ray;
@@ -12,7 +13,7 @@ class Ray;
 class Computation {
 private:
   double t_;
-  Sphere *sphere_ptr;
+  Shape *shape_ptr;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
@@ -22,7 +23,7 @@ public:
   [[nodiscard]] const glm::dvec4 &getOverPoint() const;
   void setOverPoint(const glm::dvec4 &OverPoint);
 public:
-  Computation(double t, Sphere *spherePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector, const glm::dvec4 &normal_vector);
+  Computation(double t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector, const glm::dvec4 &normal_vector);
 
   [[nodiscard]] bool isInside() const;
 
@@ -32,9 +33,9 @@ public:
 
   void setT(double t);
 
-  [[nodiscard]] Sphere *getSpherePtr() const;
+  [[nodiscard]] Shape * getShapePtr() const;
 
-  void setSpherePtr(Sphere *spherePtr);
+  void setShapePtr(Shape *shapePtr);
 
   [[nodiscard]] const glm::dvec4 &getPoint() const;
 
