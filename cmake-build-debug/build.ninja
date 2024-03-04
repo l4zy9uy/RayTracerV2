@@ -140,6 +140,13 @@ build src/CMakeFiles/classes.dir/Ray.cpp.o: CXX_COMPILER__classes_unscanned_Debu
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
+build src/CMakeFiles/classes.dir/Shape.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Shape.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/Shape.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
+
 build src/CMakeFiles/classes.dir/Sphere.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Sphere.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Sphere.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
@@ -162,7 +169,7 @@ build src/CMakeFiles/classes.dir/World.cpp.o: CXX_COMPILER__classes_unscanned_De
 #############################################
 # Link the static library src/libclasses.a
 
-build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/Computation.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/World.cpp.o
+build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/Computation.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/World.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = src/CMakeFiles/classes.dir
   POST_BUILD = :

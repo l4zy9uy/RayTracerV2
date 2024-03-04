@@ -11,38 +11,17 @@
 #include "Ray.h"
 #include <memory>
 #include "Material.h"
+#include "Shape.h"
+
 class Intersections;
 
-class Sphere {
+class Sphere : public Shape {
 public:
   Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material);
 
   explicit Sphere();
-  void setTransform(const glm::dmat4 &transform_matrix);
-  Intersections intersect(const Ray &ray);
-  [[nodiscard]] glm::dvec4 normal_at(const glm::dvec4 &point) const;
-
-    [[nodiscard]] const glm::dmat4 &getModel() const;
-
-    void setModel(const glm::dmat4 &model);
-
-    [[nodiscard]] double getRadius() const;
-
-    void setRadius(double radius);
-
-    [[nodiscard]] const glm::dvec4 &getPosition() const;
-
-    void setPosition(const glm::dvec4 &position);
-
-    [[nodiscard]] Material getMaterial() const;
-
-    void setMaterial(const Material &material);
-
-private:
-  glm::dmat4 model_ = glm::identity<glm::dmat4>();
-  double radius_ = 1.0;
-  glm::dvec4 position_ = glm::dvec4(0.0, 0.0, 0.0, 1.0);
-  Material material_;
+  Intersections local_intersect(const Ray &ray) override;
+  [[nodiscard]] glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;
 };
 
 #endif //RAYTRACERV2_SPHERE_H

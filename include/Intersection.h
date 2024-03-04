@@ -6,10 +6,10 @@
 #define RAYTRACERV2_INTERSECTION_H
 
 #include <memory>
-#include "Sphere.h"
+#include "Shape.h"
 #include "Computation.h"
 
-class Sphere;
+class Shape;
 class Computation;
 class Ray;
 
@@ -26,7 +26,7 @@ public:
   void setSpherePtr(Sphere *spherePtr);
   Computation prepare_computations(const Ray &ray);
 private:
-  Sphere *sphere_ptr_;
+  Shape *shape_ptr_;
 public:
   Intersection(double t, Sphere *sphere);
 };

@@ -4,10 +4,12 @@
 
 #include "Sphere.h"
 
+/*
 Sphere::Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material)
     : model_(model), radius_(radius), position_(position), material_(material) {}
+*/
 
-Intersections Sphere::intersect(const Ray &ray) {
+Intersections Sphere::local_intersect(const Ray &ray) {
   Intersections result;
   auto ray2 = ray.transform(glm::inverse(model_));
   // the vector from the sphere's center, to the ray origin
@@ -28,50 +30,18 @@ Intersections Sphere::intersect(const Ray &ray) {
   return result;
 }
 
+/*
 Sphere::Sphere()
     : model_(glm::identity<glm::dmat4>()), radius_(1.0), position_(glm::dvec4(0.0, 0.0, 0.0, 1.0)),
       material_(Material()) {}
+*/
 
-void Sphere::setTransform(const glm::dmat4 &transform_matrix) {
-  model_ = transform_matrix;
+glm::dvec4 Sphere::local_normal_at(const glm::dvec4 &point) const {
+  glm::dvec4 res(point);
+  res.w = 0.0;
+  return res;
+}
+Sphere::Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material) : Shape(model, radius, position, material) {
+
 }
 
-glm::dvec4 Sphere::normal_at(const glm::dvec4 &point) const {
-  auto object_point = glm::inverse(model_) * point;
-  auto object_normal = glm::normalize(object_point - glm::dvec4(0.0, 0.0, 0.0, 1.0));
-  glm::dvec4 world_normal = glm::transpose(glm::inverse(model_)) * object_normal;
-  world_normal.w = 0.0;
-  return glm::normalize(world_normal);
-}
-
-const glm::dmat4 &Sphere::getModel() const {
-  return model_;
-}
-
-void Sphere::setModel(const glm::dmat4 &model) {
-  model_ = model;
-}
-
-double Sphere::getRadius() const {
-  return radius_;
-}
-
-void Sphere::setRadius(double radius) {
-  radius_ = radius;
-}
-
-const glm::dvec4 &Sphere::getPosition() const {
-  return position_;
-}
-
-void Sphere::setPosition(const glm::dvec4 &position) {
-  position_ = position;
-}
-
-Material Sphere::getMaterial() const {
-  return material_;
-}
-
-void Sphere::setMaterial(const Material &material) {
-  material_ = material;
-}
