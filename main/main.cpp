@@ -11,10 +11,11 @@
 #include "Camera.h"
 #include <chrono>
 #include "Shape.h"
+#include "Plane.h"
 int main() {
   auto start = std::chrono::high_resolution_clock::now();
 
-  Sphere floor;
+  /*Sphere floor;
   floor.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
   Material material1;
   material1.setColor(glm::dvec3(1.0, 0.9, 0.9));
@@ -32,7 +33,7 @@ int main() {
       glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)) *
       glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 2, glm::dvec3(1.0, 0.0, 0.0)) *
       glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
-  right_wall.setMaterial(material1);
+  right_wall.setMaterial(material1);*/
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -60,14 +61,16 @@ int main() {
   left_material.setSpecular(0.3);
   left.setMaterial(left_material);
 
+  Plane p;
   World world;
   world.setLight(Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0)));
-  world.addShape(std::make_shared<Sphere>(floor));
+  /*world.addShape(std::make_shared<Sphere>(floor));
   world.addShape(std::make_shared<Sphere>(left_wall));
-  world.addShape(std::make_shared<Sphere>(right_wall));
+  world.addShape(std::make_shared<Sphere>(right_wall));*/
   world.addShape(std::make_shared<Sphere>(left));
   world.addShape(std::make_shared<Sphere>(right));
   world.addShape(std::make_shared<Sphere>(middle));
+  world.addShape(std::make_shared<Plane>(p));
   Camera camera(3840, 2160, glm::pi<double>() / 3);
   camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 1.0),
@@ -78,6 +81,5 @@ int main() {
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
-
   return 0;
 }
