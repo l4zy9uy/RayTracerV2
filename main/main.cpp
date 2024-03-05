@@ -12,72 +12,72 @@
 #include <chrono>
 #include "Shape.h"
 int main() {
-
   auto start = std::chrono::high_resolution_clock::now();
 
-  /*Sphere floor;
-  floor.setTransform(glm::scale(glm::dmat4(1.0f), glm::dvec3(10.0f, 0.01f, 10.0f)));
+  Sphere floor;
+  floor.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
   Material material1;
-  material1.setColor(glm::dvec3(1.0f, 0.9f, 0.9f));
-  material1.setSpecular(0.0f);
+  material1.setColor(glm::dvec3(1.0, 0.9, 0.9));
+  material1.setSpecular(0.0);
   floor.setMaterial(material1);
   Sphere left_wall;
-  left_wall.setTransform(glm::translate(glm::dmat4(1.0f), glm::dvec3(0.0f, 0.0f, 5.0f)) *
-      glm::rotate(glm::dmat4(1.0f), -glm::pi<double>() / 4, glm::dvec3(0.0f, 1.0f, 0.0f)) *
-      glm::rotate(glm::dmat4(1.0f), glm::pi<double>() / 2, glm::dvec3(1.0f, 0.0f, 0.0f)) *
-      glm::scale(glm::dmat4(1.0f), glm::dvec3(10.0f, 0.01f, 10.0f)));
+  left_wall.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 5.0)) *
+      glm::rotate(glm::dmat4(1.0), -glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)) *
+      glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 2, glm::dvec3(1.0, 0.0, 0.0)) *
+      glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
   left_wall.setMaterial(material1);
 
   Sphere right_wall;
-  right_wall.setTransform(glm::translate(glm::dmat4(1.0f), glm::dvec3(0.0f, 0.0f, 5.0f)) *
-      glm::rotate(glm::dmat4(1.0f), glm::pi<double>() / 4, glm::dvec3(0.0f, 1.0f, 0.0f)) *
-      glm::rotate(glm::dmat4(1.0f), glm::pi<double>() / 2, glm::dvec3(1.0f, 0.0f, 0.0f)) *
-      glm::scale(glm::dmat4(1.0f), glm::dvec3(10.0f, 0.01f, 10.0f)));
+  right_wall.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 5.0)) *
+      glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)) *
+      glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 2, glm::dvec3(1.0, 0.0, 0.0)) *
+      glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
   right_wall.setMaterial(material1);
 
   Sphere middle;
-  middle.setTransform(glm::translate(glm::dmat4(1.0f), glm::dvec3(-0.5f, 1.0f, 0.5f)));
+  middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
   Material middle_material;
-  middle_material.setColor(glm::dvec3(0.1f, 1.0f, 0.5f));
-  middle_material.setDiffuse(0.7f);
-  middle_material.setSpecular(0.3f);
+  middle_material.setColor(glm::dvec3(0.1, 1.0, 0.5));
+  middle_material.setDiffuse(0.7);
+  middle_material.setSpecular(0.3);
   middle.setMaterial(middle_material);
 
   Sphere right;
-  right.setTransform(glm::translate(glm::dmat4(1.0f), glm::dvec3(1.5f, 0.5f, -0.5f)) *
-      glm::scale(glm::dmat4(1.0f), glm::dvec3(0.5f)));
+  right.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(1.5, 0.5, -0.5)) *
+      glm::scale(glm::dmat4(1.0), glm::dvec3(0.5)));
   Material right_material;
-  right_material.setColor(glm::dvec3(0.5f, 1.0f, 0.1f));
-  right_material.setDiffuse(0.7f);
-  right_material.setSpecular(0.3f);
+  right_material.setColor(glm::dvec3(0.5, 1.0, 0.1));
+  right_material.setDiffuse(0.7);
+  right_material.setSpecular(0.3);
   right.setMaterial(right_material);
 
   Sphere left;
-  left.setTransform(glm::translate(glm::dmat4(1.0f), glm::dvec3(-1.5f, 0.33f, -0.75f)) *
-      glm::scale(glm::dmat4(1.0f), glm::dvec3(0.33f)));
+  left.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-1.5, 0.33, -0.75)) *
+      glm::scale(glm::dmat4(1.0), glm::dvec3(0.33)));
   Material left_material;
-  left_material.setColor(glm::dvec3(1.0f, 0.8f, 0.1f));
-  left_material.setDiffuse(0.7f);
-  left_material.setSpecular(0.3f);
+  left_material.setColor(glm::dvec3(1.0, 0.8, 0.1));
+  left_material.setDiffuse(0.7);
+  left_material.setSpecular(0.3);
   left.setMaterial(left_material);
 
   World world;
-  world.setLight(Light(glm::dvec3(1.0f), glm::dvec4(-10.0f, 10.0f, -10.0f, 1.0f)));
-  world.addSphere(floor);
-  world.addSphere(left_wall);
-  world.addSphere(right_wall);
-  world.addSphere(middle);
-  world.addSphere(right);
-  world.addShapes(left);
-  Camera camera(1920, 1080, glm::pi<double>() / 3);
-  camera.setTransformMatrix(view_transform(glm::dvec4(0.0f, 1.5f, -5.0f, 1.0f),
-                                           glm::dvec4(0.0f, 1.0f, 0.0f, 1.0f),
-                                           glm::dvec4(0.0f, 1.0f, 0.0f, 0.0f)));
+  world.setLight(Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0)));
+  world.addShape(std::make_shared<Sphere>(floor));
+  world.addShape(std::make_shared<Sphere>(left_wall));
+  world.addShape(std::make_shared<Sphere>(right_wall));
+  world.addShape(std::make_shared<Sphere>(left));
+  world.addShape(std::make_shared<Sphere>(right));
+  world.addShape(std::make_shared<Sphere>(middle));
+  Camera camera(3840, 2160, glm::pi<double>() / 3);
+  camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
+                                           glm::dvec4(0.0, 1.0, 0.0, 1.0),
+                                           glm::dvec4(0.0, 1.0, 0.0, 0.0)));
   Canvas canvas = camera.render(world);
 
   canvas.canvas_to_ppm();
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+
   return 0;
 }

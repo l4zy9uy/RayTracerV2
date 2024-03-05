@@ -18,7 +18,7 @@ private:
   std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
   Light light_;
 public:
-  void addShapes(std::shared_ptr<Shape> &shape);
+  void addShape(std::shared_ptr<Shape> shape);
   [[nodiscard]] const Light &getLight() const;
 
   void setLight(const Light &light);

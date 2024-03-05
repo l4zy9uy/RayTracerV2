@@ -9,6 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Ray.h"
 
+class Intersections;
+
 class Shape {
 public:
   explicit Shape();

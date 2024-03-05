@@ -9,9 +9,9 @@
 #include "Shape.h"
 #include "Computation.h"
 
-//class Shape;
+class Shape;
 class Computation;
-//class Ray;
+class Ray;
 
 class Intersection {
 private:

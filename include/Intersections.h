@@ -25,6 +25,7 @@ public:
 public:
   void addIntersection(double &distance, Shape *shape);
   void addIntersection(const Intersection &intersection);
+  void addIntersections(const Intersections &intersections);
   void addList(const Intersections &list);
   void sort();
 };

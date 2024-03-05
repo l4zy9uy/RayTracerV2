@@ -56,3 +56,8 @@ Intersections::Intersections(const std::vector<Intersection> &list, bool sorted)
 Intersections::Intersections() : sorted(false) {
 
 }
+void Intersections::addIntersections(const Intersections &intersections) {
+  for(const auto & i : intersections.list_) {
+    list_.push_back(i);
+  }
+}

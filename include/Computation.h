@@ -9,6 +9,7 @@
 
 class Sphere;
 class Ray;
+class Shape;
 
 class Computation {
 private:
