@@ -12,10 +12,12 @@
 #include <chrono>
 #include "Shape.h"
 #include "Plane.h"
-int main() {
-  auto start = std::chrono::high_resolution_clock::now();
+#include "Pattern.h"
 
-  /*Sphere floor;
+int main() {
+  /*auto start = std::chrono::high_resolution_clock::now();
+
+  *//*Sphere floor;
   floor.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
   Material material1;
   material1.setColor(glm::dvec3(1.0, 0.9, 0.9));
@@ -33,7 +35,7 @@ int main() {
       glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)) *
       glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 2, glm::dvec3(1.0, 0.0, 0.0)) *
       glm::scale(glm::dmat4(1.0), glm::dvec3(10.0, 0.01, 10.0)));
-  right_wall.setMaterial(material1);*/
+  right_wall.setMaterial(material1);*//*
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -64,9 +66,9 @@ int main() {
   Plane p;
   World world;
   world.setLight(Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0)));
-  /*world.addShape(std::make_shared<Sphere>(floor));
+  *//*world.addShape(std::make_shared<Sphere>(floor));
   world.addShape(std::make_shared<Sphere>(left_wall));
-  world.addShape(std::make_shared<Sphere>(right_wall));*/
+  world.addShape(std::make_shared<Sphere>(right_wall));*//*
   world.addShape(std::make_shared<Sphere>(left));
   world.addShape(std::make_shared<Sphere>(right));
   world.addShape(std::make_shared<Sphere>(middle));
@@ -80,6 +82,21 @@ int main() {
   canvas.canvas_to_ppm();
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
+  Pattern pattern(glm::vec3(1.0), glm::vec3(0.0));
+  Material m;
+  m.setPattern(pattern);
+  m.setAmbient(1.0);
+  m.setDiffuse(0.0);
+  m.setSpecular(0.0);
+  glm::dvec4 eyev(0.0, 0.0, -1.0, 0.0);
+  glm::dvec4 normalv(0.0, 0.0, -1.0, 0.0);
+  Light light(glm::dvec3(1.0), glm::dvec4(0.0, 0.0, -10.0, 1.0));
+  auto c1 = light.lighting(m, glm::dvec4(0.9, 0.0, 0.0, 1.0), eyev, normalv, false);
+  auto c2 = light.lighting(m, glm::dvec4(1.1, 0.0, 0.0, 1.0), eyev, normalv, false);
+  std::cout << glm::to_string(c1) << "\n";
+  std::cout << glm::to_string(c2) << "\n";
+
+
   return 0;
 }

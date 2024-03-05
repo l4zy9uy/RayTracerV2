@@ -29,7 +29,10 @@ Light::lighting(const Material &material,
                 const glm::dvec4 &eye_vector,
                 const glm::dvec4 &normal_vector,
                 const bool &isInShadow) {
-  auto effective_color = material.getColor() * intensity_;
+  glm::dvec3 color;
+  if(material.hasPattern()) color = material.getPattern().stripe_at(position);
+  else color = material.getColor();
+  auto effective_color = color * intensity_;
   auto lightv = glm::normalize(position_ - position);
   auto ambient = effective_color * material.getAmbient();
   auto light_dot_normal = glm::dot(lightv, normal_vector);

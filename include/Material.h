@@ -6,6 +6,8 @@
 #define RAYTRACERV2_MATERIAL_H
 
 #include <glm/vec3.hpp>
+#include "Pattern.h"
+#include <optional>
 
 class Material {
 public:
@@ -19,6 +21,11 @@ private:
   double diffuse_;
   double specular_;
   double shininess_;
+  std::optional<Pattern> pattern_;
+public:
+  [[nodiscard]] const Pattern &getPattern() const;
+  [[nodiscard]] bool hasPattern() const;
+  void setPattern(const Pattern &Pattern);
 public:
   [[nodiscard]] const glm::dvec3 &getColor() const;
 
