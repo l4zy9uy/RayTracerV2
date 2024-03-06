@@ -25,12 +25,13 @@ void Light::setPosition(const glm::dvec4 &position) {
 
 glm::dvec3
 Light::lighting(const Material &material,
-                const glm::dvec4 &position,
+                const Shape &shape,
                 const glm::dvec4 &eye_vector,
                 const glm::dvec4 &normal_vector,
-                const bool &isInShadow) {
+                const bool &isInShadow,
+                const glm::dvec4 &position) {
   glm::dvec3 color;
-  if(material.hasPattern()) color = material.getPattern().stripe_at(position);
+  if(material.hasPattern()) color = material.getPatternPtr()->pattern_at_shape(shape, position);
   else color = material.getColor();
   auto effective_color = color * intensity_;
   auto lightv = glm::normalize(position_ - position);

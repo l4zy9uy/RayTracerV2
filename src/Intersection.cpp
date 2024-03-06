@@ -30,6 +30,6 @@ Computation Intersection::prepare_computations(const Ray &ray) {
                     position(ray, t_),
                     -ray.getDirectionVector(),
                     shape_ptr_->normal_at(position(ray, t_)));
-  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * std::numeric_limits<double>::epsilon() * 100000.0);
+  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * std::numeric_limits<double>::epsilon() * 1000000.0);
   return comps;
 }

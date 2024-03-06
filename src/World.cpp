@@ -53,11 +53,11 @@ Intersections World::intersect_world(const Ray &ray) {
 glm::dvec3 World::shade_hit(const Computation &computation) {
   auto shadowed = isShadowed(computation.getOverPoint());
   return light_.lighting(
-      computation.getShapePtr()->getMaterial(),
-      computation.getPoint(),
+      computation.getShapePtr()->getMaterial(), *computation.getShapePtr(),
       computation.getEyeVector(),
       computation.getNormalVector(),
-      shadowed);
+      shadowed,
+      computation.getPoint());
 }
 
 glm::dvec3 World::color_at(const Ray &ray) {

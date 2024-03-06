@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Ray.h"
 
+struct Material;
 class Intersections;
 
 class Shape {

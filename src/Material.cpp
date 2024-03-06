@@ -8,7 +8,7 @@ Material::Material(const glm::dvec3 &color, double ambient, double diffuse, doub
     color), ambient_(ambient), diffuse_(diffuse), specular_(specular), shininess_(shininess) {}
 
 Material::Material() : color_(
-    glm::dvec3(1.0)), ambient_(0.1), diffuse_(0.9), specular_(0.9), shininess_(200.0), pattern_(Pattern(glm::dvec3(1.0), glm::dvec3(0.0))) {}
+    glm::dvec3(1.0)), ambient_(0.1), diffuse_(0.9), specular_(0.9), shininess_(200.0) {}
 
 const glm::dvec3 &Material::getColor() const {
   return color_;
@@ -49,14 +49,14 @@ double Material::getShininess() const {
 void Material::setShininess(double shininess) {
   shininess_ = shininess;
 }
-const Pattern &Material::getPattern() const {
-  return pattern_.value();
 
-}
-void Material::setPattern(const Pattern &Pattern) {
-  pattern_ = Pattern;
-}
 bool Material::hasPattern() const {
-  if(pattern_.has_value()) return true;
+  if(pattern_ptr_ != nullptr) return true;
   return false;
+}
+const std::shared_ptr<Pattern> &Material::getPatternPtr() const {
+  return pattern_ptr_;
+}
+void Material::setPatternPtr(const std::shared_ptr<Pattern> &PatternPtr) {
+  pattern_ptr_ = PatternPtr;
 }

@@ -6,7 +6,7 @@
 
 Intersections Plane::local_intersect(const Ray &ray) {
   Intersections result;
-  if(fabs(ray.getDirectionVector().y) < glm::epsilon<double>() * 100000.0) {
+  if(fabs(ray.getDirectionVector().y) < (glm::epsilon<double>() * 10000000.0)) {
     return result;
   }
   auto t = -ray.getOriginPoint().y / ray.getDirectionVector().y;
