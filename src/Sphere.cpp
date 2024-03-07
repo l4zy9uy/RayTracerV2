@@ -4,11 +4,6 @@
 
 #include "Sphere.h"
 
-/*
-Sphere::Sphere(const glm::dmat4 &model, const double &radius, const glm::dvec4 &position, const Material &material)
-    : model_(model), radius_(radius), position_(position), material_(material) {}
-*/
-
 Intersections Sphere::local_intersect(const Ray &ray) {
   Intersections result;
   // the vector from the sphere's center, to the ray origin

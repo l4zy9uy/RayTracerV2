@@ -18,16 +18,16 @@ private:
   double t_;
   Shape *shape_ptr_;
 public:
-  [[nodiscard]] double getT() const;
+  [[nodiscard]] const double & getT() const;
 
-  void setT(double t);
+  void setT(const double &t);
 
-  [[nodiscard]] const Shape * getShapePtr() const;
+  [[nodiscard]] const Shape *getShapePtr() const;
 
   void setShapePtr(Shape *shapePtr);
   Computation prepare_computations(const Ray &ray);
 public:
-  Intersection(double t, Shape *shape);
+  Intersection(double t, Shape *shapePtr);
 };
 
 #endif //RAYTRACERV2_INTERSECTION_H

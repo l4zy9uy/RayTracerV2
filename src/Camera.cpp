@@ -4,7 +4,7 @@
 
 #include "Camera.h"
 
-Camera::Camera(int horizontal_size, int vertical_size, double fieldOfView) : horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView) {
+Camera::Camera(const unsigned int &horizontal_size, const unsigned int &vertical_size, const double &fieldOfView) : horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView) {
   transform_matrix_ = glm::dmat4(1.0);
   double half_view = tan(field_of_view_ / 2);
   double aspect = static_cast<double>(horizontal_size_) / static_cast<double>(vertical_size_);
@@ -19,27 +19,27 @@ Camera::Camera(int horizontal_size, int vertical_size, double fieldOfView) : hor
   pixel_size_ = half_width_ * 2 / static_cast<double>(horizontal_size_);
 }
 
-int Camera::getHorizontalSize() const {
+const unsigned int & Camera::getHorizontalSize() const {
   return horizontal_size_;
 }
 
-void Camera::setHorizontalSize(int horizontal_size) {
+void Camera::setHorizontalSize(const unsigned int &horizontal_size) {
   horizontal_size_ = horizontal_size;
 }
 
-int Camera::getVerticalSize() const {
+const unsigned int & Camera::getVerticalSize() const {
   return vertical_size_;
 }
 
-void Camera::setVerticalSize(int vertical_size) {
+void Camera::setVerticalSize(const int &vertical_size) {
   vertical_size_ = vertical_size;
 }
 
-double Camera::getFieldOfView() const {
+const double & Camera::getFieldOfView() const {
   return field_of_view_;
 }
 
-void Camera::setFieldOfView(double fieldOfView) {
+void Camera::setFieldOfView(const double &fieldOfView) {
   field_of_view_ = fieldOfView;
 }
 
@@ -51,27 +51,27 @@ void Camera::setTransformMatrix(const glm::dmat4 &transformMatrix) {
   transform_matrix_ = transformMatrix;
 }
 
-double Camera::getHalfWidth() const {
+const double & Camera::getHalfWidth() const {
   return half_width_;
 }
 
-void Camera::setHalfWidth(double halfWidth) {
+void Camera::setHalfWidth(const double &halfWidth) {
   half_width_ = halfWidth;
 }
 
-double Camera::getHalfHeight() const {
+const double & Camera::getHalfHeight() const {
   return half_height_;
 }
 
-void Camera::setHalfHeight(double halfHeight) {
+void Camera::setHalfHeight(const double &halfHeight) {
   half_height_ = halfHeight;
 }
 
-double Camera::getPixelSize() const {
+const double & Camera::getPixelSize() const {
   return pixel_size_;
 }
 
-void Camera::setPixelSize(double pixelSize) {
+void Camera::setPixelSize(const double &pixelSize) {
   pixel_size_ = pixelSize;
 }
 

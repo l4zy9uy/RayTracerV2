@@ -28,8 +28,8 @@ void World::setDefault() {
 Intersections World::intersect_world(const Ray &ray) {
   Intersections result;
   for (auto &shape_ptr : shape_ptr_list_) {
-    /*auto ray2 = ray.transform(glm::inverse(shape_ptr->getModel()));
-    auto sphere_to_ray = ray2.getOriginPoint() - shape_ptr->getPosition();
+    /*auto ray2 = ray.transform(glm::inverse(shape_ptr_->getModel()));
+    auto sphere_to_ray = ray2.getOriginPoint() - shape_ptr_->getPosition();
     auto a = glm::dot(ray2.getDirectionVector(), ray2.getDirectionVector());
     auto b = 2 * glm::dot(ray2.getDirectionVector(), sphere_to_ray);
     auto c = glm::dot(sphere_to_ray, sphere_to_ray) - 1;
@@ -40,8 +40,8 @@ Intersections World::intersect_world(const Ray &ray) {
     }
     auto t1 = (-b - glm::sqrt(discriminant)) / (2 * a);
     auto t2 = (-b + glm::sqrt(discriminant)) / (2 * a);
-    result.addIntersection(t1, shape_ptr.get());
-    result.addIntersection(t2, shape_ptr.get());*/
+    result.addIntersection(t1, shape_ptr_.get());
+    result.addIntersection(t2, shape_ptr_.get());*/
     auto i = shape_ptr->intersect(ray);
     result.addIntersections(i);
   }
@@ -87,6 +87,6 @@ bool World::isShadowed(const glm::dvec4 &point) {
     return true;
   return false;
 }
-void World::addShape(std::shared_ptr<Shape> shape) {
+void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
 }

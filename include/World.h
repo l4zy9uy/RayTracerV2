@@ -18,11 +18,12 @@ private:
   std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
   Light light_;
 public:
-  void addShape(std::shared_ptr<Shape> shape);
+  void addShape(const std::shared_ptr<Shape>& shape);
   [[nodiscard]] const Light &getLight() const;
-
   void setLight(const Light &light);
   void setDefault();
+
+public:
   Intersections intersect_world(const Ray &ray);
   glm::dvec3 shade_hit(const Computation &computation);
   glm::dvec3 color_at(const Ray &ray);

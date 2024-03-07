@@ -4,6 +4,8 @@
 
 #include "Shape.h"
 
+#include <utility>
+
 void Shape::setTransform(const glm::dmat4 &transform_matrix) {
   model_ = transform_matrix;
 }
@@ -32,8 +34,8 @@ Material Shape::getMaterial() const {
 void Shape::setMaterial(const Material &material) {
   material_ = material;
 }
-Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, const Material &Material) : model_(
-    Model), radius_(Radius), position_(Position), material_(Material) {}
+Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material) : model_(
+    Model), radius_(Radius), position_(Position), material_(std::move(Material)) {}
 
 Intersections Shape::intersect(const Ray &ray) {
 

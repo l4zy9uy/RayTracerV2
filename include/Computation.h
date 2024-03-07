@@ -13,28 +13,31 @@ class Shape;
 
 class Computation {
 private:
+  bool inside_;
   double t_;
-  Shape *shape_ptr;
+  Shape *shape_ptr_;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
-  bool inside_;
   glm::dvec4 over_point_;
 public:
   [[nodiscard]] const glm::dvec4 &getOverPoint() const;
   void setOverPoint(const glm::dvec4 &OverPoint);
-public:
-  Computation(double t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector, const glm::dvec4 &normal_vector);
+  Computation(const double &t,
+              Shape *shapePtr,
+              const glm::dvec4 &point,
+              const glm::dvec4 &eye_vector,
+              const glm::dvec4 &normal_vector);
 
-  [[nodiscard]] bool isInside() const;
+  [[nodiscard]] const bool & isInside() const;
 
-  void setInside(bool inside);
+  void setInside(const bool &inside);
 
-  [[nodiscard]] double getT() const;
+  [[nodiscard]] const double & getT() const;
 
-  void setT(double t);
+  void setT(const double &t);
 
-  [[nodiscard]] Shape * getShapePtr() const;
+  [[nodiscard]] Shape *getShapePtr() const;
 
   void setShapePtr(Shape *shapePtr);
 

@@ -27,25 +27,15 @@ public:
   [[nodiscard]] const std::shared_ptr<Pattern> &getPatternPtr() const;
   void setPatternPtr(const std::shared_ptr<Pattern> &PatternPtr);
   [[nodiscard]] bool hasPattern() const;
-public:
   [[nodiscard]] const glm::dvec3 &getColor() const;
-
   void setColor(const glm::dvec3 &color);
-
   [[nodiscard]] double getAmbient() const;
-
   void setAmbient(double ambient);
-
   [[nodiscard]] double getDiffuse() const;
-
   void setDiffuse(double diffuse);
-
   [[nodiscard]] double getSpecular() const;
-
   void setSpecular(double specular);
-
   [[nodiscard]] double getShininess() const;
-
   void setShininess(double shininess);
 };
 

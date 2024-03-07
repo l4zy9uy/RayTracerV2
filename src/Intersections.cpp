@@ -5,8 +5,8 @@
 #include "Intersections.h"
 #include <algorithm>
 
-void Intersections::addIntersection(double &distance, Shape *shape) {
-  sorted = false;
+void Intersections::addIntersection(const double &distance, Shape *shape) {
+  sorted_ = false;
   list_.emplace_back(distance, shape);
 }
 
@@ -14,7 +14,7 @@ void Intersections::addList(const Intersections &list) {
   for (const auto &intersection : list.list_) {
     list_.push_back(intersection);
   }
-  sorted = false;
+  sorted_ = false;
 }
 
 const std::vector<Intersection> &Intersections::getList() const {
@@ -26,7 +26,7 @@ void Intersections::setList(const std::vector<Intersection> &list) {
 }
 
 std::optional<Intersection> Intersections::hit() {
-  if (!sorted)
+  if (!sorted_)
     sort();
 
   if (list_.empty())
@@ -51,13 +51,13 @@ void Intersections::addIntersection(const Intersection &intersection) {
 }
 
 Intersections::Intersections(const std::vector<Intersection> &list, bool sorted) : list_(
-    list), sorted(sorted) {}
+    list), sorted_(sorted) {}
 
-Intersections::Intersections() : sorted(false) {
+Intersections::Intersections() : sorted_(false) {
 
 }
 void Intersections::addIntersections(const Intersections &intersections) {
-  for(const auto & i : intersections.list_) {
+  for (const auto &i : intersections.list_) {
     list_.push_back(i);
   }
 }

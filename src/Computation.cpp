@@ -4,9 +4,10 @@
 
 #include "Computation.h"
 
-Computation::Computation(double t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector,
-                         const glm::dvec4 &normal_vector) : t_(t), shape_ptr(shapePtr), point_(point), eye_vector_(eye_vector),
-                                                            normal_vector_(normal_vector) {
+Computation::Computation(const double &t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector,
+                         const glm::dvec4 &normal_vector)
+    : t_(t), shape_ptr_(shapePtr), point_(point), eye_vector_(eye_vector),
+      normal_vector_(normal_vector) {
   if (glm::dot(normal_vector, eye_vector) < 0) {
     inside_ = true;
     normal_vector_ = -normal_vector;
@@ -14,20 +15,20 @@ Computation::Computation(double t, Shape *shapePtr, const glm::dvec4 &point, con
     inside_ = false;
 }
 
-double Computation::getT() const {
+const double &Computation::getT() const {
   return t_;
 }
 
-void Computation::setT(double t) {
+void Computation::setT(const double &t) {
   t_ = t;
 }
 
-Shape * Computation::getShapePtr() const {
-  return shape_ptr;
+Shape *Computation::getShapePtr() const {
+  return shape_ptr_;
 }
 
 void Computation::setShapePtr(Shape *shapePtr) {
-  shape_ptr = shapePtr;
+  shape_ptr_ = shapePtr;
 }
 
 const glm::dvec4 &Computation::getPoint() const {
@@ -54,11 +55,11 @@ void Computation::setNormalVector(const glm::dvec4 &normal_vector) {
   normal_vector_ = normal_vector;
 }
 
-bool Computation::isInside() const {
+const bool &Computation::isInside() const {
   return inside_;
 }
 
-void Computation::setInside(bool inside) {
+void Computation::setInside(const bool &inside) {
   inside_ = inside;
 }
 const glm::dvec4 &Computation::getOverPoint() const {

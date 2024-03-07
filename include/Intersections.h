@@ -13,20 +13,19 @@ class Shape;
 class Intersections {
 private:
   std::vector<Intersection> list_;
-  bool sorted;
+  bool sorted_;
 public:
   Intersections(const std::vector<Intersection> &list, bool sorted);
   Intersections();
   [[nodiscard]] const std::vector<Intersection> &getList() const;
-
   void setList(const std::vector<Intersection> &list);
-  std::optional<Intersection> hit();
-
-public:
-  void addIntersection(double &distance, Shape *shape);
+  void addIntersection(const double &distance, Shape *shape);
   void addIntersection(const Intersection &intersection);
   void addIntersections(const Intersections &intersections);
   void addList(const Intersections &list);
+
+public:
+  std::optional<Intersection> hit();
   void sort();
 };
 

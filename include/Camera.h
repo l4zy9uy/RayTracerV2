@@ -11,33 +11,33 @@
 
 class Camera {
 public:
-  [[nodiscard]] int getHorizontalSize() const;
+  [[nodiscard]] const unsigned int & getHorizontalSize() const;
 
-  void setHorizontalSize(int horizontal_size);
+  void setHorizontalSize(const unsigned int &horizontal_size);
 
-  [[nodiscard]] int getVerticalSize() const;
+  [[nodiscard]] const unsigned int & getVerticalSize() const;
 
-  void setVerticalSize(int vertical_size);
+  void setVerticalSize(const int &vertical_size);
 
-  [[nodiscard]] double getFieldOfView() const;
+  [[nodiscard]] const double & getFieldOfView() const;
 
-  void setFieldOfView(double fieldOfView);
+  void setFieldOfView(const double &fieldOfView);
 
   [[nodiscard]] const glm::dmat4 &getTransformMatrix() const;
 
   void setTransformMatrix(const glm::dmat4 &transformMatrix);
 
-  [[nodiscard]] double getHalfWidth() const;
+  [[nodiscard]] const double & getHalfWidth() const;
 
-  void setHalfWidth(double halfWidth);
+  void setHalfWidth(const double &halfWidth);
 
-  [[nodiscard]] double getHalfHeight() const;
+  [[nodiscard]] const double & getHalfHeight() const;
 
-  void setHalfHeight(double halfHeight);
+  void setHalfHeight(const double &halfHeight);
 
-  [[nodiscard]] double getPixelSize() const;
+  [[nodiscard]] const double & getPixelSize() const;
 
-  void setPixelSize(double pixelSize);
+  void setPixelSize(const double &pixelSize);
   Ray ray_for_pixel(const double &px, const double &py);
   Canvas render(World &world);
 private:
@@ -45,11 +45,13 @@ private:
   double half_width_;
   double half_height_;
   double pixel_size_;
-  int horizontal_size_;
-  int vertical_size_;
+  unsigned int horizontal_size_;
+  unsigned int vertical_size_;
   double field_of_view_;
 public:
-  Camera(int horizontal_size, int vertical_size, double fieldOfView);
+  Camera(const unsigned int &horizontal_size,
+         const unsigned int &vertical_size,
+         const double &fieldOfView);
 };
 
 #endif //RAYTRACERV2_CAMERA_H

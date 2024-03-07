@@ -5,7 +5,7 @@
 #include "Canvas.h"
 #include <fstream>
 #include <algorithm>
-Canvas::Canvas(int windowWidth, int windowHeight) : window_width_(
+Canvas::Canvas(const int &windowWidth, const int &windowHeight) : window_width_(
     windowWidth), window_height_(windowHeight) {
   for (int i = 0; i < windowHeight; i++) {
     std::vector<glm::dvec3> temp_vector(windowWidth, glm::dvec3(0));
@@ -38,19 +38,19 @@ void Canvas::canvas_to_ppm() {
   myFile.close();
 }
 
-int Canvas::getWindowWidth() const {
+const int & Canvas::getWindowWidth() const {
   return window_width_;
 }
 
-void Canvas::setWindowWidth(int windowWidth) {
+void Canvas::setWindowWidth(const int &windowWidth) {
   Canvas::window_width_ = windowWidth;
 }
 
-int Canvas::getWindowHeight() const {
+const int & Canvas::getWindowHeight() const {
   return window_height_;
 }
 
-void Canvas::setWindowHeight(int windowHeight) {
+void Canvas::setWindowHeight(const int &windowHeight) {
   Canvas::window_height_ = windowHeight;
 }
 
