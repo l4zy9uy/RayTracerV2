@@ -12,7 +12,7 @@
 
 class Material {
 public:
-  Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess);
+  Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess, double reflective);
 
   Material();
 
@@ -22,6 +22,11 @@ private:
   double diffuse_;
   double specular_;
   double shininess_;
+  double reflective_;
+public:
+  double getReflective() const;
+  void setReflective(double Reflective);
+private:
   std::shared_ptr<Pattern> pattern_ptr_;
 public:
   [[nodiscard]] const std::shared_ptr<Pattern> &getPatternPtr() const;

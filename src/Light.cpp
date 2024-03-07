@@ -4,6 +4,7 @@
 
 #include "Light.h"
 #include <glm/glm.hpp>
+#include <glm/ext/scalar_constants.hpp>
 
 Light::Light(const glm::dvec3 &intensity, const glm::dvec4 &position) : intensity_(intensity), position_(position) {}
 

@@ -17,8 +17,10 @@
 #include "Pattern/RingPtn.h"
 #include "Pattern/CheckerPtn.h"
 #include "Pattern/SolidPtn.h"
+#include <limits>
+#include <iomanip>
 int main() {
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -89,7 +91,42 @@ int main() {
 
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
 
+  World w;
+  w.setDefault();
+  /*Material m;
+  m.setAmbient(1.0);
+  w.changeShapeMaterial(1,m);
+  Intersection i(1, w.getShape(1).get());*/
+  Plane p;
+  Material m;
+  m.setReflective(0.5);
+  p.setMaterial(m);
+  p.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
+  w.addShape(std::make_shared<Plane>(p));
+  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0, -sqrt(2)/2.0, sqrt(2)/2.0, 0.0));
+  Intersection i(sqrt(2), &p);
+  auto comps = i.prepare_computations(r);
+  auto color = w.reflected_color(comps);
+  //auto color = w.shade_hit(comps);
+  std::cout << glm::to_string(color) << "\n";
+  std::cout << std::setprecision(10) << color.y << "\n";
+ /* w.setLight(Light(glm::dvec3(1.0), glm::dvec4(0.0, 0.0, 0.0, 1.0)));
+  Plane lower;
+  Material m;
+  m.setReflective(1.0);
+  lower.setMaterial(m);
+  lower.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
+  w.addShape(std::make_shared<Plane>(lower));
+  Plane upper;
+  Material m1;
+  m1.setReflective(1.0);
+  upper.setMaterial(m1);
+  upper.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 1.0, 0.0)));
+  w.addShape(std::make_shared<Plane>(upper));
+  Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  auto color = w.color_at(r);
+  std::cout << "Terminate success!" << "\n";*/
   return 0;
 }

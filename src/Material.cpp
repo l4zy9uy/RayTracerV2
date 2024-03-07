@@ -4,11 +4,11 @@
 
 #include "Material.h"
 
-Material::Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess) : color_(
-    color), ambient_(ambient), diffuse_(diffuse), specular_(specular), shininess_(shininess) {}
+Material::Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess, double reflective) : color_(
+    color), ambient_(ambient), diffuse_(diffuse), specular_(specular), shininess_(shininess), reflective_(reflective) {}
 
 Material::Material() : color_(
-    glm::dvec3(1.0)), ambient_(0.1), diffuse_(0.9), specular_(0.9), shininess_(200.0) {}
+    glm::dvec3(1.0)), ambient_(0.1), diffuse_(0.9), specular_(0.9), shininess_(200.0), reflective_(0.0) {}
 
 const glm::dvec3 &Material::getColor() const {
   return color_;
@@ -59,4 +59,10 @@ const std::shared_ptr<Pattern> &Material::getPatternPtr() const {
 }
 void Material::setPatternPtr(const std::shared_ptr<Pattern> &PatternPtr) {
   pattern_ptr_ = PatternPtr;
+}
+double Material::getReflective() const {
+  return reflective_;
+}
+void Material::setReflective(double Reflective) {
+  reflective_ = Reflective;
 }

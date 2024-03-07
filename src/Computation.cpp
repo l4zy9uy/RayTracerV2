@@ -5,9 +5,9 @@
 #include "Computation.h"
 
 Computation::Computation(const double &t, Shape *shapePtr, const glm::dvec4 &point, const glm::dvec4 &eye_vector,
-                         const glm::dvec4 &normal_vector)
+                         const glm::dvec4 &normal_vector, const glm::dvec4 &reflectv)
     : t_(t), shape_ptr_(shapePtr), point_(point), eye_vector_(eye_vector),
-      normal_vector_(normal_vector) {
+      normal_vector_(normal_vector), reflectv_(reflectv) {
   if (glm::dot(normal_vector, eye_vector) < 0) {
     inside_ = true;
     normal_vector_ = -normal_vector;
@@ -67,4 +67,10 @@ const glm::dvec4 &Computation::getOverPoint() const {
 }
 void Computation::setOverPoint(const glm::dvec4 &OverPoint) {
   over_point_ = OverPoint;
+}
+const glm::dvec4 &Computation::getReflectv() const {
+  return reflectv_;
+}
+void Computation::setReflectv(const glm::dvec4 &Reflectv) {
+  reflectv_ = Reflectv;
 }

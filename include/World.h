@@ -28,7 +28,9 @@ public:
   glm::dvec3 shade_hit(const Computation &computation);
   glm::dvec3 color_at(const Ray &ray);
   void changeShapeMaterial(size_t shapeIndex, const Material &newMaterial);
+  std::shared_ptr<Shape> getShape(const unsigned int &index);
   bool isShadowed(const glm::dvec4 &point);
+  glm::dvec3 reflected_color(const Computation &computation);
 };
 
 #endif //RAYTRACERV2_WORLD_H

@@ -14,12 +14,17 @@ class Shape;
 class Computation {
 private:
   bool inside_;
+public:
+  const glm::dvec4 &getReflectv() const;
+  void setReflectv(const glm::dvec4 &Reflectv);
+private:
   double t_;
   Shape *shape_ptr_;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
   glm::dvec4 over_point_;
+  glm::dvec4 reflectv_;
 public:
   [[nodiscard]] const glm::dvec4 &getOverPoint() const;
   void setOverPoint(const glm::dvec4 &OverPoint);
@@ -27,7 +32,8 @@ public:
               Shape *shapePtr,
               const glm::dvec4 &point,
               const glm::dvec4 &eye_vector,
-              const glm::dvec4 &normal_vector);
+              const glm::dvec4 &normal_vector,
+              const glm::dvec4 &reflectv);
 
   [[nodiscard]] const bool & isInside() const;
 

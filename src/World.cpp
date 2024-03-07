@@ -17,7 +17,7 @@ void World::setLight(const Light &light) {
 void World::setDefault() {
   light_ = Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0));
   Sphere s1, s2;
-  Material material(glm::dvec3(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0);
+  Material material(glm::dvec3(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0, 0.0);
   s1.setMaterial(material);
 
   shape_ptr_list_.push_back(std::make_shared<Sphere>(s1));
@@ -52,12 +52,14 @@ Intersections World::intersect_world(const Ray &ray) {
 
 glm::dvec3 World::shade_hit(const Computation &computation) {
   auto shadowed = isShadowed(computation.getOverPoint());
-  return light_.lighting(
+  auto surface = light_.lighting(
       computation.getShapePtr()->getMaterial(), *computation.getShapePtr(),
       computation.getEyeVector(),
       computation.getNormalVector(),
       shadowed,
       computation.getPoint());
+  auto reflected = reflected_color(computation);
+  return surface + reflected;
 }
 
 glm::dvec3 World::color_at(const Ray &ray) {
@@ -89,4 +91,17 @@ bool World::isShadowed(const glm::dvec4 &point) {
 }
 void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
+}
+glm::dvec3 World::reflected_color(const Computation &computation) {
+  if(fabs(computation.getShapePtr()->getMaterial().getReflective() - 0.0) < glm::epsilon<double>() * 1000) {
+    return {0.0, 0.0, 0.0};
+  }
+  auto color = color_at(Ray(computation.getOverPoint(), computation.getReflectv()));
+  return color * computation.getShapePtr()->getMaterial().getReflective();
+}
+std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
+  if(index < shape_ptr_list_.size()) {
+    return shape_ptr_list_[index];
+  }
+  return nullptr;
 }
