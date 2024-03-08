@@ -210,6 +210,13 @@ build src/CMakeFiles/classes.dir/World.cpp.o: CXX_COMPILER__classes_unscanned_De
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
+build src/CMakeFiles/classes.dir/__/test/test.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/test.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/__/test/test.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir/__/test
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target classes
@@ -218,7 +225,7 @@ build src/CMakeFiles/classes.dir/World.cpp.o: CXX_COMPILER__classes_unscanned_De
 #############################################
 # Link the static library src/libclasses.a
 
-build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computation.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/World.cpp.o
+build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computation.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/World.cpp.o src/CMakeFiles/classes.dir/__/test/test.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = src/CMakeFiles/classes.dir
   POST_BUILD = :
@@ -311,6 +318,67 @@ build main/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build main/rebuild_cache: phony main/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test
+
+
+#############################################
+# Order-only phony target for test
+
+build cmake_object_order_depends_target_test: phony || cmake_object_order_depends_target_classes
+
+build test/CMakeFiles/test.dir/test.cpp.o: CXX_COMPILER__test_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/test.cpp || cmake_object_order_depends_target_test
+  DEP_FILE = test/CMakeFiles/test.dir/test.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = test/CMakeFiles/test.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test
+
+
+#############################################
+# Link the executable test/test
+
+build test/test: CXX_EXECUTABLE_LINKER__test_Debug test/CMakeFiles/test.dir/test.cpp.o | src/libclasses.a /usr/local/lib/libCatch2Main.a /usr/local/lib/libCatch2.a || src/libclasses.a
+  FLAGS = -g
+  LINK_LIBRARIES = src/libclasses.a  /usr/local/lib/libCatch2Main.a  /usr/local/lib/libCatch2.a
+  OBJECT_DIR = test/CMakeFiles/test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test
+  TARGET_PDB = test.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test && /opt/clion-2023.3.4/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build test/edit_cache: phony test/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test && /opt/clion-2023.3.4/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2 -B/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build RayTracerV2: phony main/RayTracerV2
@@ -318,6 +386,8 @@ build RayTracerV2: phony main/RayTracerV2
 build classes: phony src/libclasses.a
 
 build libclasses.a: phony src/libclasses.a
+
+build test: phony test/test
 
 # =============================================================================
 # Folder targets.
@@ -327,7 +397,7 @@ build libclasses.a: phony src/libclasses.a
 #############################################
 # Folder: /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug
 
-build all: phony src/all main/all
+build all: phony src/all main/all test/all
 
 # =============================================================================
 
@@ -342,6 +412,13 @@ build main/all: phony main/RayTracerV2
 # Folder: /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/src
 
 build src/all: phony src/libclasses.a
+
+# =============================================================================
+
+#############################################
+# Folder: /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test
+
+build test/all: phony test/test
 
 # =============================================================================
 # Built-in targets
@@ -364,14 +441,14 @@ build /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMak
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/cmake.verify_globs | /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/VerifyGlobs.cmake /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/main/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/CMakeLists.txt /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-Initialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.27.8/CMakeCCompiler.cmake CMakeFiles/3.27.8/CMakeCXXCompiler.cmake CMakeFiles/3.27.8/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/cmake.verify_globs | /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/VerifyGlobs.cmake /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/main/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/CMakeLists.txt /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-Initialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/Catch2/Catch2Config.cmake /usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake /usr/local/lib/cmake/Catch2/Catch2Targets-noconfig.cmake /usr/local/lib/cmake/Catch2/Catch2Targets.cmake CMakeCache.txt CMakeFiles/3.27.8/CMakeCCompiler.cmake CMakeFiles/3.27.8/CMakeCXXCompiler.cmake CMakeFiles/3.27.8/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/VerifyGlobs.cmake /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/main/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/CMakeLists.txt /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-Initialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.27.8/CMakeCCompiler.cmake CMakeFiles/3.27.8/CMakeCXXCompiler.cmake CMakeFiles/3.27.8/CMakeSystem.cmake: phony
+build /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/CMakeFiles/VerifyGlobs.cmake /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/main/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/CMakeLists.txt /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/CMakeLists.txt /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Compiler/GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-C.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-GNU.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux-Initialize.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/Linux.cmake /opt/clion-2023.3.4/bin/cmake/linux/x64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/Catch2/Catch2Config.cmake /usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake /usr/local/lib/cmake/Catch2/Catch2Targets-noconfig.cmake /usr/local/lib/cmake/Catch2/Catch2Targets.cmake CMakeCache.txt CMakeFiles/3.27.8/CMakeCCompiler.cmake CMakeFiles/3.27.8/CMakeCXXCompiler.cmake CMakeFiles/3.27.8/CMakeSystem.cmake: phony
 
 
 #############################################

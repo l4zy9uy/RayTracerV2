@@ -7,7 +7,8 @@ file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.h")
 file(GLOB SOURCE_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 # Add a library target called 'classes' to be built from the source and header files.
-add_library(classes ${HEADER_LIST} ${SOURCE_LIST})
+add_library(classes ${HEADER_LIST} ${SOURCE_LIST}
+        ../test/test.cpp)
 
 # Specify include directories for the 'classes' target.
 # We use PROJECT_SOURCE_DIR assuming the 'include' directory is at the root project level.
