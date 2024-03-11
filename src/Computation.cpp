@@ -74,3 +74,15 @@ const glm::dvec4 &Computation::getReflectv() const {
 void Computation::setReflectv(const glm::dvec4 &Reflectv) {
   reflectv_ = Reflectv;
 }
+double Computation::getN1() const {
+  return n1_;
+}
+void Computation::setN1(double N1) {
+  n1_ = N1;
+}
+double Computation::getN2() const {
+  return n2_;
+}
+void Computation::setN2(double N2) {
+  n2_ = N2;
+}

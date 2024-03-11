@@ -92,7 +92,7 @@ Canvas Camera::render(World &world) {
   for (int y = 0; y < horizontal_size_; y++) {
     for (int x = 0; x < vertical_size_; x++) {
       auto ray = ray_for_pixel(static_cast<double>(y), static_cast<double>(x));
-      auto color = world.color_at(ray);
+      auto color = world.color_at(ray, 15);
       image.writePixel(y, x, color);
     }
   }

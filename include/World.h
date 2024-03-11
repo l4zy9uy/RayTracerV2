@@ -25,12 +25,12 @@ public:
 
 public:
   Intersections intersect_world(const Ray &ray);
-  glm::dvec3 shade_hit(const Computation &computation);
-  glm::dvec3 color_at(const Ray &ray);
+  glm::dvec3 shade_hit(const Computation &computation, const int &remaining);
+  glm::dvec3 color_at(const Ray &ray, const int &remaining);
   void changeShapeMaterial(size_t shapeIndex, const Material &newMaterial);
   std::shared_ptr<Shape> getShape(const unsigned int &index);
   bool isShadowed(const glm::dvec4 &point);
-  glm::dvec3 reflected_color(const Computation &computation);
+  glm::dvec3 reflected_color(const Computation &computation, const int &remaining);
 };
 
 #endif //RAYTRACERV2_WORLD_H

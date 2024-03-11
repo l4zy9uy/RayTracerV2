@@ -29,5 +29,9 @@ glm::dvec4 Sphere::local_normal_at(const glm::dvec4 &point) const {
   res.w = 0.0;
   return res;
 }
+void Sphere::make_glassy() {
+  material_.setTransparency(1.0);
+  material_.setRefractiveIndex(1.5);
+}
 Sphere::Sphere() = default;
 

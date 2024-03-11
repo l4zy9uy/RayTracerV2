@@ -22,10 +22,18 @@ private:
   double diffuse_;
   double specular_;
   double shininess_;
+public:
+  double getTransparency() const;
+  void setTransparency(double Transparency);
+  double getRefractiveIndex() const;
+  void setRefractiveIndex(double RefractiveIndex);
+private:
   double reflective_;
+  double transparency_;
+  double refractive_index_;
 public:
   double getReflective() const;
-  void setReflective(double Reflective);
+  void setReflective(const double &Reflective);
 private:
   std::shared_ptr<Pattern> pattern_ptr_;
 public:

@@ -21,7 +21,7 @@
 #include <iomanip>
 
 int main() {
-  /*auto start = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::high_resolution_clock::now();
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -55,6 +55,7 @@ int main() {
   left_material.setColor(glm::dvec3(0.0, 0.0, 0.0));
   left_material.setDiffuse(0.7);
   left_material.setSpecular(0.3);
+  left_material.setReflective(1.0);
   RingPtn ringPtn(glm::dvec3(0.0, 0.0, 0.0), glm::dvec3(1.0, 1.0, 1.0));
   ringPtn.setTransformationMatrix(
       glm::scale(glm::dmat4(1.0), glm::dvec3(1.0)) * glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 2.0)));
@@ -63,6 +64,7 @@ int main() {
 
   Plane p;
   Material material1;
+  material1.setReflective(1.0);
   CheckerPtn checkerPtn(glm::dvec3(1.0), glm::dvec3(0.0));
   checkerPtn.setTransformationMatrix(
       glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, glm::epsilon<double>() * 100.0, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(1)));
@@ -82,7 +84,7 @@ int main() {
   world.addShape(std::make_shared<Sphere>(middle));
   world.addShape(std::make_shared<Plane>(p));
 
-  Camera camera(400, 200, glm::pi<double>() / 3);
+  Camera camera(800, 400, glm::pi<double>() / 3);
   camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 0.0)));
@@ -92,42 +94,6 @@ int main() {
 
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
-
-  World w;
-  w.setDefault();
-  /*Material m;
-  m.setAmbient(1.0);
-  w.changeShapeMaterial(1,m);
-  Intersection i(1, w.getShape(1).get());*/
-  Plane p;
-  Material m;
-  m.setReflective(0.5);
-  p.setMaterial(m);
-  p.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
-  w.addShape(std::make_shared<Plane>(p));
-  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0, -sqrt(2)/2.0, sqrt(2)/2.0, 0.0));
-  Intersection i(sqrt(2), &p);
-  auto comps = i.prepare_computations(r);
-  auto color = w.reflected_color(comps);
-  //auto color = w.shade_hit(comps);
-  std::cout << glm::to_string(color) << "\n";
-  std::cout << std::setprecision(10) << color.y << "\n";
- /* w.setLight(Light(glm::dvec3(1.0), glm::dvec4(0.0, 0.0, 0.0, 1.0)));
-  Plane lower;
-  Material m;
-  m.setReflective(1.0);
-  lower.setMaterial(m);
-  lower.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
-  w.addShape(std::make_shared<Plane>(lower));
-  Plane upper;
-  Material m1;
-  m1.setReflective(1.0);
-  upper.setMaterial(m1);
-  upper.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 1.0, 0.0)));
-  w.addShape(std::make_shared<Plane>(upper));
-  Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
-  auto color = w.color_at(r);
-  std::cout << "Terminate success!" << "\n";*/
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
   return 0;
 }

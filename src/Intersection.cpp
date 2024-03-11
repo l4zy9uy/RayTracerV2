@@ -24,14 +24,19 @@ void Intersection::setShapePtr(Shape *shapePtr) {
   shape_ptr_ = shapePtr;
 }
 
-Computation Intersection::prepare_computations(const Ray &ray) {
-  auto normal_vector = shape_ptr_->normal_at(position(ray, t_));
+Computation Intersection::prepare_computations(const Ray &ray, const Intersections &intersections = Intersections()) {
+  Containers containers;
+  for(const auto &i : intersections.getList()) {
+    if(intersections.hi)
+  }
+  auto point = position(ray, t_);
+  auto normal_vector = shape_ptr_->normal_at(point);
   Computation comps(t_,
                     shape_ptr_,
-                    position(ray, t_),
+                    point,
                     -ray.getDirectionVector(),
                     normal_vector,
                     glm::reflect(ray.getDirectionVector(), normal_vector));
-  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * glm::epsilon<double>() * 10000000.0);
+  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * 0.00001);//glm::epsilon<double>() * 10000000.0);
   return comps;
 }

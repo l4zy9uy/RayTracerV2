@@ -63,6 +63,18 @@ void Material::setPatternPtr(const std::shared_ptr<Pattern> &PatternPtr) {
 double Material::getReflective() const {
   return reflective_;
 }
-void Material::setReflective(double Reflective) {
+void Material::setReflective(const double &Reflective) {
   reflective_ = Reflective;
+}
+double Material::getTransparency() const {
+  return transparency_;
+}
+void Material::setTransparency(double Transparency) {
+  transparency_ = Transparency;
+}
+double Material::getRefractiveIndex() const {
+  return refractive_index_;
+}
+void Material::setRefractiveIndex(double RefractiveIndex) {
+  refractive_index_ = RefractiveIndex;
 }

@@ -6,3 +6,6 @@
 /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/main/CMakeFiles/RayTracerV2.dir
 /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/main/CMakeFiles/edit_cache.dir
 /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/main/CMakeFiles/rebuild_cache.dir
+/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test/CMakeFiles/test.dir
+/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir

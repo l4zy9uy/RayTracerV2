@@ -28,29 +28,15 @@ void World::setDefault() {
 Intersections World::intersect_world(const Ray &ray) {
   Intersections result;
   for (auto &shape_ptr : shape_ptr_list_) {
-    /*auto ray2 = ray.transform(glm::inverse(shape_ptr_->getModel()));
-    auto sphere_to_ray = ray2.getOriginPoint() - shape_ptr_->getPosition();
-    auto a = glm::dot(ray2.getDirectionVector(), ray2.getDirectionVector());
-    auto b = 2 * glm::dot(ray2.getDirectionVector(), sphere_to_ray);
-    auto c = glm::dot(sphere_to_ray, sphere_to_ray) - 1;
-    auto discriminant = b * b - 4 * a * c;
-
-    if (discriminant < 0) {
-      continue;
-    }
-    auto t1 = (-b - glm::sqrt(discriminant)) / (2 * a);
-    auto t2 = (-b + glm::sqrt(discriminant)) / (2 * a);
-    result.addIntersection(t1, shape_ptr_.get());
-    result.addIntersection(t2, shape_ptr_.get());*/
     auto i = shape_ptr->intersect(ray);
     result.addIntersections(i);
   }
-
+  result.sort();
   return result;
 }
 
 
-glm::dvec3 World::shade_hit(const Computation &computation) {
+glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining) {
   auto shadowed = isShadowed(computation.getOverPoint());
   auto surface = light_.lighting(
       computation.getShapePtr()->getMaterial(), *computation.getShapePtr(),
@@ -58,15 +44,15 @@ glm::dvec3 World::shade_hit(const Computation &computation) {
       computation.getNormalVector(),
       shadowed,
       computation.getPoint());
-  auto reflected = reflected_color(computation);
+  auto reflected = reflected_color(computation, remaining);
   return surface + reflected;
 }
 
-glm::dvec3 World::color_at(const Ray &ray) {
+glm::dvec3 World::color_at(const Ray &ray, const int &remaining) {
   auto intersections = intersect_world(ray);
   auto hit = intersections.hit();
   if (hit.has_value()) {
-    return shade_hit(hit->prepare_computations(ray));
+    return shade_hit(hit->prepare_computations(ray, Intersections()), remaining);
   } else {
     return {0.0, 0.0, 0.0};
   }
@@ -92,16 +78,14 @@ bool World::isShadowed(const glm::dvec4 &point) {
 void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
 }
-glm::dvec3 World::reflected_color(const Computation &computation) {
-  if(fabs(computation.getShapePtr()->getMaterial().getReflective() - 0.0) < glm::epsilon<double>() * 1000) {
+glm::dvec3 World::reflected_color(const Computation &computation, const int &remaining) {
+  if(fabs(computation.getShapePtr()->getMaterial().getReflective() - 0.0) < 0.00001) {
     return {0.0, 0.0, 0.0};
   }
-  auto color = color_at(Ray(computation.getOverPoint(), computation.getReflectv()));
+  if(remaining <= 0) return {0.0, 0.0, 0.0};
+  auto color = color_at(Ray(computation.getOverPoint(), computation.getReflectv()), remaining-1);
   return color * computation.getShapePtr()->getMaterial().getReflective();
 }
 std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
-  if(index < shape_ptr_list_.size()) {
-    return shape_ptr_list_[index];
-  }
-  return nullptr;
+  return shape_ptr_list_.at(index);
 }

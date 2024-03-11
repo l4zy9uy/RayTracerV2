@@ -26,6 +26,14 @@ private:
   glm::dvec4 over_point_;
   glm::dvec4 reflectv_;
 public:
+  double getN1() const;
+  void setN1(double N1);
+  double getN2() const;
+  void setN2(double N2);
+private:
+  double n1_;
+  double n2_;
+public:
   [[nodiscard]] const glm::dvec4 &getOverPoint() const;
   void setOverPoint(const glm::dvec4 &OverPoint);
   Computation(const double &t,
