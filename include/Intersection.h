@@ -7,11 +7,11 @@
 
 #include <memory>
 #include "Shape.h"
-#include "Computation.h"
+//#include "Computation.h"
 #include "Intersections.h"
-#include "Containers.h"
+//#include "Containers.h"
 class Shape;
-class Computation;
+//class Computation;
 class Ray;
 class Intersections;
 
@@ -27,7 +27,7 @@ public:
   [[nodiscard]] const Shape *getShapePtr() const;
 
   void setShapePtr(Shape *shapePtr);
-  Computation prepare_computations(const Ray &ray, const Intersections &intersections);
+  /*Computation prepare_computations(const Ray &ray, const Intersections &intersections);*/
 public:
   Intersection(double t, Shape *shapePtr);
 };

@@ -9,6 +9,7 @@
 #include "Intersections.h"
 #include <vector>
 #include <memory>
+#include "Computation.h"
 
 class Intersections;
 class World {

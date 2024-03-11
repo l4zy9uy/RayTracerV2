@@ -24,10 +24,9 @@ void Intersection::setShapePtr(Shape *shapePtr) {
   shape_ptr_ = shapePtr;
 }
 
-Computation Intersection::prepare_computations(const Ray &ray, const Intersections &intersections = Intersections()) {
+/*Computation Intersection::prepare_computations(const Ray &ray, const Intersections &intersections = Intersections()) {
   Containers containers;
   for(const auto &i : intersections.getList()) {
-    if(intersections.hi)
   }
   auto point = position(ray, t_);
   auto normal_vector = shape_ptr_->normal_at(point);
@@ -37,6 +36,6 @@ Computation Intersection::prepare_computations(const Ray &ray, const Intersectio
                     -ray.getDirectionVector(),
                     normal_vector,
                     glm::reflect(ray.getDirectionVector(), normal_vector));
-  comps.setOverPoint(comps.getPoint() + comps.getNormalVector() * 0.00001);//glm::epsilon<double>() * 10000000.0);
+  comps.over_point_ = comps.point_ + comps.normal_vector_ * 0.00001;
   return comps;
-}
+}*/

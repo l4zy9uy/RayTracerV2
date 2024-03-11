@@ -7,10 +7,7 @@
 Material::Material(const glm::dvec3 &color, double ambient, double diffuse, double specular, double shininess, double reflective) : color_(
     color), ambient_(ambient), diffuse_(diffuse), specular_(specular), shininess_(shininess), reflective_(reflective) {}
 
-Material::Material() : color_(
-    glm::dvec3(1.0)), ambient_(0.1), diffuse_(0.9), specular_(0.9), shininess_(200.0), reflective_(0.0) {}
-
-const glm::dvec3 &Material::getColor() const {
+/*const glm::dvec3 &Material::getColor() const {
   return color_;
 }
 
@@ -66,9 +63,9 @@ double Material::getReflective() const {
 void Material::setReflective(const double &Reflective) {
   reflective_ = Reflective;
 }
-double Material::getTransparency() const {
+*//*double Material::getTransparency() const {
   return transparency_;
-}
+}*//*
 void Material::setTransparency(double Transparency) {
   transparency_ = Transparency;
 }
@@ -77,4 +74,4 @@ double Material::getRefractiveIndex() const {
 }
 void Material::setRefractiveIndex(double RefractiveIndex) {
   refractive_index_ = RefractiveIndex;
-}
+}*/

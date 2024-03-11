@@ -37,13 +37,13 @@ Intersections World::intersect_world(const Ray &ray) {
 
 
 glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining) {
-  auto shadowed = isShadowed(computation.getOverPoint());
+  auto shadowed = isShadowed(computation.over_point_);
   auto surface = light_.lighting(
-      computation.getShapePtr()->getMaterial(), *computation.getShapePtr(),
-      computation.getEyeVector(),
-      computation.getNormalVector(),
+      computation.shape_ptr_->getMaterial(), *computation.shape_ptr_,
+      computation.eye_vector_,
+      computation.eye_vector_,
       shadowed,
-      computation.getPoint());
+      computation.point_);
   auto reflected = reflected_color(computation, remaining);
   return surface + reflected;
 }
@@ -52,7 +52,7 @@ glm::dvec3 World::color_at(const Ray &ray, const int &remaining) {
   auto intersections = intersect_world(ray);
   auto hit = intersections.hit();
   if (hit.has_value()) {
-    return shade_hit(hit->prepare_computations(ray, Intersections()), remaining);
+    return shade_hit(prepare_computations(hit.value(), ray), remaining);
   } else {
     return {0.0, 0.0, 0.0};
   }
@@ -79,12 +79,12 @@ void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
 }
 glm::dvec3 World::reflected_color(const Computation &computation, const int &remaining) {
-  if(fabs(computation.getShapePtr()->getMaterial().getReflective() - 0.0) < 0.00001) {
+  if(fabs(computation.shape_ptr_->getMaterial().reflective_ - 0.0) < 0.00001) {
     return {0.0, 0.0, 0.0};
   }
   if(remaining <= 0) return {0.0, 0.0, 0.0};
-  auto color = color_at(Ray(computation.getOverPoint(), computation.getReflectv()), remaining-1);
-  return color * computation.getShapePtr()->getMaterial().getReflective();
+  auto color = color_at(Ray(computation.over_point_, computation.reflect_vector_), remaining-1);
+  return color * computation.shape_ptr_->getMaterial().reflective_;
 }
 std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
   return shape_ptr_list_.at(index);

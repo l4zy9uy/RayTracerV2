@@ -5,67 +5,33 @@
 #ifndef RAYTRACERV2_COMPUTATION_H
 #define RAYTRACERV2_COMPUTATION_H
 #include "Shape.h"
+#include "Intersections.h"
+#include "Containers.h"
 #include <glm/glm.hpp>
 
 class Sphere;
 class Ray;
 class Shape;
 
-class Computation {
-private:
-  bool inside_;
-public:
-  const glm::dvec4 &getReflectv() const;
-  void setReflectv(const glm::dvec4 &Reflectv);
-private:
+struct Computation {
   double t_;
   Shape *shape_ptr_;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
+  bool inside_;
   glm::dvec4 over_point_;
-  glm::dvec4 reflectv_;
-public:
-  double getN1() const;
-  void setN1(double N1);
-  double getN2() const;
-  void setN2(double N2);
-private:
+  glm::dvec4 reflect_vector_;
   double n1_;
   double n2_;
 public:
-  [[nodiscard]] const glm::dvec4 &getOverPoint() const;
-  void setOverPoint(const glm::dvec4 &OverPoint);
   Computation(const double &t,
               Shape *shapePtr,
               const glm::dvec4 &point,
               const glm::dvec4 &eye_vector,
               const glm::dvec4 &normal_vector,
-              const glm::dvec4 &reflectv);
-
-  [[nodiscard]] const bool & isInside() const;
-
-  void setInside(const bool &inside);
-
-  [[nodiscard]] const double & getT() const;
-
-  void setT(const double &t);
-
-  [[nodiscard]] Shape *getShapePtr() const;
-
-  void setShapePtr(Shape *shapePtr);
-
-  [[nodiscard]] const glm::dvec4 &getPoint() const;
-
-  void setPoint(const glm::dvec4 &point);
-
-  [[nodiscard]] const glm::dvec4 &getEyeVector() const;
-
-  void setEyeVector(const glm::dvec4 &eye_vector);
-
-  [[nodiscard]] const glm::dvec4 &getNormalVector() const;
-
-  void setNormalVector(const glm::dvec4 &normal_vector);
+              const glm::dvec4 &reflect_vector);
 };
 
+Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections = Intersections());
 #endif //RAYTRACERV2_COMPUTATION_H
