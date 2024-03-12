@@ -41,7 +41,7 @@ glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining
   auto surface = light_.lighting(
       computation.shape_ptr_->getMaterial(), *computation.shape_ptr_,
       computation.eye_vector_,
-      computation.eye_vector_,
+      computation.normal_vector_,
       shadowed,
       computation.point_);
   auto reflected = reflected_color(computation, remaining);
