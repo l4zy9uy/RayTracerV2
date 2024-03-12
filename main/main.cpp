@@ -21,7 +21,7 @@
 #include <iomanip>
 
 int main() {
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -94,6 +94,23 @@ int main() {
 
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
+  World w;
+  w.setDefault();
+  w.setLight(Light(glm::dvec3(1.0), glm::dvec4(0.0, 0.25, 0.0, 1.0)));
+  Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
+  auto shape = w.getShape(1);
+  Intersection i(0.5, shape.get());
+  auto comps = prepare_computations(i, r);
+  std::cout << comps.t_ << "\n";
+  std::cout << shape << "\n";
+  std::cout << comps.shape_ptr_ << "\n";
+  std::cout << glm::to_string(comps.eye_vector_) << "\n";
+  std::cout << glm::to_string(comps.point_) << "\n";
+  std::cout << glm::to_string(comps.normal_vector_) << "\n";
+  std::cout << glm::to_string(comps.over_point_) << "\n";
+  auto c = w.shade_hit(comps, 10);
+
+
   return 0;
 }
