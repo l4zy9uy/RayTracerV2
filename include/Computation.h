@@ -24,6 +24,7 @@ struct Computation {
   glm::dvec4 reflect_vector_;
   double n1_;
   double n2_;
+  glm::dvec4 under_point_;
 public:
   Computation(const double &t,
               const Shape *shapePtr,

@@ -97,19 +97,26 @@ int main() {
   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
   World w;
   w.setDefault();
-  w.setLight(Light(glm::dvec3(1.0), glm::dvec4(0.0, 0.25, 0.0, 1.0)));
-  Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
-  auto shape = w.getShape(1);
-  Intersection i(0.5, shape.get());
-  auto comps = prepare_computations(i, r);
-  std::cout << comps.t_ << "\n";
-  std::cout << shape << "\n";
-  std::cout << comps.shape_ptr_ << "\n";
-  std::cout << glm::to_string(comps.eye_vector_) << "\n";
-  std::cout << glm::to_string(comps.point_) << "\n";
-  std::cout << glm::to_string(comps.normal_vector_) << "\n";
-  std::cout << glm::to_string(comps.over_point_) << "\n";
-  auto c = w.shade_hit(comps, 10);
+  Material m;
+  m.ambient_ = 1.0;
+  m.pattern_ptr_ = std::make_shared<GradientPtn>(glm::dvec3(0.0), glm::dvec3(0.0));
+  std::cout << glm::to_string(m.pattern_ptr_->getTransformationMatrix()) << "\n";
+  w.getShape(0)->setMaterial(m);
+  Material m2;
+  m2.transparency_ = 1.0;
+  m2.refractive_index_ = 1.5;
+  w.getShape(1)->setMaterial(m2);
+  std::cout << w.getShape(1)->getMaterial().transparency_ << "\n";
+  std::cout << w.getShape(1)->getMaterial().refractive_index_ << "\n";
+  Ray r(glm::dvec4(0.0, 0.0, 0.1, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(-0.9899, w.getShape(0).get());
+  xs.addIntersection(-0.4899, w.getShape(1).get());
+  xs.addIntersection(0.4899, w.getShape(1).get());
+  xs.addIntersection(0.9899, w.getShape(0).get());
+  auto comps = prepare_computations(xs.getList()[2], r, xs);
+  auto c = w.refracted_color(comps, 5);
+  std::cout << glm::to_string(c) << "\n";
 
 
   return 0;

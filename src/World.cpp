@@ -45,7 +45,8 @@ glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining
       shadowed,
       computation.point_);
   auto reflected = reflected_color(computation, remaining);
-  return surface + reflected;
+  //auto refracted = reflected_color(computation, remaining);
+  return surface + reflected;// + refracted;
 }
 
 glm::dvec3 World::color_at(const Ray &ray, const int &remaining) {
@@ -88,4 +89,18 @@ glm::dvec3 World::reflected_color(const Computation &computation, const int &rem
 }
 std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
   return shape_ptr_list_.at(index);
+}
+glm::dvec3 World::refracted_color(const Computation &comp, const int &remaining) {
+  if(remaining <= 0) return {0.0, 0.0, 0.0};
+  auto n_ratio = comp.n1_ / comp.n2_;
+  auto cos_i = glm::dot(comp.eye_vector_, comp.normal_vector_);
+  auto sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
+  if(sin2_t > 1.0) return {0.0, 0.0, 0.0};
+  auto cos_t = sqrt(1.0 - sin2_t);
+  auto direction = comp.normal_vector_ * (n_ratio * cos_i - cos_t) - comp.eye_vector_ * n_ratio;
+  Ray refracted_ray(comp.under_point_, direction);
+  return color_at(refracted_ray, remaining-1) * comp.shape_ptr_->getMaterial().transparency_;
+
+  if(comp.shape_ptr_->getMaterial().transparency_ == 0) return {0.0, 0.0, 0.0};
+  return {1.0, 1.0, 1.0};
 }

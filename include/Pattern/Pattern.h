@@ -20,7 +20,7 @@ public:
   [[nodiscard]] const glm::dvec3 &getB() const;
   void setB(const glm::dvec3 &B);
 protected:
-  glm::dmat4 transformation_matrix_;
+  glm::dmat4 transformation_matrix_ = glm::dmat4(1.0);
   glm::dvec3 a;
   glm::dvec3 b;
 public:

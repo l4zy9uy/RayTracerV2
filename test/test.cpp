@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "Plane.h"
 #include "Computation.h"
+#include "Pattern/StripePtn.h"
 
 const double Epsilon = 0.00001;
 
@@ -496,7 +497,7 @@ TEST_CASE("shade_hit() with a reflective material", "[reflection]") {
   w.addShape(std::make_shared<Plane>(shape));
   Intersection i(sqrt(2), &shape);
   auto comps = prepare_computations(i, r);
-  auto color = w.shade_hit(comps, 10);
+  auto color = w.shade_hit(comps, 5);
   REQUIRE(fabs(color.x - 0.87677) < Epsilon*10);
   REQUIRE(fabs(color.y - 0.92436) < Epsilon*10);
   REQUIRE(fabs(color.z - 0.82918) < Epsilon*10);
@@ -559,4 +560,80 @@ TEST_CASE("Finding n1 and n2 at various intersections", "[normals]") {
   comps = prepare_computations(i, r, xs);
   REQUIRE(fabs(comps.n1_ - 1.5) < Epsilon);
   REQUIRE(fabs(comps.n2_ - 1.0) < Epsilon);
+}
+
+TEST_CASE("The under point is offset below the surface", "[hit]") {
+  Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
+  Sphere shape;
+  shape.make_glassy();
+  shape.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 1.0)));
+  Intersection i(5, &shape);
+  Intersections xs;
+  xs.addIntersection(i);
+  auto comps = prepare_computations(i, r, xs);
+  REQUIRE(comps.under_point_.z > Epsilon/2);
+  REQUIRE(comps.point_.z < comps.under_point_.z);
+}
+
+TEST_CASE("The refracted color with an opaque surface", "[refraction]") {
+  World w;
+  w.setDefault();
+  Material m;
+  m.transparency_ = 1.0;
+  m.refractive_index_ = 1.5;
+  w.getShape(0)->setMaterial(m);
+  Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(4, w.getShape(0).get());
+  xs.addIntersection(6, w.getShape(0).get());
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto c = w.refracted_color(comps, 0);
+
+  REQUIRE(fabs(c.x - 0.0) < Epsilon);
+  REQUIRE(fabs(c.y - 0.0) < Epsilon);
+  REQUIRE(fabs(c.z - 0.0) < Epsilon);
+}
+
+TEST_CASE("The refracted color under total internal reflection", "[refraction]") {
+  World w;
+  w.setDefault();
+  Material m;
+  m.transparency_ = 1.0;
+  m.refractive_index_ = 1.5;
+  w.getShape(0)->setMaterial(m);
+  Ray r(glm::dvec4(0.0, 0.0, sqrt(2)/2, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(-sqrt(2)/2, w.getShape(0).get());
+  xs.addIntersection(sqrt(2)/2, w.getShape(0).get());
+  auto comps = prepare_computations(xs.getList()[1], r, xs);
+  auto c = w.refracted_color(comps, 5);
+
+  REQUIRE(fabs(c.x - 0.0) < Epsilon);
+  REQUIRE(fabs(c.y - 0.0) < Epsilon);
+  REQUIRE(fabs(c.z - 0.0) < Epsilon);
+}
+
+TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
+  World w;
+  w.setDefault();
+  Material m;
+  m.ambient_ = 1.0;
+  m.pattern_ptr_ = std::make_shared<StripePtn>(glm::dvec3(0.0), glm::dvec3(0.0));
+  w.getShape(0)->setMaterial(m);
+  Material m2;
+  m2.transparency_ = 1.0;
+  m2.refractive_index_ = 1.5;
+  w.getShape(1)->setMaterial(m2);
+  Ray r(glm::dvec4(0.0, 0.0, 0.1, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(-0.9899, w.getShape(0).get());
+  xs.addIntersection(-0.4899, w.getShape(1).get());
+  xs.addIntersection(0.4899, w.getShape(1).get());
+  xs.addIntersection(0.9899, w.getShape(0).get());
+  auto comps = prepare_computations(xs.getList()[2], r, xs);
+  auto c = w.refracted_color(comps, 5);
+
+  REQUIRE(fabs(c.x - 0.0) < Epsilon);
+  REQUIRE(fabs(c.y - 0.99888) < Epsilon);
+  REQUIRE(fabs(c.z - 0.04725) < Epsilon);
 }

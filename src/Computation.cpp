@@ -22,6 +22,8 @@ Computation prepare_computations(const Intersection &intersection, const Ray &ra
                     normal_vector,
                     glm::reflect(ray.getDirectionVector(), normal_vector));
   comps.over_point_ = comps.point_ + comps.normal_vector_ * 0.00001;
+  comps.under_point_ = comps.point_ - comps.normal_vector_ * 0.00001;
+
   Containers containers;
   for(const auto &i : intersections.getList()) {
     if(i == intersection) {

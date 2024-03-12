@@ -16,7 +16,7 @@ class World {
 public:
 
 private:
-  std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
+  mutable std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
   Light light_;
 public:
   void addShape(const std::shared_ptr<Shape>& shape);
@@ -32,6 +32,7 @@ public:
   std::shared_ptr<Shape> getShape(const unsigned int &index);
   bool isShadowed(const glm::dvec4 &point);
   glm::dvec3 reflected_color(const Computation &computation, const int &remaining);
+  glm::dvec3 refracted_color(const Computation &comp, const int &remaining);
 };
 
 #endif //RAYTRACERV2_WORLD_H
