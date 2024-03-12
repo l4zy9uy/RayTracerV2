@@ -555,7 +555,7 @@ TEST_CASE("Finding n1 and n2 at various intersections", "[normals]") {
   REQUIRE(fabs(comps.n1_ - 2.5) < Epsilon);
   REQUIRE(fabs(comps.n2_ - 1.5) < Epsilon);
 
-  i = xs.getList().at(1);
+  i = xs.getList().at(5);
   comps = prepare_computations(i, r, xs);
   REQUIRE(fabs(comps.n1_ - 1.5) < Epsilon);
   REQUIRE(fabs(comps.n2_ - 1.0) < Epsilon);

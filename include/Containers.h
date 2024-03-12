@@ -8,7 +8,7 @@
 
 class Shape;
 class Containers {
-private:
+public:
   std::vector<Shape*> list_;
 public:
   [[nodiscard]] const std::vector<Shape *> &getList() const;

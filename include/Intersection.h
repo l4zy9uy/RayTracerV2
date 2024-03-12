@@ -25,6 +25,7 @@ public:
   Intersection& operator=(const Intersection& other);
   Intersection(Intersection&& other) noexcept;
   Intersection& operator=(Intersection&& other) noexcept;
+  bool operator==(const Intersection &rhs) const;
   ~Intersection() = default;
 
   [[nodiscard]] const double& getT() const;

@@ -40,6 +40,9 @@ const double& Intersection::getT() const { return t_; }
 void Intersection::setT(const double& t) { t_ = t; }
 const Shape* Intersection::getShapePtr() const { return shape_ptr_; }
 void Intersection::setShapePtr(Shape* shapePtr) { shape_ptr_ = shapePtr; }
+bool Intersection::operator==(const Intersection &rhs) const {
+  return fabs(t_ - rhs.t_) < 0.00001 && shape_ptr_ == rhs.shape_ptr_;
+}
 
 /*Computation Intersection::prepare_computations(const Ray &ray, const Intersections &intersections = Intersections()) {
   Containers containers;
