@@ -16,20 +16,21 @@ class Ray;
 class Intersections;
 
 class Intersection {
-private:
+public:
   double t_;
-  Shape *shape_ptr_;
+  const Shape *shape_ptr_;
 public:
-  [[nodiscard]] const double & getT() const;
+  Intersection(double t, Shape* shapePtr);
+  Intersection(const Intersection& other);
+  Intersection& operator=(const Intersection& other);
+  Intersection(Intersection&& other) noexcept;
+  Intersection& operator=(Intersection&& other) noexcept;
+  ~Intersection() = default;
 
-  void setT(const double &t);
-
-  [[nodiscard]] const Shape *getShapePtr() const;
-
-  void setShapePtr(Shape *shapePtr);
-  /*Computation prepare_computations(const Ray &ray, const Intersections &intersections);*/
-public:
-  Intersection(double t, Shape *shapePtr);
+  [[nodiscard]] const double& getT() const;
+  void setT(const double& t);
+  [[nodiscard]] const Shape* getShapePtr() const;
+  void setShapePtr(Shape* shapePtr);
 };
 
 #endif //RAYTRACERV2_INTERSECTION_H

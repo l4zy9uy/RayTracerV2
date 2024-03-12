@@ -25,7 +25,7 @@ void Intersections::setList(const std::vector<Intersection> &list) {
   list_ = list;
 }
 
-std::optional<Intersection> Intersections::hit() {
+std::optional<Intersection> Intersections::hit() const {
   if (!sorted_)
     sort();
 
@@ -40,10 +40,11 @@ std::optional<Intersection> Intersections::hit() {
   return std::make_optional<Intersection>(*result);
 }
 
-void Intersections::sort() {
+void Intersections::sort() const {
   std::sort(list_.begin(), list_.end(), [&](const Intersection &lhs, const Intersection &rhs) {
-    return lhs.getT() < rhs.getT();
+    return lhs.t_ < rhs.t_;
   });
+  sorted_ = true;
 }
 
 void Intersections::addIntersection(const Intersection &intersection) {

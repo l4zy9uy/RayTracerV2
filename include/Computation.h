@@ -15,7 +15,7 @@ class Shape;
 
 struct Computation {
   double t_;
-  Shape *shape_ptr_;
+  const Shape *shape_ptr_;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
@@ -25,12 +25,12 @@ struct Computation {
   double n1_;
   double n2_;
 public:
-  Computation(const double &t,
-              Shape *shapePtr,
+  /*Computation(const double &t,
+              const Shape *shapePtr,
               const glm::dvec4 &point,
               const glm::dvec4 &eye_vector,
               const glm::dvec4 &normal_vector,
-              const glm::dvec4 &reflect_vector);
+              const glm::dvec4 &reflect_vector);*/
 };
 
 Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections = Intersections());

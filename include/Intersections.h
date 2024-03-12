@@ -12,8 +12,8 @@ class Shape;
 
 class Intersections {
 private:
-  std::vector<Intersection> list_;
-  bool sorted_;
+  mutable std::vector<Intersection> list_;
+  mutable bool sorted_;
 public:
   Intersections(const std::vector<Intersection> &list, bool sorted);
   Intersections();
@@ -25,8 +25,8 @@ public:
   void addList(const Intersections &list);
 
 public:
-  std::optional<Intersection> hit();
-  void sort();
+  [[nodiscard]] std::optional<Intersection> hit() const;
+  void sort() const;
 };
 
 #endif //RAYTRACERV2_INTERSECTIONS_H

@@ -496,7 +496,7 @@ TEST_CASE("shade_hit() with a reflective material", "[reflection]") {
   w.addShape(std::make_shared<Plane>(shape));
   Intersection i(sqrt(2), &shape);
   auto comps = prepare_computations(i, r);
-  auto color = w.shade_hit(comps, 3);
+  auto color = w.shade_hit(comps, 10);
   REQUIRE(fabs(color.x - 0.87677) < Epsilon*10);
   REQUIRE(fabs(color.y - 0.92436) < Epsilon*10);
   REQUIRE(fabs(color.z - 0.82918) < Epsilon*10);

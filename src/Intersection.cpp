@@ -4,25 +4,42 @@
 
 
 #include "Intersection.h"
-#include <limits>
 
-Intersection::Intersection(double t, Shape *shapePtr) : t_(t), shape_ptr_(shapePtr) {}
+// Constructor
+Intersection::Intersection(double t, Shape* shapePtr) : t_(t), shape_ptr_(shapePtr) {}
 
-const double & Intersection::getT() const {
-  return t_;
+// Copy constructor
+Intersection::Intersection(const Intersection& other)  = default;
+
+// Copy assignment operator
+Intersection& Intersection::operator=(const Intersection& other) {
+  if (this != &other) {
+    t_ = other.t_;
+    shape_ptr_ = other.shape_ptr_;
+  }
+  return *this;
 }
 
-void Intersection::setT(const double &t) {
-  t_ = t;
+// Move constructor
+Intersection::Intersection(Intersection&& other) noexcept : t_(other.t_), shape_ptr_(other.shape_ptr_) {
+  other.shape_ptr_ = nullptr;
 }
 
-const Shape *Intersection::getShapePtr() const {
-  return shape_ptr_;
+// Move assignment operator
+Intersection& Intersection::operator=(Intersection&& other) noexcept {
+  if (this != &other) {
+    t_ = other.t_;
+    shape_ptr_ = other.shape_ptr_;
+    other.shape_ptr_ = nullptr;
+  }
+  return *this;
 }
 
-void Intersection::setShapePtr(Shape *shapePtr) {
-  shape_ptr_ = shapePtr;
-}
+// Getters and setters
+const double& Intersection::getT() const { return t_; }
+void Intersection::setT(const double& t) { t_ = t; }
+const Shape* Intersection::getShapePtr() const { return shape_ptr_; }
+void Intersection::setShapePtr(Shape* shapePtr) { shape_ptr_ = shapePtr; }
 
 /*Computation Intersection::prepare_computations(const Ray &ray, const Intersections &intersections = Intersections()) {
   Containers containers;
