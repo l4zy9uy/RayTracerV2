@@ -32,7 +32,7 @@ std::optional<Intersection> Intersections::hit() const {
   if (list_.empty())
     return std::nullopt;
   auto result = std::find_if(list_.begin(), list_.end(), [&](const Intersection &i) {
-    return i.getT() > 0.0;
+    return i.t_ > 0.0;
   });
 
   if (result == list_.end())

@@ -73,7 +73,7 @@ bool World::isShadowed(const glm::dvec4 &point) {
   Ray r(point, direction);
   auto intersections = intersect_world(r);
   std::optional<Intersection> ht = intersections.hit();
-  if(ht.has_value() && ht->getT() < distance)
+  if(ht.has_value() && ht->t_ < distance)
     return true;
   return false;
 }

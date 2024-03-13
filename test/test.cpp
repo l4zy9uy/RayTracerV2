@@ -29,8 +29,8 @@ TEST_CASE("A ray intersects a sphere at two points", "[Intersect]") {
   Sphere s;
   auto xs = s.intersect(r);
   REQUIRE(xs.getList().size() == 2);
-  REQUIRE(xs.getList()[0].getT() == 4.0);
-  REQUIRE(xs.getList()[1].getT() == 6.0);
+  REQUIRE(xs.getList()[0].t_ == 4.0);
+  REQUIRE(xs.getList()[1].t_ == 6.0);
 }
 
 TEST_CASE("A ray intersects a sphere at a tangent", "[Intersect]") {
@@ -38,8 +38,8 @@ TEST_CASE("A ray intersects a sphere at a tangent", "[Intersect]") {
   Sphere s;
   auto xs = s.intersect(r);
   REQUIRE(xs.getList().size() == 2);
-  REQUIRE(xs.getList()[0].getT() == 5.0);
-  REQUIRE(xs.getList()[1].getT() == 5.0);
+  REQUIRE(xs.getList()[0].t_ == 5.0);
+  REQUIRE(xs.getList()[1].t_ == 5.0);
 }
 
 TEST_CASE("A ray misses a sphere", "[Intersect]") {
@@ -54,8 +54,8 @@ TEST_CASE("A ray originates inside a sphere", "[Intersect]") {
   Sphere s;
   auto xs = s.intersect(r);
   REQUIRE(xs.getList().size() == 2);
-  REQUIRE(xs.getList()[0].getT() == -1.0);
-  REQUIRE(xs.getList()[1].getT() == 1.0);
+  REQUIRE(xs.getList()[0].t_ == -1.0);
+  REQUIRE(xs.getList()[1].t_ == 1.0);
 }
 
 TEST_CASE("A sphere is behind a ray", "[Intersect]") {
@@ -63,8 +63,8 @@ TEST_CASE("A sphere is behind a ray", "[Intersect]") {
   Sphere s;
   auto xs = s.intersect(r);
   REQUIRE(xs.getList().size() == 2);
-  REQUIRE(xs.getList()[0].getT() == -6.0);
-  REQUIRE(xs.getList()[1].getT() == -4.0);
+  REQUIRE(xs.getList()[0].t_ == -6.0);
+  REQUIRE(xs.getList()[1].t_ == -4.0);
 }
 
 TEST_CASE("The hit, when all intersections have positive t", "[hit]") {
@@ -76,8 +76,8 @@ TEST_CASE("The hit, when all intersections have positive t", "[hit]") {
   xs.addIntersection(i2);
   auto i = xs.hit();
   if(i.has_value()) {
-    REQUIRE(i->getT() == i1.getT());
-    REQUIRE(i->getShapePtr() == i1.getShapePtr());
+    REQUIRE(i->t_ == i1.t_);
+    REQUIRE(i->shape_ptr_ == i1.shape_ptr_);
   }
   else
     REQUIRE(i == std::nullopt);
@@ -92,8 +92,8 @@ TEST_CASE("The hit, when some intersections have negative t", "[hit]") {
   xs.addIntersection(i2);
   auto i = xs.hit();
   if(i.has_value()) {
-    REQUIRE(i->getT() == i2.getT());
-    REQUIRE(i->getShapePtr() == i2.getShapePtr());
+    REQUIRE(i->t_ == i2.t_);
+    REQUIRE(i->shape_ptr_ == i2.shape_ptr_);
   }
   else
     REQUIRE(i == std::nullopt);
@@ -108,8 +108,8 @@ TEST_CASE("The hit, when all intersections have negative t", "[hit]") {
   xs.addIntersection(i2);
   auto i = xs.hit();
   if(i.has_value()) {
-    REQUIRE(i->getT() == i2.getT());
-    REQUIRE(i->getShapePtr() == i2.getShapePtr());
+    REQUIRE(i->t_ == i2.t_);
+    REQUIRE(i->shape_ptr_ == i2.shape_ptr_);
   }
   else
     REQUIRE(i == std::nullopt);
@@ -128,8 +128,8 @@ TEST_CASE("The hit, hit is always the lowest non-negative intersection", "[hit]"
   xs.addIntersection(i4);
   auto i = xs.hit();
   if(i.has_value()) {
-    REQUIRE(i->getT() == i4.getT());
-    REQUIRE(i->getShapePtr() == i4.getShapePtr());
+    REQUIRE(i->t_ == i4.t_);
+    REQUIRE(i->shape_ptr_ == i4.shape_ptr_);
   }
   else
     REQUIRE(i == std::nullopt);
@@ -158,8 +158,8 @@ TEST_CASE("Intersecting a scaled sphere with a ray", "[intersect]") {
   auto xs = s.intersect(r);
   if(!xs.getList().empty()) {
     REQUIRE(xs.getList().size() == 2);
-    REQUIRE(xs.getList()[0].getT() == 3.0);
-    REQUIRE(xs.getList()[1].getT() == 7.0);
+    REQUIRE(xs.getList()[0].t_ == 3.0);
+    REQUIRE(xs.getList()[1].t_ == 7.0);
   }
 }
 
@@ -170,8 +170,8 @@ TEST_CASE("Intersecting a translated sphere with a ray", "[intersect]") {
   auto xs = s.intersect(r);
   if(!xs.getList().empty()) {
     REQUIRE(xs.getList().size() == 2);
-    REQUIRE(xs.getList()[0].getT() == 3.0);
-    REQUIRE(xs.getList()[1].getT() == 7.0);
+    REQUIRE(xs.getList()[0].t_ == 3.0);
+    REQUIRE(xs.getList()[1].t_ == 7.0);
   }
 }
 
@@ -273,10 +273,10 @@ TEST_CASE("Intersect a world with a ray", "[intersect world]") {
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   auto xs = w.intersect_world(r);
   REQUIRE(xs.getList().size() == 4);
-  REQUIRE(fabs(xs.getList().at(0).getT() - 4) < Epsilon);
-  REQUIRE(fabs(xs.getList().at(1).getT() - 4.5) < Epsilon);
-  REQUIRE(fabs(xs.getList().at(2).getT() - 5.5) < Epsilon);
-  REQUIRE(fabs(xs.getList().at(3).getT() - 6) < Epsilon);
+  REQUIRE(fabs(xs.getList().at(0).t_ - 4) < Epsilon);
+  REQUIRE(fabs(xs.getList().at(1).t_ - 4.5) < Epsilon);
+  REQUIRE(fabs(xs.getList().at(2).t_ - 5.5) < Epsilon);
+  REQUIRE(fabs(xs.getList().at(3).t_ - 6) < Epsilon);
 }
 
 TEST_CASE("Shading an intersection", "[shading]") {

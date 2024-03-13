@@ -5,11 +5,11 @@
 #include "Computation.h"
 #include <algorithm>
 Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections) {
-  auto point = position(ray, intersection.getT());
-  auto normal_vector = intersection.getShapePtr()->normal_at(point);
+  auto point = position(ray, intersection.t_);
+  auto normal_vector = intersection.shape_ptr_->normal_at(point);
   Computation comps{};
-  comps.t_ = intersection.getT();
-  comps.shape_ptr_ = intersection.getShapePtr();
+  comps.t_ = intersection.t_;
+  comps.shape_ptr_ = intersection.shape_ptr_;
   comps.point_ = point;
   comps.eye_vector_ = -ray.getDirectionVector();
   comps.normal_vector_ = normal_vector;
