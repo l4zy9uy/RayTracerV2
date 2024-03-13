@@ -19,7 +19,7 @@ void SolidPtn::setPtn2Ptr(const std::shared_ptr<Pattern> &Ptn2Ptr) {
 SolidPtn::SolidPtn(const glm::dvec3 &A,
                    const glm::dvec3 &B,
                    const std::shared_ptr<Pattern> &Ptn1Ptr,
-                   const std::shared_ptr<Pattern> &Ptn2Ptr) : Pattern(A, B), ptn1_ptr_(Ptn1Ptr), ptn2_ptr_(Ptn2Ptr) {}
+                   const std::shared_ptr<Pattern> &Ptn2Ptr) : a(A), b(B), ptn1_ptr_(Ptn1Ptr), ptn2_ptr_(Ptn2Ptr) {}
 glm::dvec3 SolidPtn::pattern_at(const glm::dvec4 &point) const {
   glm::dvec3 color;
   if(static_cast<long>(floor(point.x) + floor(point.y) + floor(point.z)) % 2) {
@@ -32,4 +32,16 @@ glm::dvec3 SolidPtn::pattern_at(const glm::dvec4 &point) const {
   }
 
   return color;
+}
+const glm::dvec3 &SolidPtn::getA1() const {
+  return a;
+}
+void SolidPtn::setA1(const glm::dvec3 &A) {
+  a = A;
+}
+const glm::dvec3 &SolidPtn::getB1() const {
+  return b;
+}
+void SolidPtn::setB1(const glm::dvec3 &B) {
+  b = B;
 }

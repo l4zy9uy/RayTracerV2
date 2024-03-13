@@ -11,7 +11,7 @@ class Shape;
 
 class Pattern {
 public:
-  Pattern(const glm::dvec3 &A, const glm::dvec3 &B);
+  //Pattern(const glm::dvec3 &A, const glm::dvec3 &B);
   [[nodiscard]] const glm::dmat4 &getTransformationMatrix() const;
   void setTransformationMatrix(const glm::dmat4 &TransformationMatrix);
   //explicit Pattern() = default;
@@ -21,8 +21,6 @@ public:
   void setB(const glm::dvec3 &B);
 protected:
   glm::dmat4 transformation_matrix_ = glm::dmat4(1.0);
-  glm::dvec3 a;
-  glm::dvec3 b;
 public:
   [[nodiscard]] virtual glm::dvec3 pattern_at(const glm::dvec4 &point) const = 0;
   glm::dvec3 pattern_at_shape(const Shape &shape, const glm::dvec4 &world_position);

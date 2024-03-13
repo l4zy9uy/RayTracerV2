@@ -45,15 +45,16 @@ glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining
       shadowed,
       computation.point_);
   auto reflected = reflected_color(computation, remaining);
-  //auto refracted = reflected_color(computation, remaining);
-  return surface + reflected;// + refracted;
+  auto refracted = refracted_color(computation, remaining);
+  return surface + reflected + refracted;
 }
 
 glm::dvec3 World::color_at(const Ray &ray, const int &remaining) {
   auto intersections = intersect_world(ray);
   auto hit = intersections.hit();
   if (hit.has_value()) {
-    return shade_hit(prepare_computations(hit.value(), ray), remaining);
+    auto comps = prepare_computations(hit.value(), ray, intersections);
+    return shade_hit(comps, remaining);
   } else {
     return {0.0, 0.0, 0.0};
   }

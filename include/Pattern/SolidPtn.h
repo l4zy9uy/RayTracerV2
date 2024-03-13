@@ -22,6 +22,14 @@ public:
            const glm::dvec3 &B,
            const std::shared_ptr<Pattern> &Ptn1Ptr,
            const std::shared_ptr<Pattern> &Ptn2Ptr);
+private:
+  glm::dvec3 a;
+  glm::dvec3 b;
+public:
+  const glm::dvec3 &getA1() const;
+  void setA1(const glm::dvec3 &A);
+  const glm::dvec3 &getB1() const;
+  void setB1(const glm::dvec3 &B);
 };
 
 

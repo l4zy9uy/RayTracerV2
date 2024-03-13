@@ -19,6 +19,7 @@
 #include "Pattern/SolidPtn.h"
 #include <limits>
 #include <iomanip>
+#include "Pattern/TestPtn.h"
 
 int main() {
   /*auto start = std::chrono::high_resolution_clock::now();
@@ -97,25 +98,28 @@ int main() {
   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
   World w;
   w.setDefault();
+  Plane floor;
+  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
   Material m;
-  m.ambient_ = 1.0;
-  m.pattern_ptr_ = std::make_shared<GradientPtn>(glm::dvec3(0.0), glm::dvec3(0.0));
-  std::cout << glm::to_string(m.pattern_ptr_->getTransformationMatrix()) << "\n";
-  w.getShape(0)->setMaterial(m);
+  m.transparency_ = 0.5;
+  m.refractive_index_ = 1.5;
+  floor.setMaterial(m);
+  w.addShape(std::make_shared<Plane>(floor));
+  Sphere ball;
   Material m2;
-  m2.transparency_ = 1.0;
-  m2.refractive_index_ = 1.5;
-  w.getShape(1)->setMaterial(m2);
-  std::cout << w.getShape(1)->getMaterial().transparency_ << "\n";
-  std::cout << w.getShape(1)->getMaterial().refractive_index_ << "\n";
-  Ray r(glm::dvec4(0.0, 0.0, 0.1, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
+  m2.ambient_ = 0.5;
+  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
+  ball.setMaterial(m2);
+  w.addShape(std::make_shared<Sphere>(ball));
+  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
   Intersections xs;
-  xs.addIntersection(-0.9899, w.getShape(0).get());
-  xs.addIntersection(-0.4899, w.getShape(1).get());
-  xs.addIntersection(0.4899, w.getShape(1).get());
-  xs.addIntersection(0.9899, w.getShape(0).get());
-  auto comps = prepare_computations(xs.getList()[2], r, xs);
-  auto c = w.refracted_color(comps, 5);
+  xs.addIntersection(sqrt(2), w.getShape(2).get());
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto c = w.shade_hit(comps, 5);
+  std::cout << &floor << "\n";
+  std::cout << w.getShape(2).get() << "\n";
+  std::cout << w.getShape(3).get() << "\n";
   std::cout << glm::to_string(c) << "\n";
 
 

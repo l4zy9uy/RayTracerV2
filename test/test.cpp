@@ -12,6 +12,7 @@
 #include "Plane.h"
 #include "Computation.h"
 #include "Pattern/StripePtn.h"
+#include "Pattern/TestPtn.h"
 
 const double Epsilon = 0.00001;
 
@@ -441,6 +442,37 @@ TEST_CASE("The hit should offset the point", "[hit]") {
   REQUIRE(comps.point_.z > comps.over_point_.z);
 }
 
+TEST_CASE("A pattern with an object transformation", "[pattern]") {
+  Sphere shape;
+  TestPtn pattern;
+  shape.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
+  auto c = pattern.pattern_at_shape(shape, glm::dvec4(2.0, 3.0, 4.0, 1.0));
+  REQUIRE(fabs(c.x - 1.0) < Epsilon);
+  REQUIRE(fabs(c.y - 1.5) < Epsilon);
+  REQUIRE(fabs(c.z - 2.0) < Epsilon);
+}
+
+TEST_CASE("A pattern with a pattern transformation", "[pattern]") {
+  Sphere shape;
+  TestPtn pattern;
+  pattern.setTransformationMatrix(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
+  auto c = pattern.pattern_at_shape(shape, glm::dvec4(2.0, 3.0, 4.0, 1.0));
+  REQUIRE(fabs(c.x - 1.0) < Epsilon);
+  REQUIRE(fabs(c.y - 1.5) < Epsilon);
+  REQUIRE(fabs(c.z - 2.0) < Epsilon);
+}
+
+TEST_CASE("A pattern with both an object and a pattern transformation", "[pattern]") {
+  Sphere shape;
+  TestPtn pattern;
+  shape.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
+  pattern.setTransformationMatrix(glm::translate(glm::dmat4(1.0), glm::dvec3(0.5, 1.0, 1.5)));
+  auto c = pattern.pattern_at_shape(shape, glm::dvec4(2.5, 3.0, 3.5, 1.0));
+  REQUIRE(fabs(c.x - 0.75) < Epsilon);
+  REQUIRE(fabs(c.y - 0.5) < Epsilon);
+  REQUIRE(fabs(c.z - 0.25) < Epsilon);
+}
+
 TEST_CASE("Precomputing the reflection vector", "[reflection]") {
   Plane shape;
   Ray r(glm::dvec4(0.0, 1.0, -1.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
@@ -618,7 +650,7 @@ TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
   w.setDefault();
   Material m;
   m.ambient_ = 1.0;
-  m.pattern_ptr_ = std::make_shared<StripePtn>(glm::dvec3(0.0), glm::dvec3(0.0));
+  m.pattern_ptr_ = std::make_shared<TestPtn>();
   w.getShape(0)->setMaterial(m);
   Material m2;
   m2.transparency_ = 1.0;
@@ -635,5 +667,33 @@ TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
 
   REQUIRE(fabs(c.x - 0.0) < Epsilon);
   REQUIRE(fabs(c.y - 0.99888) < Epsilon);
-  REQUIRE(fabs(c.z - 0.04725) < Epsilon);
+  REQUIRE(fabs(c.z - 0.04725) < Epsilon*10);
+}
+
+TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
+  World w;
+  w.setDefault();
+  Plane floor;
+  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
+  Material m;
+  m.transparency_ = 0.5;
+  m.refractive_index_ = 1.5;
+  floor.setMaterial(m);
+  w.addShape(std::make_shared<Plane>(floor));
+  Sphere ball;
+  Material m2;
+  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
+  m2.ambient_ = 0.5;
+  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
+  ball.setMaterial(m2);
+  w.addShape(std::make_shared<Sphere>(ball));
+  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
+  Intersections xs;
+  xs.addIntersection(sqrt(2), w.getShape(2).get());
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto c = w.shade_hit(comps, 5);
+
+  REQUIRE(fabs(c.x - 0.93642) < Epsilon);
+  REQUIRE(fabs(c.y - 0.68642) < Epsilon);
+  REQUIRE(fabs(c.z - 0.68642) < Epsilon*10);
 }

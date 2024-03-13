@@ -5,7 +5,7 @@
 #include "Pattern/StripePtn.h"
 #include "Shape.h"
 
-StripePtn::StripePtn(const glm::dvec3 &A, const glm::dvec3 &B) : Pattern(A, B){}
+StripePtn::StripePtn(const glm::dvec3 &A, const glm::dvec3 &B) : a(A), b(B) {}
 
 /*glm::dvec3 StripePtn::pattern_at_shape(const Shape &shape, const glm::dvec4 &world_position) {
   auto object_point = glm::inverse(shape.getModel()) * world_position;
@@ -17,6 +17,18 @@ StripePtn::StripePtn(const glm::dvec3 &A, const glm::dvec3 &B) : Pattern(A, B){}
 glm::dvec3 StripePtn::pattern_at(const glm::dvec4 &point) const {
   if(static_cast<long>(floor(point.x)) % 2 == 0) return a;
   else return b;
+}
+const glm::dvec3 &StripePtn::getA1() const {
+  return a;
+}
+void StripePtn::setA1(const glm::dvec3 &A) {
+  a = A;
+}
+const glm::dvec3 &StripePtn::getB1() const {
+  return b;
+}
+void StripePtn::setB1(const glm::dvec3 &B) {
+  b = B;
 }
 /*const glm::dvec3 &StripePtn::getA() const {
   return a;
