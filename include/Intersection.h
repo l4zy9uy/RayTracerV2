@@ -7,16 +7,13 @@
 
 #include <memory>
 #include "Shape.h"
-//#include "Computation.h"
 #include "Intersections.h"
-//#include "Containers.h"
 class Shape;
-//class Computation;
+
 class Ray;
 class Intersections;
 
-class Intersection {
-public:
+struct Intersection {
   double t_;
   const Shape *shape_ptr_;
 public:

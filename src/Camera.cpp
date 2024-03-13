@@ -4,14 +4,18 @@
 
 #include "Camera.h"
 
-Camera::Camera(const unsigned int &horizontal_size, const unsigned int &vertical_size, const double &fieldOfView) : horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView) {
+Camera::Camera(const unsigned int &horizontal_size,
+               const unsigned int &vertical_size,
+               const double &fieldOfView) :
+               horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView) {
   transform_matrix_ = glm::dmat4(1.0);
   double half_view = tan(field_of_view_ / 2);
   double aspect = static_cast<double>(horizontal_size_) / static_cast<double>(vertical_size_);
   if (aspect >= 1) {
     half_width_ = half_view;
     half_height_ = half_view / aspect;
-  } else {
+  }
+  else {
     half_width_ = half_view * aspect;
     half_height_ = half_view;
   }
@@ -84,13 +88,15 @@ Ray Camera::ray_for_pixel(const double &px, const double &py) {
   auto pixel = glm::inverse(transform_matrix_) * glm::dvec4(world_x, world_y, -1.0f, 1.0f);
   auto origin = glm::inverse(transform_matrix_) * glm::dvec4(0.0f, 0.0f, 0.0f, 1.0f);
   auto direction = glm::normalize(pixel - origin);
+
   return {origin, direction};
 }
 
 Canvas Camera::render(World &world) {
   Canvas image(horizontal_size_, vertical_size_);
-  for (int y = 0; y < horizontal_size_; y++) {
-    for (int x = 0; x < vertical_size_; x++) {
+
+  for (auto y = 0; y < horizontal_size_; y++) {
+    for (auto x = 0; x < vertical_size_; x++) {
       auto ray = ray_for_pixel(static_cast<double>(y), static_cast<double>(x));
       auto color = world.color_at(ray, 15);
       image.writePixel(y, x, color);

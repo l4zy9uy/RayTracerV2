@@ -96,32 +96,9 @@ int main() {
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
-  World w;
-  w.setDefault();
-  Plane floor;
-  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
-  Material m;
-  m.transparency_ = 0.5;
-  m.refractive_index_ = 1.5;
-  floor.setMaterial(m);
-  w.addShape(std::make_shared<Plane>(floor));
-  Sphere ball;
-  Material m2;
-  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
-  m2.ambient_ = 0.5;
-  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
-  ball.setMaterial(m2);
-  w.addShape(std::make_shared<Sphere>(ball));
-  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
-  Intersections xs;
-  xs.addIntersection(sqrt(2), w.getShape(2).get());
-  auto comps = prepare_computations(xs.getList()[0], r, xs);
-  auto c = w.shade_hit(comps, 5);
-  std::cout << &floor << "\n";
-  std::cout << w.getShape(2).get() << "\n";
-  std::cout << w.getShape(3).get() << "\n";
-  std::cout << glm::to_string(c) << "\n";
-
-
+  glm::dvec4 v{0.0};
+  std::cout << "size of Camera: " << sizeof(Camera) << "\n";
+  std::cout << "size of dmat4: " << sizeof(glm::dmat4) << "\n";
+  std::cout << glm::to_string(v) << "\n";
   return 0;
 }

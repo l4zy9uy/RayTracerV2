@@ -14,24 +14,19 @@ class Ray;
 class Shape;
 
 struct Computation {
+  explicit Computation() = default;
+
   double t_;
   const Shape *shape_ptr_;
   glm::dvec4 normal_vector_;
   glm::dvec4 point_;
   glm::dvec4 eye_vector_;
-  bool inside_;
   glm::dvec4 over_point_;
   glm::dvec4 reflect_vector_;
   double n1_;
   double n2_;
   glm::dvec4 under_point_;
-public:
-  Computation(const double &t,
-              const Shape *shapePtr,
-              const glm::dvec4 &point,
-              const glm::dvec4 &eye_vector,
-              const glm::dvec4 &normal_vector,
-              const glm::dvec4 &reflect_vector);
+  bool inside_;
 };
 
 Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections = Intersections());

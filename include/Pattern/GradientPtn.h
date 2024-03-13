@@ -6,19 +6,18 @@
 #define RAYTRACERV2_INCLUDE_GRADIENTPATTERN_H
 #include "Pattern.h"
 class GradientPtn : public Pattern {
+public:
+  GradientPtn(const glm::dvec3 &A, const glm::dvec3 &B);
+public:
+  [[nodiscard]] const glm::dvec3 &getA() const;
+  void setA(const glm::dvec3 &A);
+  [[nodiscard]] const glm::dvec3 &getB() const;
+  void setB(const glm::dvec3 &B);
+public:
+  [[nodiscard]] glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
 private:
   glm::dvec3 a;
   glm::dvec3 b;
-public:
-  const glm::dvec3 &getA1() const;
-  void setA1(const glm::dvec3 &A);
-  const glm::dvec3 &getB1() const;
-  void setB1(const glm::dvec3 &B);
-public:
-  GradientPtn(const glm::dvec3 &A, const glm::dvec3 &B);
-  glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
-  //glm::dvec3 pattern_at_shape(const Shape &shape, const glm::dvec4 &world_position) override;
-
 };
 
 #endif //RAYTRACERV2_INCLUDE_GRADIENTPATTERN_H

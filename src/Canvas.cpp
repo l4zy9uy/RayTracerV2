@@ -5,7 +5,7 @@
 #include "Canvas.h"
 #include <fstream>
 #include <algorithm>
-Canvas::Canvas(const int &windowWidth, const int &windowHeight) : window_width_(
+Canvas::Canvas(const unsigned int &windowWidth, const unsigned int &windowHeight) : window_width_(
     windowWidth), window_height_(windowHeight) {
   for (int i = 0; i < windowHeight; i++) {
     std::vector<glm::dvec3> temp_vector(windowWidth, glm::dvec3(0));
