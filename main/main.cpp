@@ -17,12 +17,13 @@
 #include "Pattern/RingPtn.h"
 #include "Pattern/CheckerPtn.h"
 #include "Pattern/SolidPtn.h"
+#include "Pattern/BlendedPtn.h"
 #include <limits>
 #include <iomanip>
 #include "Pattern/TestPtn.h"
 
 int main() {
-  /*auto start = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::high_resolution_clock::now();
 
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
@@ -66,16 +67,11 @@ int main() {
   Plane p;
   Material material1;
   material1.reflective_ = (1.0);
-  CheckerPtn checkerPtn(glm::dvec3(1.0), glm::dvec3(0.0));
-  checkerPtn.setTransformationMatrix(
-      glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(1)));
-  StripePtn sp1(glm::dvec3(1.0), glm::dvec3(0.0));
-  sp1.setTransformationMatrix(glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)));
-  StripePtn sp2(glm::dvec3(1.0), glm::dvec3(0.0));
-  sp1.setTransformationMatrix(glm::rotate(glm::dmat4(1.0), -glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)));
-  SolidPtn solidPtn
-      (glm::dvec3(1.0), glm::dvec3(1.0, 0.0, 0.0), std::make_shared<StripePtn>(sp1), std::make_shared<StripePtn>(sp2));
-  material1.pattern_ptr_ = (std::make_shared<CheckerPtn>(checkerPtn));
+  StripePtn checkerPtn(glm::dvec3(1.0), glm::dvec3(0.0));
+  StripePtn checkerPtn2(glm::dvec3(0.0), glm::dvec3(1.0, 0.0, 0.0));
+  checkerPtn2.setTransformationMatrix(glm::rotate(glm::dmat4(1.0), glm::pi<double>()/2, glm::dvec3(0.0, 0.0, 1.0)));
+  BlendedPtn blendedPtn(std::make_shared<StripePtn>(checkerPtn), std::make_shared<StripePtn>(checkerPtn2));
+  material1.pattern_ptr_ = (std::make_shared<BlendedPtn>(blendedPtn));
   p.setMaterial(material1);
 
   World world;
@@ -95,29 +91,6 @@ int main() {
 
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
-  World w;
-  w.setDefault();
-  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
-  Plane floor;
-  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
-  Material m;
-  m.reflective_ = 0.5;
-  m.transparency_ = 0.5;
-  m.refractive_index_ = 1.5;
-  floor.setMaterial(m);
-  w.addShape(std::make_shared<Plane>(floor));
-  Sphere ball;
-  Material m2;
-  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
-  m2.ambient_ = 0.5;
-  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
-  ball.setMaterial(m2);
-  w.addShape(std::make_shared<Sphere>(ball));
-  Intersections xs;
-  xs.addIntersection(sqrt(2), w.getShape(2).get());
-  auto comps = prepare_computations(xs.getList()[0], r, xs);
-  auto c = w.shade_hit(comps, 5);
-  std::cout << glm::to_string(c) << "\n";
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
   return 0;
 }
