@@ -44,16 +44,23 @@ Intersections World::intersect_world(const Ray &ray) {
   return result;
 }
 
-glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining) {
+glm::dvec3 World::shade_hit(const Computations &computation, const int &remaining) {
   auto shadowed = isShadowed(computation.over_point_);
   auto surface = light_.lighting(
-      computation.shape_ptr_->getMaterial(), *computation.shape_ptr_,
+      computation.shape_ptr_->getMaterial(),
+      *computation.shape_ptr_,
       computation.eye_vector_,
       computation.normal_vector_,
       shadowed,
-      computation.point_);
+      computation.over_point_);
   auto reflected = reflected_color(computation, remaining);
   auto refracted = refracted_color(computation, remaining);
+
+  auto material = computation.shape_ptr_->getMaterial();
+  if(material.reflective_ > 0 && material.transparency_ > 0) {
+    auto reflectance = schlick(computation);
+    return  surface + reflected * reflectance + refracted * (1 - reflectance);
+  }
   return surface + reflected + refracted;
 }
 
@@ -90,7 +97,7 @@ void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
 }
 
-glm::dvec3 World::reflected_color(const Computation &computation, const int &remaining) {
+glm::dvec3 World::reflected_color(const Computations &computation, const int &remaining) {
   if(fabs(computation.shape_ptr_->getMaterial().reflective_ - 0.0) < 0.00001) {
     return {0.0, 0.0, 0.0};
   }
@@ -99,7 +106,7 @@ glm::dvec3 World::reflected_color(const Computation &computation, const int &rem
   return color * computation.shape_ptr_->getMaterial().reflective_;
 }
 
-glm::dvec3 World::refracted_color(const Computation &comp, const int &remaining) {
+glm::dvec3 World::refracted_color(const Computations &comp, const int &remaining) {
   if(remaining <= 0) return {0.0, 0.0, 0.0};
   auto n_ratio = comp.n1_ / comp.n2_;
   auto cos_i = glm::dot(comp.eye_vector_, comp.normal_vector_);

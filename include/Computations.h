@@ -13,8 +13,8 @@ class Sphere;
 class Ray;
 class Shape;
 
-struct Computation {
-  explicit Computation() = default;
+struct Computations {
+  explicit Computations() = default;
 
   double t_;
   const Shape *shape_ptr_;
@@ -29,5 +29,6 @@ struct Computation {
   bool inside_;
 };
 
-Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections = Intersections());
+Computations prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections = Intersections());
+double schlick(Computations comps);
 #endif //RAYTRACERV2_COMPUTATION_H

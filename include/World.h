@@ -9,7 +9,7 @@
 #include "Intersections.h"
 #include <vector>
 #include <memory>
-#include "Computation.h"
+#include "Computations.h"
 
 class Intersections;
 class World {
@@ -22,11 +22,11 @@ public:
   std::shared_ptr<Shape> getShape(const unsigned int &index);
 public:
   Intersections intersect_world(const Ray &ray);
-  glm::dvec3 shade_hit(const Computation &computation, const int &remaining);
+  glm::dvec3 shade_hit(const Computations &computation, const int &remaining);
   glm::dvec3 color_at(const Ray &ray, const int &remaining);
   bool isShadowed(const glm::dvec4 &point);
-  glm::dvec3 reflected_color(const Computation &computation, const int &remaining);
-  glm::dvec3 refracted_color(const Computation &comp, const int &remaining);
+  glm::dvec3 reflected_color(const Computations &computation, const int &remaining);
+  glm::dvec3 refracted_color(const Computations &comp, const int &remaining);
 private:
   mutable std::vector<std::shared_ptr<Shape>> shape_ptr_list_;
   Light light_;

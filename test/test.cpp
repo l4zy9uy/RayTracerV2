@@ -10,7 +10,7 @@
 #include "World.h"
 #include "Camera.h"
 #include "Plane.h"
-#include "Computation.h"
+#include "Computations.h"
 #include "Pattern/StripePtn.h"
 #include "Pattern/TestPtn.h"
 
@@ -681,4 +681,68 @@ TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
   REQUIRE(fabs(c.x - 0.93642) < Epsilon);
   REQUIRE(fabs(c.y - 0.68642) < Epsilon);
   REQUIRE(fabs(c.z - 0.68642) < Epsilon*10);
+}
+
+TEST_CASE("The Schlick approximation under total internal reflection", "[schlick]") {
+  Sphere sphere;
+  sphere.make_glassy();
+  Ray r(glm::dvec4(0.0, 0.0, sqrt(2)/2, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(-sqrt(2)/2, &sphere);
+  xs.addIntersection(sqrt(2)/2, &sphere);
+  auto comps = prepare_computations(xs.getList()[1], r, xs);
+  auto reflectance = schlick(comps);
+  REQUIRE(fabs(reflectance - 1.0) < Epsilon);
+}
+
+TEST_CASE("The Schlick approximation with a perpendicular viewing angle", "[schlick]") {
+  Sphere sphere;
+  sphere.make_glassy();
+  Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(-1, &sphere);
+  xs.addIntersection(1, &sphere);
+  auto comps = prepare_computations(xs.getList()[1], r, xs);
+  auto reflectance = schlick(comps);
+  REQUIRE(fabs(reflectance - 0.04) < Epsilon);
+}
+
+TEST_CASE("The Schlick approximation with small angle and n2 > n1", "[schlick]") {
+  Sphere sphere;
+  sphere.make_glassy();
+  Ray r(glm::dvec4(0.0, 0.99, -2.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
+  Intersections xs;
+  xs.addIntersection(1.8589, &sphere);
+  //xs.addIntersection(1, &sphere);
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto reflectance = schlick(comps);
+  REQUIRE(fabs(reflectance - 0.48873) < Epsilon);
+}
+
+TEST_CASE("shade_hit() with a reflective, transparent material", "[schlick]") {
+  World w;
+  w.setDefault();
+  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
+  Plane floor;
+  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
+  Material m;
+  m.reflective_ = 0.5;
+  m.transparency_ = 0.5;
+  m.refractive_index_ = 1.5;
+  floor.setMaterial(m);
+  w.addShape(std::make_shared<Plane>(floor));
+  Sphere ball;
+  Material m2;
+  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
+  m2.ambient_ = 0.5;
+  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
+  ball.setMaterial(m2);
+  w.addShape(std::make_shared<Sphere>(ball));
+  Intersections xs;
+  xs.addIntersection(sqrt(2), w.getShape(2).get());
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto c = w.shade_hit(comps, 5);
+  REQUIRE(fabs(c.r - 0.93391) < Epsilon);
+  REQUIRE(fabs(c.g - 0.69643) < Epsilon);
+  REQUIRE(fabs(c.b - 0.69243) < Epsilon);
 }

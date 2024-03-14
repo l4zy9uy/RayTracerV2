@@ -2,12 +2,12 @@
 // Created by l4zy9uy on 3/11/24.
 //
 
-#include "Computation.h"
+#include "Computations.h"
 #include <algorithm>
-Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections) {
+Computations prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections) {
   auto point = ray.at(intersection.t_);
   auto normal_vector = intersection.shape_ptr_->normal_at(point);
-  Computation comps{};
+  Computations comps{};
   comps.t_ = intersection.t_;
   comps.shape_ptr_ = intersection.shape_ptr_;
   comps.point_ = point;
@@ -50,4 +50,20 @@ Computation prepare_computations(const Intersection &intersection, const Ray &ra
   }
 
   return comps;
+}
+
+double schlick(Computations comps) {
+  auto temp_cos = glm::dot(comps.eye_vector_, comps.normal_vector_);
+
+  if(comps.n1_ > comps.n2_) {
+    auto n = comps.n1_ / comps.n2_;
+    auto sin2_t = n*n * (1 - temp_cos*temp_cos);
+    if(sin2_t > 1.0) return 1.0;
+
+    auto cos_t = sqrt(1.0 - sin2_t);
+    temp_cos = cos_t;
+  }
+
+  auto r0 = ((comps.n1_ - comps.n2_) / (comps.n1_ + comps.n2_)) * ((comps.n1_ - comps.n2_) / (comps.n1_ + comps.n2_));
+  return r0 + (1 - r0) * pow(1-temp_cos, 5);
 }

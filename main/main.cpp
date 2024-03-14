@@ -27,55 +27,55 @@ int main() {
   Sphere middle;
   middle.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-0.5, 1.0, 0.5)));
   Material middle_material;
-  middle_material.setColor(glm::dvec3(0.1, 1.0, 0.5));
-  middle_material.setDiffuse(0.7);
-  middle_material.setSpecular(0.3);
+  middle_material.color_ = (glm::dvec3(0.1, 1.0, 0.5));
+  middle_material.diffuse_ = (0.7);
+  middle_material.specular_ = (0.3);
   GradientPtn gradientPtn(glm::dvec3(1.0, 0.0, 0.0), glm::dvec3(0.0, 0.0, 1.0));
   gradientPtn.setTransformationMatrix(
       glm::translate(glm::dmat4(1.0), glm::dvec3(1, 0.1, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(2)));
-  middle_material.setPatternPtr(std::make_shared<GradientPtn>(gradientPtn));
+  middle_material.pattern_ptr_ = (std::make_shared<GradientPtn>(gradientPtn));
   middle.setMaterial(middle_material);
 
   Sphere right;
   right.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(1.5, 0.5, -0.5)) *
       glm::scale(glm::dmat4(1.0), glm::dvec3(0.5)));
   Material right_material;
-  right_material.setColor(glm::dvec3(0.5, 1.0, 0.1));
-  right_material.setDiffuse(0.7);
-  right_material.setSpecular(0.3);
+  right_material.color_ = (glm::dvec3(0.5, 1.0, 0.1));
+  right_material.diffuse_ = (0.7);
+  right_material.specular_ = (0.3);
   StripePtn stripePtn(glm::dvec3(0.0, 1.0, 0.0), glm::dvec3(1.0));
   stripePtn.setTransformationMatrix(
       glm::translate(glm::dmat4(1.0), glm::dvec3(1, 0.1, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(0.1)));
-  right_material.setPatternPtr(std::make_shared<StripePtn>(stripePtn));
+  right_material.pattern_ptr_ = (std::make_shared<StripePtn>(stripePtn));
   right.setMaterial(right_material);
 
   Sphere left;
   left.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(-1.5, 1.0, -0.75)) *
       glm::scale(glm::dmat4(1.0), glm::dvec3(0.5)));
   Material left_material;
-  left_material.setColor(glm::dvec3(0.0, 0.0, 0.0));
-  left_material.setDiffuse(0.7);
-  left_material.setSpecular(0.3);
-  left_material.setReflective(1.0);
+  left_material.color_ = (glm::dvec3(0.0, 0.0, 0.0));
+  left_material.diffuse_ = (0.7);
+  left_material.specular_ = (0.3);
+  left_material.reflective_ = (1.0);
   RingPtn ringPtn(glm::dvec3(0.0, 0.0, 0.0), glm::dvec3(1.0, 1.0, 1.0));
   ringPtn.setTransformationMatrix(
       glm::scale(glm::dmat4(1.0), glm::dvec3(1.0)) * glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 2.0)));
-  left_material.setPatternPtr(std::make_shared<RingPtn>(ringPtn));
+  left_material.pattern_ptr_ = (std::make_shared<RingPtn>(ringPtn));
   left.setMaterial(left_material);
 
   Plane p;
   Material material1;
-  material1.setReflective(1.0);
+  material1.reflective_ = (1.0);
   CheckerPtn checkerPtn(glm::dvec3(1.0), glm::dvec3(0.0));
   checkerPtn.setTransformationMatrix(
-      glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, glm::epsilon<double>() * 100.0, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(1)));
+      glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 0.0)) * glm::scale(glm::dmat4(1.0), glm::dvec3(1)));
   StripePtn sp1(glm::dvec3(1.0), glm::dvec3(0.0));
   sp1.setTransformationMatrix(glm::rotate(glm::dmat4(1.0), glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)));
   StripePtn sp2(glm::dvec3(1.0), glm::dvec3(0.0));
   sp1.setTransformationMatrix(glm::rotate(glm::dmat4(1.0), -glm::pi<double>() / 4, glm::dvec3(0.0, 1.0, 0.0)));
   SolidPtn solidPtn
       (glm::dvec3(1.0), glm::dvec3(1.0, 0.0, 0.0), std::make_shared<StripePtn>(sp1), std::make_shared<StripePtn>(sp2));
-  material1.setPatternPtr(std::make_shared<CheckerPtn>(checkerPtn));
+  material1.pattern_ptr_ = (std::make_shared<CheckerPtn>(checkerPtn));
   p.setMaterial(material1);
 
   World world;
@@ -96,9 +96,28 @@ int main() {
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
-  glm::dvec4 v{0.0};
-  std::cout << "size of Camera: " << sizeof(Camera) << "\n";
-  std::cout << "size of dmat4: " << sizeof(glm::dmat4) << "\n";
-  std::cout << glm::to_string(v) << "\n";
+  World w;
+  w.setDefault();
+  Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
+  Plane floor;
+  floor.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -1.0, 0.0)));
+  Material m;
+  m.reflective_ = 0.5;
+  m.transparency_ = 0.5;
+  m.refractive_index_ = 1.5;
+  floor.setMaterial(m);
+  w.addShape(std::make_shared<Plane>(floor));
+  Sphere ball;
+  Material m2;
+  m2.color_ = glm::dvec3(1.0, 0.0, 0.0);
+  m2.ambient_ = 0.5;
+  ball.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -3.5, -0.5)));
+  ball.setMaterial(m2);
+  w.addShape(std::make_shared<Sphere>(ball));
+  Intersections xs;
+  xs.addIntersection(sqrt(2), w.getShape(2).get());
+  auto comps = prepare_computations(xs.getList()[0], r, xs);
+  auto c = w.shade_hit(comps, 5);
+  std::cout << glm::to_string(c) << "\n";
   return 0;
 }
