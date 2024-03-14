@@ -6,6 +6,11 @@
 
 #include <utility>
 
+Shape::Shape() = default;
+
+Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material) : model_(
+    Model), radius_(Radius), position_(Position), material_(std::move(Material)) {}
+
 void Shape::setTransform(const glm::dmat4 &transform_matrix) {
   model_ = transform_matrix;
 }
@@ -34,11 +39,8 @@ Material Shape::getMaterial() const {
 void Shape::setMaterial(const Material &material) {
   material_ = material;
 }
-Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material) : model_(
-    Model), radius_(Radius), position_(Position), material_(std::move(Material)) {}
 
 Intersections Shape::intersect(const Ray &ray) {
-
   auto local_ray = ray.transform(glm::inverse(model_));
   return local_intersect(local_ray);
 }
@@ -50,5 +52,5 @@ glm::dvec4 Shape::normal_at(const glm::dvec4 &point) const {
   world_normal.w = 0.0;
   return glm::normalize(world_normal);
 }
-Shape::Shape() = default;
+
 

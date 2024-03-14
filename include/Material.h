@@ -11,15 +11,8 @@
 #include <memory>
 
 struct Material {
-public:
-  Material(const glm::dvec3 &color,
-           double ambient,
-           double diffuse,
-           double specular,
-           double shininess,
-           double reflective);
   explicit Material() = default;
-public:
+
   glm::dvec3 color_ = glm::dvec3(1.0);
   double ambient_ = 0.1;
   double diffuse_ = 0.9;

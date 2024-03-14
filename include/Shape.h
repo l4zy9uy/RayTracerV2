@@ -16,6 +16,7 @@ class Shape {
 public:
   explicit Shape();
   Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material);
+public:
   void setTransform(const glm::dmat4 &transform_matrix);
   void setModel(const glm::dmat4 &model);
   [[nodiscard]] double getRadius() const;
@@ -25,7 +26,6 @@ public:
   [[nodiscard]] Material getMaterial() const;
   void setMaterial(const Material &material);
   [[nodiscard]] const glm::dmat4 &getModel() const;
-
 public:
   virtual Intersections local_intersect(const Ray &ray) = 0;
   Intersections intersect(const Ray &ray);
@@ -33,7 +33,7 @@ public:
   [[nodiscard]] virtual glm::dvec4 local_normal_at(const glm::dvec4 &point) const = 0;
 
 protected:
-  glm::dmat4 model_ = glm::identity<glm::dmat4>();
+  glm::dmat4 model_{1.0};
   double radius_ = 1.0;
   glm::dvec4 position_ = glm::dvec4(0.0, 0.0, 0.0, 1.0);
   Material material_;

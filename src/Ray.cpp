@@ -26,7 +26,7 @@ void Ray::setDirectionVector(const glm::dvec4 &directionVector) {
 Ray Ray::transform(const glm::dmat4 &transform_matrix) const {
   return {origin_point_ * glm::transpose(transform_matrix), direction_vector_ * glm::transpose(transform_matrix)};
 }
-
-glm::dvec4 position(const Ray &ray, const double &t) {
-  return ray.getOriginPoint() + ray.getDirectionVector() * t;
+glm::dvec4 Ray::at(const double &t) const {
+  return origin_point_ + direction_vector_ * t;
 }
+

@@ -5,7 +5,7 @@
 #include "Computation.h"
 #include <algorithm>
 Computation prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections) {
-  auto point = position(ray, intersection.t_);
+  auto point = ray.at(intersection.t_);
   auto normal_vector = intersection.shape_ptr_->normal_at(point);
   Computation comps{};
   comps.t_ = intersection.t_;

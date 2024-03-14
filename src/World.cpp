@@ -14,13 +14,22 @@ void World::setLight(const Light &light) {
   light_ = light;
 }
 
+std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
+  return shape_ptr_list_.at(index);
+}
+
 void World::setDefault() {
   light_ = Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0));
   Sphere s1, s2;
-  Material material(glm::dvec3(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0, 0.0);
+  Material material;
+  material.color_ = glm::dvec3(0.8, 1.0, 0.6);
+  material.ambient_ = 0.1;
+  material.diffuse_ = 0.7;
+  material.specular_ = 0.2;
+  material.shininess_ = 200.0;
   s1.setMaterial(material);
-
   shape_ptr_list_.push_back(std::make_shared<Sphere>(s1));
+
   s2.setTransform(glm::scale(glm::identity<glm::dmat4>(), glm::dvec3(0.5)));
   shape_ptr_list_.push_back(std::make_shared<Sphere>(s2));
 }
@@ -34,7 +43,6 @@ Intersections World::intersect_world(const Ray &ray) {
   result.sort();
   return result;
 }
-
 
 glm::dvec3 World::shade_hit(const Computation &computation, const int &remaining) {
   auto shadowed = isShadowed(computation.over_point_);
@@ -77,9 +85,11 @@ bool World::isShadowed(const glm::dvec4 &point) {
     return true;
   return false;
 }
+
 void World::addShape(const std::shared_ptr<Shape>& shape) {
   shape_ptr_list_.push_back(shape);
 }
+
 glm::dvec3 World::reflected_color(const Computation &computation, const int &remaining) {
   if(fabs(computation.shape_ptr_->getMaterial().reflective_ - 0.0) < 0.00001) {
     return {0.0, 0.0, 0.0};
@@ -88,9 +98,7 @@ glm::dvec3 World::reflected_color(const Computation &computation, const int &rem
   auto color = color_at(Ray(computation.over_point_, computation.reflect_vector_), remaining-1);
   return color * computation.shape_ptr_->getMaterial().reflective_;
 }
-std::shared_ptr<Shape> World::getShape(const unsigned int &index) {
-  return shape_ptr_list_.at(index);
-}
+
 glm::dvec3 World::refracted_color(const Computation &comp, const int &remaining) {
   if(remaining <= 0) return {0.0, 0.0, 0.0};
   auto n_ratio = comp.n1_ / comp.n2_;
@@ -102,6 +110,4 @@ glm::dvec3 World::refracted_color(const Computation &comp, const int &remaining)
   Ray refracted_ray(comp.under_point_, direction);
   return color_at(refracted_ray, remaining-1) * comp.shape_ptr_->getMaterial().transparency_;
 
-  if(comp.shape_ptr_->getMaterial().transparency_ == 0) return {0.0, 0.0, 0.0};
-  return {1.0, 1.0, 1.0};
 }

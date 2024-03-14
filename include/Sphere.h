@@ -14,8 +14,8 @@ class Intersections;
 
 class Sphere : public Shape {
 public:
-
   explicit Sphere();
+public:
   Intersections local_intersect(const Ray &ray) override;
   [[nodiscard]] glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;
   void make_glassy();

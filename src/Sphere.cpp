@@ -4,6 +4,8 @@
 
 #include "Sphere.h"
 
+Sphere::Sphere() = default;
+
 Intersections Sphere::local_intersect(const Ray &ray) {
   Intersections result;
   // the vector from the sphere's center, to the ray origin
@@ -33,5 +35,4 @@ void Sphere::make_glassy() {
   material_.transparency_ = 1.0;
   material_.refractive_index_ = 1.5;
 }
-Sphere::Sphere() = default;
 

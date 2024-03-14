@@ -18,10 +18,10 @@ const double Epsilon = 0.00001;
 
 TEST_CASE("Compute a point from a distance", "[Ray]") {
   Ray r(glm::dvec4(2.0, 3.0, 4.0, 1.0), glm::dvec4(1.0, 0.0, 0.0, 0.0));
-  REQUIRE(position(r, 0) == glm::dvec4(2.0, 3.0, 4.0, 1.0));
-  REQUIRE(position(r, 1) == glm::dvec4(3.0, 3.0, 4.0, 1.0));
-  REQUIRE(position(r, -1) == glm::dvec4(1.0, 3.0, 4.0, 1.0));
-  REQUIRE(position(r, 2.5) == glm::dvec4(4.5, 3.0, 4.0, 1.0));
+  REQUIRE(r.at(0) == glm::dvec4(2.0, 3.0, 4.0, 1.0));
+  REQUIRE(r.at(1) == glm::dvec4(3.0, 3.0, 4.0, 1.0));
+  REQUIRE(r.at(-1) == glm::dvec4(1.0, 3.0, 4.0, 1.0));
+  REQUIRE(r.at(2.5) == glm::dvec4(4.5, 3.0, 4.0, 1.0));
 }
 
 TEST_CASE("A ray intersects a sphere at two points", "[Intersect]") {
@@ -325,21 +325,6 @@ TEST_CASE("The color when a ray hits", "[color]") {
   REQUIRE(fabs(c.y - 0.47583) < Epsilon);
   REQUIRE(fabs(c.z - 0.2855) < Epsilon);
 }
-
-/*TEST_CASE("The color with an intersection behind the ray", "[color]") {
-  World w;
-  w.setDefault();
-  Ray r(glm::dvec4(0.0, 0.0, 0.75, 1.0), glm::dvec4(0.0, 0.0, -1.0, 0.0));
-  auto inner = w.getShape(1);
-  auto outer = w.getShape(0);
-  inner->getMaterial().setAmbient(1);
-  outer->getMaterial().setAmbient(1);
-
-  auto c = w.color_at(r);
-  REQUIRE(fabs(c.x - inner->getMaterial().getColor().x) < Epsilon);
-  REQUIRE(fabs(c.y - inner->getMaterial().getColor().y) < Epsilon);
-  REQUIRE(fabs(c.z - inner->getMaterial().getColor().z) < Epsilon);
-}*/
 
 TEST_CASE("Constructing a ray through the center of the canvas", "[camera]") {
   Camera c(201, 101, glm::pi<double>()/2);

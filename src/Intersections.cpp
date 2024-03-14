@@ -5,6 +5,11 @@
 #include "Intersections.h"
 #include <algorithm>
 
+Intersections::Intersections(const std::vector<Intersection> &list, bool sorted) : list_(
+    list), sorted_(sorted) { }
+
+Intersections::Intersections() : sorted_(false) { }
+
 void Intersections::addIntersection(const double &distance, Shape *shape) {
   sorted_ = false;
   list_.emplace_back(distance, shape);
@@ -23,6 +28,16 @@ const std::vector<Intersection> &Intersections::getList() const {
 
 void Intersections::setList(const std::vector<Intersection> &list) {
   list_ = list;
+}
+
+void Intersections::addIntersection(const Intersection &intersection) {
+  list_.push_back(intersection);
+}
+
+void Intersections::addIntersections(const Intersections &intersections) {
+  for (const auto &i : intersections.list_) {
+    list_.push_back(i);
+  }
 }
 
 std::optional<Intersection> Intersections::hit() const {
@@ -45,20 +60,4 @@ void Intersections::sort() const {
     return lhs.t_ < rhs.t_;
   });
   sorted_ = true;
-}
-
-void Intersections::addIntersection(const Intersection &intersection) {
-  list_.push_back(intersection);
-}
-
-Intersections::Intersections(const std::vector<Intersection> &list, bool sorted) : list_(
-    list), sorted_(sorted) {}
-
-Intersections::Intersections() : sorted_(false) {
-
-}
-void Intersections::addIntersections(const Intersections &intersections) {
-  for (const auto &i : intersections.list_) {
-    list_.push_back(i);
-  }
 }

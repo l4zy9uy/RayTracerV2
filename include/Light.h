@@ -7,13 +7,11 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 #include "Material.h"
+
 class Light {
 public:
   Light();
   Light(const glm::dvec3 &intensity, const glm::dvec4 &position);
-private:
-  glm::dvec3 intensity_{};
-  glm::dvec4 position_{};
 public:
   [[nodiscard]] const glm::dvec3 &getIntensity() const;
   void setIntensity(const glm::dvec3 &intensity);
@@ -26,6 +24,9 @@ public:
                       const glm::dvec4 &normal_vector,
                       const bool &isInShadow,
                       const glm::dvec4 &position);
+private:
+  glm::dvec3 intensity_{};
+  glm::dvec4 position_{};
 };
 
 #endif //RAYTRACERV2_LIGHT_H

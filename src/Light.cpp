@@ -8,6 +8,8 @@
 
 Light::Light(const glm::dvec3 &intensity, const glm::dvec4 &position) : intensity_(intensity), position_(position) {}
 
+Light::Light() = default;
+
 const glm::dvec3 &Light::getIntensity() const {
   return intensity_;
 }
@@ -24,8 +26,7 @@ void Light::setPosition(const glm::dvec4 &position) {
   Light::position_ = position;
 }
 
-glm::dvec3
-Light::lighting(const Material &material,
+glm::dvec3 Light::lighting(const Material &material,
                 const Shape &shape,
                 const glm::dvec4 &eye_vector,
                 const glm::dvec4 &normal_vector,
@@ -36,10 +37,12 @@ Light::lighting(const Material &material,
     color = material.pattern_ptr_->pattern_at_shape(shape, position);
   else
     color = material.color_;
+
   auto effective_color = color * intensity_;
   auto light_vector = glm::normalize(position_ - position);
   auto ambient = effective_color * material.ambient_;
   auto light_dot_normal = glm::dot(light_vector, normal_vector);
+
   glm::dvec3 diffuse, specular;
   if (light_dot_normal < 0) {
     diffuse = glm::dvec3(0.0);
@@ -59,5 +62,3 @@ Light::lighting(const Material &material,
     return ambient;
   return ambient + diffuse + specular;
 }
-
-Light::Light() = default;
