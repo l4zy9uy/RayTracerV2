@@ -14,8 +14,9 @@ public:
 private:
   std::shared_ptr<Pattern> a;
   std::shared_ptr<Pattern> b;
+  double t_;
 public:
-  BlendedPtn(const std::shared_ptr<Pattern> &A, const std::shared_ptr<Pattern> &B);
+  BlendedPtn(const std::shared_ptr<Pattern> &A, const std::shared_ptr<Pattern> &B, const double &t);
 };
 
 #endif //RAYTRACERV2_INCLUDE_PATTERN_BLENDEDPTN_H

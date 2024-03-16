@@ -27,12 +27,12 @@ Computations prepare_computations(const Intersection &intersection, const Ray &r
   Containers containers;
   for(const auto &i : intersections.getList()) {
     if(i == intersection) {
-      if(containers.getList().empty()) comps.n1_ = 1.0;
-      else comps.n1_ = containers.getList().back()->getMaterial().refractive_index_;
+      if(containers.list_.empty()) comps.n1_ = 1.0;
+      else comps.n1_ = containers.list_.back()->getMaterial().refractive_index_;
     }
-    auto include = std::find_if(containers.getList().begin(), containers.getList().end(), [i](const Shape *object) {
+    auto include = std::find_if(containers.list_.begin(), containers.list_.end(), [i](const Shape *object) {
       return i.shape_ptr_ == object;
-    }) != containers.getList().end();
+    }) != containers.list_.end();
     if(include) {
       auto rm = std::remove_if(containers.list_.begin(), containers.list_.end(), [i](const Shape *object) {
         return i.shape_ptr_ == object;
@@ -43,8 +43,8 @@ Computations prepare_computations(const Intersection &intersection, const Ray &r
       containers.list_.push_back(const_cast<Shape*>(i.shape_ptr_));
     }
     if(i == intersection) {
-      if(containers.getList().empty()) comps.n2_ = 1.0;
-      else comps.n2_ = containers.getList().back()->getMaterial().refractive_index_;
+      if(containers.list_.empty()) comps.n2_ = 1.0;
+      else comps.n2_ = containers.list_.back()->getMaterial().refractive_index_;
       break;
     }
   }

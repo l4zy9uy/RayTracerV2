@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 3/5/24.
 //
 
-#include "Plane.h"
+#include "Shape/Plane.h"
 
 Intersections Plane::local_intersect(const Ray &ray) {
   Intersections result;

@@ -4,15 +4,11 @@
 
 #ifndef RAYTRACERV2_INCLUDE_CONTAINERS_H
 #define RAYTRACERV2_INCLUDE_CONTAINERS_H
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 class Shape;
-class Containers {
-public:
+struct Containers {
   std::vector<Shape*> list_;
-public:
-  [[nodiscard]] const std::vector<Shape *> &getList() const;
-  void setList(const std::vector<Shape *> &List);
 };
 
 #endif //RAYTRACERV2_INCLUDE_CONTAINERS_H

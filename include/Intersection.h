@@ -6,7 +6,7 @@
 #define RAYTRACERV2_INTERSECTION_H
 
 #include <memory>
-#include "Shape.h"
+#include "Shape/Shape.h"
 #include "Intersections.h"
 class Shape;
 

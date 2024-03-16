@@ -119,6 +119,13 @@ build src/CMakeFiles/classes.dir/Containers.cpp.o: CXX_COMPILER__classes_unscann
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
+build src/CMakeFiles/classes.dir/Cube.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Cube.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/Cube.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
+
 build src/CMakeFiles/classes.dir/ExtVec3.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/ExtVec3.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/ExtVec3.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
@@ -246,7 +253,7 @@ build src/CMakeFiles/classes.dir/__/test/test.cpp.o: CXX_COMPILER__classes_unsca
 #############################################
 # Link the static library src/libclasses.a
 
-build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/BlendedPtn.cpp.o src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computations.cpp.o src/CMakeFiles/classes.dir/Containers.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/TestPtn.cpp.o src/CMakeFiles/classes.dir/World.cpp.o src/CMakeFiles/classes.dir/__/test/test.cpp.o
+build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/BlendedPtn.cpp.o src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computations.cpp.o src/CMakeFiles/classes.dir/Containers.cpp.o src/CMakeFiles/classes.dir/Cube.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/TestPtn.cpp.o src/CMakeFiles/classes.dir/World.cpp.o src/CMakeFiles/classes.dir/__/test/test.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = src/CMakeFiles/classes.dir
   POST_BUILD = :

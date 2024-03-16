@@ -4,7 +4,7 @@
 
 #include <glm/ext/matrix_transform.hpp>
 #include "World.h"
-#include "Sphere.h"
+#include "Shape/Sphere.h"
 
 const Light &World::getLight() const {
   return light_;

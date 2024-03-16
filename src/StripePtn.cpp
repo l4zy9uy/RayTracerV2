@@ -3,7 +3,7 @@
 //
 
 #include "Pattern/StripePtn.h"
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 StripePtn::StripePtn(const glm::dvec3 &A, const glm::dvec3 &B) : a(A), b(B) {}
 

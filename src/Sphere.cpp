@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 2/28/24.
 //
 
-#include "Sphere.h"
+#include "Shape/Sphere.h"
 
 Sphere::Sphere() = default;
 

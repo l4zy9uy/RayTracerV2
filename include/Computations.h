@@ -4,7 +4,7 @@
 
 #ifndef RAYTRACERV2_COMPUTATION_H
 #define RAYTRACERV2_COMPUTATION_H
-#include "Shape.h"
+#include "Shape/Shape.h"
 #include "Intersections.h"
 #include "Containers.h"
 #include <glm/glm.hpp>

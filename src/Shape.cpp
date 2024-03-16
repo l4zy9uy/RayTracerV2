@@ -2,7 +2,7 @@
 // Created by l4zy9uy on 3/4/24.
 //
 
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 #include <utility>
 
@@ -51,6 +51,9 @@ glm::dvec4 Shape::normal_at(const glm::dvec4 &point) const {
   auto world_normal = glm::transpose(glm::inverse(model_)) * local_normal;
   world_normal.w = 0.0;
   return glm::normalize(world_normal);
+}
+glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point) const {
+  return {point.x, point.y, point.z, 0.0};
 }
 
 

@@ -4,12 +4,12 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_test_macros.hpp>
 #include "Ray.h"
-#include "Sphere.h"
+#include "Shape/Sphere.h"
 #include <iomanip>
 #include "Light.h"
 #include "World.h"
 #include "Camera.h"
-#include "Plane.h"
+#include "Shape/Plane.h"
 #include "Computations.h"
 #include "Pattern/StripePtn.h"
 #include "Pattern/TestPtn.h"

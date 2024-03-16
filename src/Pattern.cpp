@@ -4,7 +4,7 @@
 
 #include "Pattern/Pattern.h"
 #include <cmath>
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 const glm::dmat4 &Pattern::getTransformationMatrix() const {
   return transformation_matrix_;

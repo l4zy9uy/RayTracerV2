@@ -5,7 +5,7 @@
 #ifndef RAYTRACERV2_WORLD_H
 #define RAYTRACERV2_WORLD_H
 #include "Light.h"
-#include "Shape.h"
+#include "Shape/Shape.h"
 #include "Intersections.h"
 #include <vector>
 #include <memory>

@@ -3,9 +3,4 @@
 //
 
 #include "Containers.h"
-const std::vector<Shape *> &Containers::getList() const {
-  return list_;
-}
-void Containers::setList(const std::vector<Shape *> &List) {
-  list_ = List;
-}
+
