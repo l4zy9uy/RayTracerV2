@@ -22,12 +22,12 @@
 #include <iomanip>
 #include "Pattern/TestPtn.h"
 #include "Shape/Cube.h"
+#include "Timer.h"
 
 int main() {
-  /*World world;
+  Timer timer;
+  World world;
   world.setLight(Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0)));
-
-  auto start = std::chrono::high_resolution_clock::now();
   Plane myFloor;
   Material material1;
   material1.ambient_ = 0.05;
@@ -49,29 +49,18 @@ int main() {
   checkerPtn2.setTransformationMatrix(glm::scale(glm::dmat4(1.0), glm::dvec3(0.25)));
   material2.pattern_ptr_ = std::make_shared<decltype(checkerPtn2)>(checkerPtn2);
   myWall.setMaterial(material2);
-  auto wallTransform = glm::transpose(glm::rotate(glm::dmat4(1.0), glm::pi<double>()/2, glm::dvec3(1.0, 0.0, 0.0))) *
-      glm::transpose(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 12.0)));
   auto wallTransform2 = glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 0.0, 12.0)) *
       glm::rotate(glm::dmat4(1.0), glm::pi<double>()/2, glm::dvec3(1.0, 0.0, 0.0));
-  std::cout << glm::to_string(wallTransform) << "\n";
-  std::cout << "transpose: " << glm::to_string(glm::transpose(wallTransform)) << "\n";
-  std::cout << glm::to_string(wallTransform2) << "\n";
-  std::cout << "transpose: " << glm::to_string(glm::transpose(wallTransform2)) << "\n";
   myWall.setTransform(wallTransform2);
 
   world.addShape(std::make_shared<Plane>(myFloor));
   world.addShape(std::make_shared<Plane>(myWall));
 
-  Camera camera(1920, 1080, glm::pi<double>() / 3);
+  Camera camera(10, 5, glm::pi<double>() / 3);
   camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 0.0)));
-  Canvas canvas = camera.render(world);
-  canvas.canvas_to_ppm();
-
-  auto end = std::chrono::high_resolution_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;*/
+  camera.render(world).canvas_to_ppm();
   return 0;
 }
 /*std::vector<Ray> v;

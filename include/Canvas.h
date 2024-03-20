@@ -6,22 +6,23 @@
 #define RAYTRACERV2_CANVAS_H
 #include <glm/vec3.hpp>
 #include <vector>
+#include <mutex>
 
 class Canvas {
 public:
   Canvas(const unsigned int &windowWidth, const unsigned int &windowHeight);
 public:
-  [[nodiscard]] const int & getWindowWidth() const;
-  void setWindowWidth(const int &windowWidth);
-  [[nodiscard]] const int & getWindowHeight() const;
-  void setWindowHeight(const int &windowHeight);
+  [[nodiscard]] const unsigned long & getWindowWidth() const;
+  void setWindowWidth(const unsigned long &windowWidth);
+  [[nodiscard]] const unsigned long & getWindowHeight() const;
+  void setWindowHeight(const unsigned long &windowHeight);
 public:
-  void writePixel(const int &y, const int &x, const glm::dvec3 &color);
+  void writePixel(const unsigned long &y, const unsigned long &x, const glm::dvec3 &color);
   [[nodiscard]] const glm::dvec3 &pixelAt(const int &y, const int &x) const;
   void canvas_to_ppm();
 private:
-  unsigned int window_width_;
-  unsigned int window_height_;
+  unsigned long window_width_;
+  unsigned long window_height_;
   std::vector<std::vector<glm::dvec3>> image_;
 };
 

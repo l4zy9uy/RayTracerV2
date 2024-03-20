@@ -5,6 +5,9 @@
 #include "Canvas.h"
 #include <fstream>
 #include <algorithm>
+#include <thread>
+#include <sstream>
+
 Canvas::Canvas(const unsigned int &windowWidth, const unsigned int &windowHeight) : window_width_(
     windowWidth), window_height_(windowHeight) {
   for (int i = 0; i < windowHeight; i++) {
@@ -13,7 +16,7 @@ Canvas::Canvas(const unsigned int &windowWidth, const unsigned int &windowHeight
   }
 }
 
-void Canvas::writePixel(const int &y, const int &x, const glm::dvec3 &color) {
+void Canvas::writePixel(const unsigned long &y, const unsigned long &x, const glm::dvec3 &color) {
   image_[x][y] = color;
 }
 
@@ -32,25 +35,28 @@ void Canvas::canvas_to_ppm() {
       int y = static_cast<int>(std::clamp(temp.y, 0.0, 255.0));
       int z = static_cast<int>(std::clamp(temp.z, 0.0, 255.0));
       myFile << x << " " << y << " " << z << " ";
+      //myFile.write( window_width_ * window_height_);
     }
     myFile << "\n";
   }
   myFile.close();
 }
 
-const int & Canvas::getWindowWidth() const {
+const unsigned long & Canvas::getWindowWidth() const {
   return window_width_;
 }
 
-void Canvas::setWindowWidth(const int &windowWidth) {
+void Canvas::setWindowWidth(const unsigned long &windowWidth) {
   Canvas::window_width_ = windowWidth;
 }
 
-const int & Canvas::getWindowHeight() const {
+const unsigned long & Canvas::getWindowHeight() const {
   return window_height_;
 }
 
-void Canvas::setWindowHeight(const int &windowHeight) {
+void Canvas::setWindowHeight(const unsigned long &windowHeight) {
   Canvas::window_height_ = windowHeight;
 }
+
+
 

@@ -3,11 +3,12 @@
 //
 
 #include "Camera.h"
+#include <thread>
 
 Camera::Camera(const unsigned int &horizontal_size,
                const unsigned int &vertical_size,
                const double &fieldOfView) :
-               horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView) {
+               horizontal_size_(horizontal_size), vertical_size_(vertical_size), field_of_view_(fieldOfView), image_(horizontal_size, vertical_size) {
   transform_matrix_ = glm::dmat4(1.0);
   double half_view = tan(field_of_view_ / 2);
   double aspect = static_cast<double>(horizontal_size_) / static_cast<double>(vertical_size_);
@@ -92,15 +93,30 @@ Ray Camera::ray_for_pixel(const double &px, const double &py) {
   return {origin, direction};
 }
 
-Canvas Camera::render(World &world) {
-  Canvas image(horizontal_size_, vertical_size_);
-
-  for (auto y = 0; y < horizontal_size_; y++) {
+void Camera::render_at_thread(Canvas &image, World &world, const unsigned long &start, const unsigned long &jump) {
+  for (auto y = start; y < horizontal_size_; y+=jump) {
     for (auto x = 0; x < vertical_size_; x++) {
       auto ray = ray_for_pixel(static_cast<double>(y), static_cast<double>(x));
       auto color = world.color_at(ray, 5);
-      image.writePixel(y, x, color);
+        image.writePixel(y, x, color);
     }
   }
-  return image;
+}
+
+Canvas & Camera::render(World &world) {
+  const unsigned long Num_threads = std::thread::hardware_concurrency();
+  std::vector<std::thread> thread_vector;
+  thread_vector.reserve(Num_threads);
+  for(auto i = 0; i < Num_threads; i++) {
+    thread_vector.emplace_back(&Camera::render_at_thread,
+                               this,
+                               std::ref(image_),
+                               std::ref(world),
+                               i,
+                               std::ref(Num_threads));
+  }
+  for(auto &thread : thread_vector) {
+    if(thread.joinable()) thread.join();
+  }
+  return image_;
 }

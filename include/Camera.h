@@ -8,6 +8,7 @@
 #include "Ray.h"
 #include "World.h"
 #include "Canvas.h"
+#include <mutex>
 
 class Camera {
 public:
@@ -31,7 +32,8 @@ public:
   void setTransformMatrix(const glm::dmat4 &transformMatrix);
 public:
   Ray ray_for_pixel(const double &px, const double &py);
-  Canvas render(World &world);
+  Canvas & render(World &world);
+  void render_at_thread(Canvas &image, World &world, const unsigned long &start, const unsigned long &jump);
 private:
   glm::dmat4 transform_matrix_{};
   double half_width_;
@@ -40,6 +42,7 @@ private:
   unsigned int horizontal_size_;
   unsigned int vertical_size_;
   double field_of_view_;
+  Canvas image_;
 };
 
 #endif //RAYTRACERV2_CAMERA_H
