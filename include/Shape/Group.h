@@ -11,10 +11,10 @@ public:
   Group() = default;
   Intersections local_intersect(const Ray &ray) override;
   glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;
-  void addChild(const std::shared_ptr<Shape> &shape);
-  const std::vector<std::shared_ptr<Shape>> &getChildVector() const;
+  void addChild(Shape *shape);
+  const std::vector<Shape *> & getChildVector() const;
 private:
-  std::vector<std::shared_ptr<Shape>> child_vector_;
+  std::vector<Shape*> child_vector_;
 
 };
 

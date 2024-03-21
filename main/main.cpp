@@ -67,14 +67,16 @@ int main() {
                                            glm::dvec4(0.0, 1.0, 0.0, 0.0)));
   camera.render(world).canvas_to_ppm();*/
 
-  Group g;
-  auto s1 = std::make_shared<Sphere>();
-  g.setTransform(glm::scale(glm::dmat4(1), {2, 2, 2}));
-  s1->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
-  g.addChild(s1);
-  Ray r({10, 0, -10, 1}, {0, 0, 1, 0});
-  auto xs = g.intersect(r);
-  std::cout << xs.getList().size() << "\n";
+  Group g1;// = std::make_shared<Group>();
+  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
+  Group g2;// = std::make_shared<Group>();
+  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
+  g1.addChild(&g2);
+  Sphere s;// = std::make_shared<Sphere>();
+  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g2.addChild(&s);
+  auto n = s.normal_at({1.7321, 1.1547, -5.5774, 1});
+  std::cout << glm::to_string(n) << "\n";
   return 0;
 }
 /*auto g = std::make_shared<Group>();
@@ -103,3 +105,23 @@ int main() {
   std::cout << "xs[1]: " << xs.getList()[1].shape_ptr_ << "\n";
   std::cout << "xs[2]: " << xs.getList()[2].shape_ptr_ << "\n";
   std::cout << "xs[3]: " << xs.getList()[3].shape_ptr_ << "\n";*/
+
+/*Group g;
+  auto s1 = std::make_shared<Sphere>();
+  g.setTransform(glm::scale(glm::dmat4(1), {2, 2, 2}));
+  s1->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g.addChild(s1);
+  Ray r({10, 0, -10, 1}, {0, 0, 1, 0});
+  auto xs = g.intersect(r);
+  std::cout << xs.getList().size() << "\n";*/
+
+/*Group g1;// = std::make_shared<Group>();
+  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
+  Group g2;// = std::make_shared<Group>();
+  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
+  g1.addChild(&g2);
+  Sphere s;// = std::make_shared<Sphere>();
+  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g2.addChild(&s);
+  auto n = s.normal_to_world({sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, 0});
+  std::cout << glm::to_string(n) << "\n";*/

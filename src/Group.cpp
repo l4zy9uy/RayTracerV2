@@ -16,10 +16,10 @@ Intersections Group::local_intersect(const Ray &ray) {
 glm::dvec4 Group::local_normal_at(const glm::dvec4 &point) const {
   return Shape::local_normal_at(point);
 }
-void Group::addChild(const std::shared_ptr<Shape> &shape) {
+void Group::addChild(Shape *shape) {
   child_vector_.push_back(shape);
   shape->setParentPtr(this);
 }
-const std::vector<std::shared_ptr<Shape>> &Group::getChildVector() const {
+const std::vector<Shape *> & Group::getChildVector() const {
   return child_vector_;
 }

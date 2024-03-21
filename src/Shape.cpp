@@ -46,11 +46,9 @@ Intersections Shape::intersect(const Ray &ray) {
 }
 
 glm::dvec4 Shape::normal_at(const glm::dvec4 &point) const {
-  auto local_point = glm::inverse(model_) * point;
+  auto local_point = world_to_object(point);
   auto local_normal = local_normal_at(local_point);
-  auto world_normal = glm::transpose(glm::inverse(model_)) * local_normal;
-  world_normal.w = 0.0;
-  return glm::normalize(world_normal);
+  return normal_to_world(local_normal);
 }
 glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point) const {
   return {point.x, point.y, point.z, 0.0};
@@ -60,6 +58,20 @@ const Shape *Shape::getParentPtr() const {
 }
 void Shape::setParentPtr(const Shape *ParentPtr) {
   parent_ptr_ = ParentPtr;
+}
+glm::dvec4 Shape::world_to_object(glm::dvec4 point) const {
+  if(parent_ptr_ != nullptr) {
+    point = parent_ptr_->world_to_object(point);
+  }
+  return glm::inverse(model_) * point;
+}
+glm::dvec4 Shape::normal_to_world(glm::dvec4 normal) const {
+  normal = glm::transpose(glm::inverse(model_)) * normal;
+  normal.w = 0;
+  normal = glm::normalize(normal);
+  if(parent_ptr_ != nullptr)
+    normal = parent_ptr_->normal_to_world(normal);
+  return normal;
 }
 
 
