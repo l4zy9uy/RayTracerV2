@@ -34,9 +34,14 @@ public:
 
 protected:
   glm::dmat4 model_{1.0};
+public:
+  const Shape *getParentPtr() const;
+  void setParentPtr(const Shape *ParentPtr);
+protected:
   double radius_ = 1.0;
   glm::dvec4 position_ = glm::dvec4(0.0, 0.0, 0.0, 1.0);
   Material material_;
+  const Shape* parent_ptr_;
 };
 
 #endif //RAYTRACERV2_INCLUDE_SHAPE_H

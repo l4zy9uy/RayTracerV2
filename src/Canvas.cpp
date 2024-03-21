@@ -5,7 +5,6 @@
 #include "Canvas.h"
 #include <fstream>
 #include <algorithm>
-#include <thread>
 #include <sstream>
 
 Canvas::Canvas(const unsigned int &windowWidth, const unsigned int &windowHeight) : window_width_(
@@ -25,22 +24,24 @@ const glm::dvec3 &Canvas::pixelAt(const int &y, const int &x) const {
 }
 
 void Canvas::canvas_to_ppm() {
+  std::stringstream ss;
   std::fstream myFile;
   myFile.open("../../image.ppm", std::ios::out);
   myFile << "P3\n" << window_width_ << " " << window_height_ << "\n" << "255" << "\n";
-  for (int i = 0; i < window_height_; i++) {
-    for (int j = 0; j < window_width_; j++) {
-      auto temp = image_[i][j] * 256.0;
-      int x = static_cast<int>(std::clamp(temp.x, 0.0, 255.0));
-      int y = static_cast<int>(std::clamp(temp.y, 0.0, 255.0));
-      int z = static_cast<int>(std::clamp(temp.z, 0.0, 255.0));
-      myFile << x << " " << y << " " << z << " ";
-      //myFile.write( window_width_ * window_height_);
+  for (const auto& row : image_) {
+    for (const auto& pixel : row) {
+      auto r = static_cast<unsigned short>(std::clamp(pixel.r * 255.0, 0.0, 255.0));
+      auto g = static_cast<unsigned short>(std::clamp(pixel.g * 255.0, 0.0, 255.0));
+      auto b = static_cast<unsigned short >(std::clamp(pixel.b * 255.0, 0.0, 255.0));
+      ss << r << " " << g << " " << b << " ";
     }
-    myFile << "\n";
+    ss << "\n";
   }
+  myFile << ss.str();
   myFile.close();
 }
+
+
 
 const unsigned long & Canvas::getWindowWidth() const {
   return window_width_;

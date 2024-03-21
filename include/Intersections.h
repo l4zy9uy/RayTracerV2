@@ -12,7 +12,7 @@ class Shape;
 
 class Intersections {
 public:
-  Intersections(const std::vector<Intersection> &list, bool sorted);
+  Intersections(const std::vector<Intersection> &list);
   Intersections();
 public:
   [[nodiscard]] const std::vector<Intersection> &getList() const;

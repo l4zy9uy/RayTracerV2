@@ -10,7 +10,7 @@ Intersections Sphere::local_intersect(const Ray &ray) {
   Intersections result;
   // the vector from the sphere's center, to the ray origin
   // remember: the sphere is centered at the world origin
-  auto sphere_to_ray = ray.getOriginPoint() - position_;
+  auto sphere_to_ray = ray.getOriginPoint() - position_ ;//* glm::transpose(model_);
   auto a = glm::dot(ray.getDirectionVector(), ray.getDirectionVector());
   auto b = 2 * glm::dot(ray.getDirectionVector(), sphere_to_ray);
   auto c = glm::dot(sphere_to_ray, sphere_to_ray) - 1;

@@ -29,4 +29,10 @@ Ray Ray::transform(const glm::dmat4 &transform_matrix) const {
 glm::dvec4 Ray::at(const double &t) const {
   return origin_point_ + direction_vector_ * t;
 }
+bool Ray::operator==(const Ray &rhs) {
+  return origin_point_ == rhs.origin_point_ && direction_vector_ == rhs.direction_vector_;
+}
+bool Ray::operator!=(const Ray &rhs) {
+  return origin_point_ != rhs.origin_point_ || direction_vector_ != rhs.direction_vector_;
+}
 

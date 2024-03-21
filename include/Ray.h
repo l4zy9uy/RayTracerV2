@@ -19,6 +19,8 @@ public:
   [[nodiscard]] Ray transform(const glm::dmat4 &transform_matrix) const;
 public:
   [[nodiscard]] glm::dvec4 at(const double &t) const;
+  bool operator==(const Ray &rhs);
+  bool operator!=(const Ray &rhs);
 private:
   glm::dvec4 direction_vector_;
   glm::dvec4 origin_point_;

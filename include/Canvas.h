@@ -6,7 +6,6 @@
 #define RAYTRACERV2_CANVAS_H
 #include <glm/vec3.hpp>
 #include <vector>
-#include <mutex>
 
 class Canvas {
 public:

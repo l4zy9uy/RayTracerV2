@@ -5,8 +5,8 @@
 #include "Intersections.h"
 #include <algorithm>
 
-Intersections::Intersections(const std::vector<Intersection> &list, bool sorted) : list_(
-    list), sorted_(sorted) { }
+Intersections::Intersections(const std::vector<Intersection> &list) : list_(
+    list){ }
 
 Intersections::Intersections() : sorted_(false) { }
 

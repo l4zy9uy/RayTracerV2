@@ -33,6 +33,7 @@ public:
 public:
   Ray ray_for_pixel(const double &px, const double &py);
   Canvas & render(World &world);
+private:
   void render_at_thread(Canvas &image, World &world, const unsigned long &start, const unsigned long &jump);
 private:
   glm::dmat4 transform_matrix_{};

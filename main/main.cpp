@@ -23,8 +23,13 @@
 #include "Pattern/TestPtn.h"
 #include "Shape/Cube.h"
 #include "Timer.h"
+#include "Shape/Cylinder.h"
+#include "Shape/Cone.h"
+#include "Shape/Group.h"
 
 int main() {
+  /*std::ios_base::sync_with_stdio(false);
+  std::cin.tie(nullptr);
   Timer timer;
   World world;
   world.setLight(Light(glm::dvec3(1.0), glm::dvec4(-10.0, 10.0, -10.0, 1.0)));
@@ -56,56 +61,45 @@ int main() {
   world.addShape(std::make_shared<Plane>(myFloor));
   world.addShape(std::make_shared<Plane>(myWall));
 
-  Camera camera(10, 5, glm::pi<double>() / 3);
+  Camera camera(1920, 1080, glm::pi<double>() / 3);
   camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 0.0)));
-  camera.render(world).canvas_to_ppm();
+  camera.render(world).canvas_to_ppm();*/
+
+  Group g;
+  auto s1 = std::make_shared<Sphere>();
+  g.setTransform(glm::scale(glm::dmat4(1), {2, 2, 2}));
+  s1->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g.addChild(s1);
+  Ray r({10, 0, -10, 1}, {0, 0, 1, 0});
+  auto xs = g.intersect(r);
+  std::cout << xs.getList().size() << "\n";
   return 0;
 }
-/*std::vector<Ray> v;
-Cube c;
-v.emplace_back(glm::dvec4(5, 0.5, 0, 1), glm::dvec4(-1, 0, 0, 0));
-v.emplace_back(glm::dvec4(-5, 0.5, 0, 1), glm::dvec4(1, 0, 0, 0));
-v.emplace_back(glm::dvec4(0.5, 5, 0, 1), glm::dvec4(0, -1, 0, 0));
-v.emplace_back(glm::dvec4(0.5, -5, 0, 1), glm::dvec4(0, 1, 0, 0));
-v.emplace_back(glm::dvec4(0.5, 0, 5, 1), glm::dvec4(0, 0, -1, 0));
-v.emplace_back(glm::dvec4(0.5, 0, -5, 1), glm::dvec4(0, 0, 1, 0));
-v.emplace_back(glm::dvec4(0, 0.5, 0, 1), glm::dvec4(0, 0, 1, 0));
-for(auto &r : v) {
-auto xs = c.local_intersect(r);
-std::cout << xs.getList()[0].t_ << " " << xs.getList()[1].t_ << "\n";
-}*/
+/*auto g = std::make_shared<Group>();
+  auto s = std::make_shared<Sphere>();
+  g->addChild(s);
+  std::cout << "g: " << g << "\n";
+  std::cout << "s: " << s << "\n";
+  std::cout << "first child: " << g->getChildVector()[0] << "\n";
+  std::cout << "s parent: " << s->getParentPtr() << "\n";*/
 
-/*
-std::vector<Ray> v;
-Cube c;
-v.emplace_back(glm::dvec4(-2, 0.0, 0, 1), glm::dvec4(0.2673, 0.5345, 0.8018, 0));
-v.emplace_back(glm::dvec4(0, -2, 0, 1), glm::dvec4(0.8018, 0.2673, 0.5345, 0));
-v.emplace_back(glm::dvec4(0, 0, -2, 1), glm::dvec4(0.5345, 0.8018, 0.2673, 0));
-v.emplace_back(glm::dvec4(2, 0, 2, 1), glm::dvec4(0, 0, -1, 0));
-v.emplace_back(glm::dvec4(0, 2, 2, 1), glm::dvec4(0, -1, 0, 0));
-v.emplace_back(glm::dvec4(2, 2, 0, 1), glm::dvec4(-1, 0, 0, 0));
-for (auto &r : v) {
-auto xs = c.local_intersect(r);
-if (xs.getList().empty())
-std::cout << "Missed\n";
-else
-std::cout << "not missed and " << xs.getList()[0].t_ << " " << xs.getList()[1].t_ << "\n";
-}*/
-
-/*
-std::vector<glm::dvec4> v;
-Cube c;
-v.emplace_back(1, 0.5, 0.8, 1);
-v.emplace_back(-1, -0.2, 0.9, 1);
-v.emplace_back(-0.4, 1, -0.1, 1);
-v.emplace_back(0.3, -1, -0.7, 1);
-v.emplace_back(-0.6, 0.3, 1, 1);
-v.emplace_back(0.4, 0.4, -1, 1);
-v.emplace_back(1, 1, 1, 1);
-v.emplace_back(-1, -1, -1, 1);
-for (auto &p : v) {
-auto xs = c.local_normal_at(p);
-std::cout << glm::to_string(xs) << "\n";
-}*/
+/*Group g;
+  auto s1 = std::make_shared<Sphere>();
+  auto s2 = std::make_shared<Sphere>();
+  auto s3 = std::make_shared<Sphere>();
+  s2->setTransform(glm::translate(glm::dmat4(1.0), {0, 0, -3}));
+  s3->setTransform(glm::translate(glm::dmat4(1.0), {5, 0, 0}));
+  g.addChild(s1);
+  g.addChild(s2);
+  g.addChild(s3);
+  Ray r({0, 0, -5, 1}, {0, 0, 1, 0});
+  auto xs = g.local_intersect(r);
+  std::cout << xs.getList().size() << "\n";
+  std::cout << "s1: " << s1 << "\n";
+  std::cout << "s2: " << s2 << "\n";
+  std::cout << "xs[0]: " << xs.getList()[0].shape_ptr_ << "\n";
+  std::cout << "xs[1]: " << xs.getList()[1].shape_ptr_ << "\n";
+  std::cout << "xs[2]: " << xs.getList()[2].shape_ptr_ << "\n";
+  std::cout << "xs[3]: " << xs.getList()[3].shape_ptr_ << "\n";*/

@@ -13,6 +13,7 @@
 #include "Computations.h"
 #include "Pattern/StripePtn.h"
 #include "Pattern/TestPtn.h"
+#include "Shape/Cube.h"
 
 const double Epsilon = 0.00001;
 
@@ -746,3 +747,203 @@ TEST_CASE("shade_hit() with a reflective, transparent material", "[schlick]") {
   REQUIRE(fabs(c.g - 0.69643) < Epsilon);
   REQUIRE(fabs(c.b - 0.69243) < Epsilon);
 }
+
+TEST_CASE("The normal on the surface of a cube", "[cube]") {
+  std::vector<glm::dvec4> v;
+  Cube c;
+  std::vector<glm::dvec3> cv;
+  v.emplace_back(1, 0.5, 0.8, 1);
+  v.emplace_back(-1, -0.2, 0.9, 1);
+  v.emplace_back(-0.4, 1, -0.1, 1);
+  v.emplace_back(0.3, -1, -0.7, 1);
+  v.emplace_back(-0.6, 0.3, 1, 1);
+  v.emplace_back(0.4, 0.4, -1, 1);
+  v.emplace_back(1, 1, 1, 1);
+  v.emplace_back(-1, -1, -1, 1);
+  cv.reserve(v.size());
+for (auto &p : v) {
+    cv.emplace_back(c.local_normal_at(p));
+  }
+
+  REQUIRE(fabs(cv[0].r - 1) < Epsilon);
+  REQUIRE(fabs(cv[0].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[0].b - 0) < Epsilon);
+
+  REQUIRE(fabs(cv[1].r + 1) < Epsilon);
+  REQUIRE(fabs(cv[1].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[1].b - 0) < Epsilon);
+
+  REQUIRE(fabs(cv[2].r - 0) < Epsilon);
+  REQUIRE(fabs(cv[2].g - 1) < Epsilon);
+  REQUIRE(fabs(cv[2].b - 0) < Epsilon);
+
+  REQUIRE(fabs(cv[3].r - 0) < Epsilon);
+  REQUIRE(fabs(cv[3].g + 1) < Epsilon);
+  REQUIRE(fabs(cv[3].b - 0) < Epsilon);
+
+  REQUIRE(fabs(cv[4].r - 0) < Epsilon);
+  REQUIRE(fabs(cv[4].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[4].b - 1) < Epsilon);
+
+  REQUIRE(fabs(cv[5].r - 0) < Epsilon);
+  REQUIRE(fabs(cv[5].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[5].b + 1) < Epsilon);
+
+  REQUIRE(fabs(cv[6].r - 1) < Epsilon);
+  REQUIRE(fabs(cv[6].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[6].b - 0) < Epsilon);
+
+  REQUIRE(fabs(cv[7].r + 1) < Epsilon);
+  REQUIRE(fabs(cv[7].g - 0) < Epsilon);
+  REQUIRE(fabs(cv[7].b - 0) < Epsilon);
+}
+
+TEST_CASE("A ray misses a cube", "[cube]") {
+  std::vector<Ray> v;
+  Cube c;
+  v.emplace_back(glm::dvec4(-2, 0.0, 0, 1), glm::dvec4(0.2673, 0.5345, 0.8018, 0));
+  v.emplace_back(glm::dvec4(0, -2, 0, 1), glm::dvec4(0.8018, 0.2673, 0.5345, 0));
+  v.emplace_back(glm::dvec4(0, 0, -2, 1), glm::dvec4(0.5345, 0.8018, 0.2673, 0));
+  v.emplace_back(glm::dvec4(2, 0, 2, 1), glm::dvec4(0, 0, -1, 0));
+  v.emplace_back(glm::dvec4(0, 2, 2, 1), glm::dvec4(0, -1, 0, 0));
+  v.emplace_back(glm::dvec4(2, 2, 0, 1), glm::dvec4(-1, 0, 0, 0));
+  for (auto &r : v) {
+    auto xs = c.local_intersect(r);
+    REQUIRE(xs.getList().empty());
+  }
+}
+
+TEST_CASE("A ray intersects a cube", "[cube]") {
+  std::vector<Ray> v;
+  Cube c;
+  v.emplace_back(glm::dvec4(5, 0.5, 0, 1), glm::dvec4(-1, 0, 0, 0));
+  v.emplace_back(glm::dvec4(-5, 0.5, 0, 1), glm::dvec4(1, 0, 0, 0));
+  v.emplace_back(glm::dvec4(0.5, 5, 0, 1), glm::dvec4(0, -1, 0, 0));
+  v.emplace_back(glm::dvec4(0.5, -5, 0, 1), glm::dvec4(0, 1, 0, 0));
+  v.emplace_back(glm::dvec4(0.5, 0, 5, 1), glm::dvec4(0, 0, -1, 0));
+  v.emplace_back(glm::dvec4(0.5, 0, -5, 1), glm::dvec4(0, 0, 1, 0));
+  v.emplace_back(glm::dvec4(0, 0.5, 0, 1), glm::dvec4(0, 0, 1, 0));
+  for(auto &r : v) {
+    auto xs = c.local_intersect(r);
+    if(r != v.back()) {
+      REQUIRE(fabs(xs.getList()[0].t_ - 4) < Epsilon);
+      REQUIRE(fabs(xs.getList()[1].t_ - 6) < Epsilon);
+    }
+    else {
+      REQUIRE(fabs(xs.getList()[0].t_ + 1) < Epsilon);
+      REQUIRE(fabs(xs.getList()[1].t_ - 1) < Epsilon);
+    }
+  }
+}
+
+/*Cylinder cyl;
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(1, 0, 0, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, 0, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(1, 1, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = cyl.local_intersect(r);
+    if(xs.getList().empty()) std::cout << "Empty\n";
+  }*/
+/*Cylinder cyl;
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(1, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0.5, 0, -5, 1), glm::normalize(glm::dvec4(0.1, 1, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = cyl.local_intersect(r);
+    if(xs.getList().empty()) std::cout << "Empty\n";
+    else std::cout << xs.getList().at(0).t_ << " " << xs.getList().at(1).t_ << "\n";
+  }*/
+
+/*Cylinder cyl;
+  std::vector<glm::dvec4> vp;
+  vp.emplace_back(1, 0, 0, 1);
+  vp.emplace_back(0, 5, -1, 1);
+  vp.emplace_back(0, -2, 1, 1);
+  vp.emplace_back(-1, 1, 0, 1);
+  for(auto &p : vp) {
+    auto n = cyl.local_normal_at(p);
+    std::cout << glm::to_string(n) << "\n";
+  }*/
+
+/*Cylinder cyl;
+  cyl.setMinimum(1);
+  cyl.setMaximum(2);
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(0, 1.5, 0, 1), glm::normalize(glm::dvec4(0.1, 1, 0, 0)));
+  vr.emplace_back(glm::dvec4(0, 3, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 2, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 1, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 1.5, -2, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = cyl.local_intersect(r);
+    std::cout << xs.getList().size() << "\n";
+  }*/
+
+/*Cylinder cyl;
+  cyl.setMinimum(1);
+  cyl.setMaximum(2);
+  cyl.setClose(true);
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(0, 3, 0, 1), glm::normalize(glm::dvec4(0, -1, 0, 0)));
+  vr.emplace_back(glm::dvec4(0, 3, -2, 1), glm::normalize(glm::dvec4(0, -1, 2, 0)));
+  vr.emplace_back(glm::dvec4(0, 4, -2, 1), glm::normalize(glm::dvec4(0, -1, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -2, 1), glm::normalize(glm::dvec4(0, 1, 2, 0)));
+  vr.emplace_back(glm::dvec4(0, -1, -2, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = cyl.local_intersect(r);
+    std::cout << xs.getList().size() << "\n";
+  }*/
+
+/*Cylinder cyl;
+  cyl.setMinimum(1);
+  cyl.setMaximum(2);
+  cyl.setClose(true);
+  std::vector<glm::dvec4> vp;
+  vp.emplace_back(0, 1, 0, 1);
+  vp.emplace_back(0.5, 1, 0, 1);
+  vp.emplace_back(0, 1, 0.5, 1);
+  vp.emplace_back(0, 2, 0, 1);
+  vp.emplace_back(0.5, 2, 0, 1);
+  vp.emplace_back(0, 2, 0.5, 1);
+  for(auto &p : vp) {
+    auto n = cyl.local_normal_at(p);
+    std::cout << glm::to_string(n) << "\n";
+  }*/
+
+/*Cone shape;
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(1, 1, 1, 0)));
+  vr.emplace_back(glm::dvec4(1, 1, -5, 1), glm::normalize(glm::dvec4(-0.5, -1, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = shape.local_intersect(r);
+    if(xs.getList().empty()) std::cout << "Empty\n";
+    else std::cout << xs.getList().at(0).t_ << " " << xs.getList().at(1).t_ << "\n";
+  }*/
+
+/*Cone shape;
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(0, 0, -1, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
+  for(auto &r : vr) {
+    auto xs = shape.local_intersect(r);
+    if(xs.getList().empty()) std::cout << "Empty\n";
+    else std::cout << xs.getList().at(0).t_ << "\n";
+  }*/
+
+/*Cone shape;
+  shape.setMinimum(-0.5);
+  shape.setMaximum(0.5);
+  shape.setClose(true);
+  std::vector<Ray> vr;
+  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
+  vr.emplace_back(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
+
+  for(auto &r : vr) {
+    auto xs = shape.local_intersect(r);
+    if(xs.getList().empty()) std::cout << "Empty\n";
+    else std::cout << xs.getList().size() << "\n";
+  }*/

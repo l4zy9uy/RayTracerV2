@@ -79,175 +79,196 @@ build cmake_object_order_depends_target_classes: phony || src/CMakeFiles/classes
 
 build src/CMakeFiles/classes.dir/BlendedPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/BlendedPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/BlendedPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Camera.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Camera.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Camera.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Canvas.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Canvas.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Canvas.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/CheckerPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/CheckerPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/CheckerPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Computations.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Computations.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Computations.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
+
+build src/CMakeFiles/classes.dir/Cone.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Cone.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/Cone.cpp.o.d
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Containers.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Containers.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Containers.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Cube.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Cube.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Cube.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
+
+build src/CMakeFiles/classes.dir/Cylinder.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Cylinder.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/Cylinder.cpp.o.d
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/ExtVec3.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/ExtVec3.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/ExtVec3.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/GradientPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/GradientPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/GradientPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
+  INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
+  OBJECT_DIR = src/CMakeFiles/classes.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
+
+build src/CMakeFiles/classes.dir/Group.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Group.cpp || cmake_object_order_depends_target_classes
+  DEP_FILE = src/CMakeFiles/classes.dir/Group.cpp.o.d
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Intersection.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Intersection.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Intersection.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Intersections.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Intersections.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Intersections.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Light.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Light.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Light.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Material.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Material.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Material.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Pattern.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Pattern.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Pattern.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Plane.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Plane.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Plane.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Ray.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Ray.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Ray.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/RingPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/RingPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/RingPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Shape.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Shape.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Shape.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/SolidPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/SolidPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/SolidPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Sphere.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Sphere.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Sphere.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/StripePtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/StripePtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/StripePtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/TestPtn.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/TestPtn.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/TestPtn.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/Timer.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/Timer.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/Timer.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/World.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/src/World.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/World.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir
 
 build src/CMakeFiles/classes.dir/__/test/test.cpp.o: CXX_COMPILER__classes_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/test.cpp || cmake_object_order_depends_target_classes
   DEP_FILE = src/CMakeFiles/classes.dir/__/test/test.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = src/CMakeFiles/classes.dir
   OBJECT_FILE_DIR = src/CMakeFiles/classes.dir/__/test
@@ -260,8 +281,8 @@ build src/CMakeFiles/classes.dir/__/test/test.cpp.o: CXX_COMPILER__classes_unsca
 #############################################
 # Link the static library src/libclasses.a
 
-build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/BlendedPtn.cpp.o src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computations.cpp.o src/CMakeFiles/classes.dir/Containers.cpp.o src/CMakeFiles/classes.dir/Cube.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/TestPtn.cpp.o src/CMakeFiles/classes.dir/Timer.cpp.o src/CMakeFiles/classes.dir/World.cpp.o src/CMakeFiles/classes.dir/__/test/test.cpp.o
-  LANGUAGE_COMPILE_FLAGS = -g
+build src/libclasses.a: CXX_STATIC_LIBRARY_LINKER__classes_Debug src/CMakeFiles/classes.dir/BlendedPtn.cpp.o src/CMakeFiles/classes.dir/Camera.cpp.o src/CMakeFiles/classes.dir/Canvas.cpp.o src/CMakeFiles/classes.dir/CheckerPtn.cpp.o src/CMakeFiles/classes.dir/Computations.cpp.o src/CMakeFiles/classes.dir/Cone.cpp.o src/CMakeFiles/classes.dir/Containers.cpp.o src/CMakeFiles/classes.dir/Cube.cpp.o src/CMakeFiles/classes.dir/Cylinder.cpp.o src/CMakeFiles/classes.dir/ExtVec3.cpp.o src/CMakeFiles/classes.dir/GradientPtn.cpp.o src/CMakeFiles/classes.dir/Group.cpp.o src/CMakeFiles/classes.dir/Intersection.cpp.o src/CMakeFiles/classes.dir/Intersections.cpp.o src/CMakeFiles/classes.dir/Light.cpp.o src/CMakeFiles/classes.dir/Material.cpp.o src/CMakeFiles/classes.dir/Pattern.cpp.o src/CMakeFiles/classes.dir/Plane.cpp.o src/CMakeFiles/classes.dir/Ray.cpp.o src/CMakeFiles/classes.dir/RingPtn.cpp.o src/CMakeFiles/classes.dir/Shape.cpp.o src/CMakeFiles/classes.dir/SolidPtn.cpp.o src/CMakeFiles/classes.dir/Sphere.cpp.o src/CMakeFiles/classes.dir/StripePtn.cpp.o src/CMakeFiles/classes.dir/TestPtn.cpp.o src/CMakeFiles/classes.dir/Timer.cpp.o src/CMakeFiles/classes.dir/World.cpp.o src/CMakeFiles/classes.dir/__/test/test.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -O0 -g
   OBJECT_DIR = src/CMakeFiles/classes.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -307,7 +328,7 @@ build cmake_object_order_depends_target_RayTracerV2: phony || cmake_object_order
 
 build main/CMakeFiles/RayTracerV2.dir/main.cpp.o: CXX_COMPILER__RayTracerV2_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/main/main.cpp || cmake_object_order_depends_target_RayTracerV2
   DEP_FILE = main/CMakeFiles/RayTracerV2.dir/main.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = main/CMakeFiles/RayTracerV2.dir
   OBJECT_FILE_DIR = main/CMakeFiles/RayTracerV2.dir
@@ -321,7 +342,7 @@ build main/CMakeFiles/RayTracerV2.dir/main.cpp.o: CXX_COMPILER__RayTracerV2_unsc
 # Link the executable main/RayTracerV2
 
 build main/RayTracerV2: CXX_EXECUTABLE_LINKER__RayTracerV2_Debug main/CMakeFiles/RayTracerV2.dir/main.cpp.o | src/libclasses.a || src/libclasses.a
-  FLAGS = -g
+  FLAGS = -O0 -g
   LINK_LIBRARIES = src/libclasses.a
   OBJECT_DIR = main/CMakeFiles/RayTracerV2.dir
   POST_BUILD = :
@@ -368,7 +389,7 @@ build cmake_object_order_depends_target_test: phony || cmake_object_order_depend
 
 build test/CMakeFiles/test.dir/test.cpp.o: CXX_COMPILER__test_unscanned_Debug /home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/test/test.cpp || cmake_object_order_depends_target_test
   DEP_FILE = test/CMakeFiles/test.dir/test.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -O0 -g -fdiagnostics-color=always
   INCLUDES = -I/home/l4zy9uy/Desktop/c-c++/pet_project/RayTracerV2/include
   OBJECT_DIR = test/CMakeFiles/test.dir
   OBJECT_FILE_DIR = test/CMakeFiles/test.dir
@@ -382,7 +403,7 @@ build test/CMakeFiles/test.dir/test.cpp.o: CXX_COMPILER__test_unscanned_Debug /h
 # Link the executable test/test
 
 build test/test: CXX_EXECUTABLE_LINKER__test_Debug test/CMakeFiles/test.dir/test.cpp.o | src/libclasses.a /usr/local/lib/libCatch2Main.a /usr/local/lib/libCatch2.a || src/libclasses.a
-  FLAGS = -g
+  FLAGS = -O0 -g
   LINK_LIBRARIES = src/libclasses.a  /usr/local/lib/libCatch2Main.a  /usr/local/lib/libCatch2.a
   OBJECT_DIR = test/CMakeFiles/test.dir
   POST_BUILD = :

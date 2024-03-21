@@ -55,5 +55,11 @@ glm::dvec4 Shape::normal_at(const glm::dvec4 &point) const {
 glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point) const {
   return {point.x, point.y, point.z, 0.0};
 }
+const Shape *Shape::getParentPtr() const {
+  return parent_ptr_;
+}
+void Shape::setParentPtr(const Shape *ParentPtr) {
+  parent_ptr_ = ParentPtr;
+}
 
 
