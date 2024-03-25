@@ -6,7 +6,7 @@
 #include "Intersection.h"
 
 // Constructor
-Intersection::Intersection(double t, Shape* shapePtr) : t_(t), shape_ptr_(shapePtr) {}
+Intersection::Intersection(const double &t, Shape* shapePtr) : t_(t), shape_ptr_(shapePtr) {}
 
 // Copy constructor
 Intersection::Intersection(const Intersection& other)  = default;

@@ -26,6 +26,9 @@
 #include "Shape/Cylinder.h"
 #include "Shape/Cone.h"
 #include "Shape/Group.h"
+#include "Shape/Triangle.h"
+#include "Parser.h"
+
 
 int main() {
   /*std::ios_base::sync_with_stdio(false);
@@ -66,17 +69,14 @@ int main() {
                                            glm::dvec4(0.0, 1.0, 0.0, 1.0),
                                            glm::dvec4(0.0, 1.0, 0.0, 0.0)));
   camera.render(world).canvas_to_ppm();*/
+  /*Parser p = parse_file_obj("../../test.txt");
+  std::cout << p.num_line_ignored << "\n";
+  for(const auto& vt : p.vertices) {
+    std::cout << glm::to_string(vt) << "\n";
+  }
+  std::cout << "\n" << p.defaultGroup.getChild().size() << "\n";
 
-  Group g1;// = std::make_shared<Group>();
-  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
-  Group g2;// = std::make_shared<Group>();
-  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
-  g1.addChild(&g2);
-  Sphere s;// = std::make_shared<Sphere>();
-  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
-  g2.addChild(&s);
-  auto n = s.normal_at({1.7321, 1.1547, -5.5774, 1});
-  std::cout << glm::to_string(n) << "\n";
+*/
   return 0;
 }
 /*auto g = std::make_shared<Group>();
@@ -84,7 +84,7 @@ int main() {
   g->addChild(s);
   std::cout << "g: " << g << "\n";
   std::cout << "s: " << s << "\n";
-  std::cout << "first child: " << g->getChildVector()[0] << "\n";
+  std::cout << "first child: " << g->getChild()[0] << "\n";
   std::cout << "s parent: " << s->getParentPtr() << "\n";*/
 
 /*Group g;
@@ -125,3 +125,29 @@ int main() {
   g2.addChild(&s);
   auto n = s.normal_to_world({sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, 0});
   std::cout << glm::to_string(n) << "\n";*/
+
+/*Group g1;// = std::make_shared<Group>();
+  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
+  Group g2;// = std::make_shared<Group>();
+  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
+  g1.addChild(&g2);
+  Sphere s;// = std::make_shared<Sphere>();
+  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g2.addChild(&s);
+  auto n = s.normal_at({1.7321, 1.1547, -5.5774, 1});*/
+/*glm::dvec4 p1(0, 1, 0, 1);
+  glm::dvec4 p2(-1, 0, 0, 1);
+  glm::dvec4 p3(1, 0, 0, 1);
+  Triangle t(p1, p2, p3);
+  Ray r({0, 0.5, -2, 1}, {0, 0, 1, 0});
+  auto xs = t.local_intersect(r);
+  std::cout << xs.getList().size() << "\n";
+  std::cout << xs.getList()[0].t_ << "\n";*/
+
+/*  Parser p = parse_file_obj("../../test.txt");
+  std::cout << p.num_line_ignored << "\n";
+  for(const auto& vt : p.vertices) {
+    std::cout << glm::to_string(vt) << "\n";
+  }
+  std::cout << "\n" << p.defaultGroup.getChild().size() << "\n";
+*/

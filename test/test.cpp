@@ -6,6 +6,7 @@
 #include "Ray.h"
 #include "Shape/Sphere.h"
 #include <iomanip>
+#include <glm/gtx/string_cast.hpp>
 #include "Light.h"
 #include "World.h"
 #include "Camera.h"
@@ -14,6 +15,8 @@
 #include "Pattern/StripePtn.h"
 #include "Pattern/TestPtn.h"
 #include "Shape/Cube.h"
+#include "Shape/Cylinder.h"
+#include "Shape/Group.h"
 
 const double Epsilon = 0.00001;
 
@@ -836,93 +839,149 @@ TEST_CASE("A ray intersects a cube", "[cube]") {
   }
 }
 
-/*Cylinder cyl;
+TEST_CASE("A ray misses a cylinder", "[cylinder]") {
+  Cylinder cyl;
   std::vector<Ray> vr;
   vr.emplace_back(glm::dvec4(1, 0, 0, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
   vr.emplace_back(glm::dvec4(0, 0, 0, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
   vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(1, 1, 1, 0)));
   for(auto &r : vr) {
     auto xs = cyl.local_intersect(r);
-    if(xs.getList().empty()) std::cout << "Empty\n";
-  }*/
-/*Cylinder cyl;
+    REQUIRE(xs.getList().empty());
+  }
+}
+
+TEST_CASE("A ray strikes a cylinder", "[cylinder]") {
+  Cylinder cyl;
   std::vector<Ray> vr;
   vr.emplace_back(glm::dvec4(1, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
   vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
   vr.emplace_back(glm::dvec4(0.5, 0, -5, 1), glm::normalize(glm::dvec4(0.1, 1, 1, 0)));
+  std::vector<Intersections> its;
   for(auto &r : vr) {
     auto xs = cyl.local_intersect(r);
-    if(xs.getList().empty()) std::cout << "Empty\n";
-    else std::cout << xs.getList().at(0).t_ << " " << xs.getList().at(1).t_ << "\n";
-  }*/
+    its.push_back(xs);
+  }
+  REQUIRE(fabs(its[0].getList().at(0).t_ - 5) < Epsilon);
+  REQUIRE(fabs(its[0].getList().at(1).t_ - 5) < Epsilon);
+  REQUIRE(fabs(its[1].getList().at(0).t_ - 4) < Epsilon);
+  REQUIRE(fabs(its[1].getList().at(1).t_ - 6) < Epsilon);
+  REQUIRE(fabs(its[2].getList().at(0).t_ - 6.80798) < Epsilon);
+  REQUIRE(fabs(its[2].getList().at(1).t_ - 7.08872) < Epsilon);
+}
 
-/*Cylinder cyl;
-  std::vector<glm::dvec4> vp;
-  vp.emplace_back(1, 0, 0, 1);
-  vp.emplace_back(0, 5, -1, 1);
-  vp.emplace_back(0, -2, 1, 1);
-  vp.emplace_back(-1, 1, 0, 1);
-  for(auto &p : vp) {
-    auto n = cyl.local_normal_at(p);
-    std::cout << glm::to_string(n) << "\n";
-  }*/
+TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
+  Cylinder cyl;
+  std::vector<std::pair<glm::dvec4, glm::dvec4>> test_data = {
+      {glm::dvec4(1, 0, 0, 1), glm::dvec4(1, 0, 0, 0)},
+      {glm::dvec4(0, 5, -1, 1), glm::dvec4(0, 0, -1, 0)},
+      {glm::dvec4(0, -2, 1, 1), glm::dvec4(0, 0, 1, 0)},
+      {glm::dvec4(-1, 1, 0, 1), glm::dvec4(-1, 0, 0, 0)}
+  };
 
-/*Cylinder cyl;
+  for (auto &[point, expected_normal] : test_data) {
+    glm::dvec4 computed_normal = cyl.local_normal_at(point);
+    REQUIRE(glm::to_string(computed_normal) == glm::to_string(expected_normal));
+  }
+}
+
+TEST_CASE("Intersecting a constrained cylinder", "[Cylinder]") {
+  Cylinder cyl;
   cyl.setMinimum(1);
   cyl.setMaximum(2);
-  std::vector<Ray> vr;
-  vr.emplace_back(glm::dvec4(0, 1.5, 0, 1), glm::normalize(glm::dvec4(0.1, 1, 0, 0)));
-  vr.emplace_back(glm::dvec4(0, 3, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 2, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 1, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 1.5, -2, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  for(auto &r : vr) {
-    auto xs = cyl.local_intersect(r);
-    std::cout << xs.getList().size() << "\n";
-  }*/
+  std::vector<Ray> vr = {
+      Ray(glm::dvec4(0, 1.5, 0, 1), glm::normalize(glm::dvec4(0.1, 1, 0, 0))),
+      Ray(glm::dvec4(0, 3, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
+      Ray(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
+      Ray(glm::dvec4(0, 2, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
+      Ray(glm::dvec4(0, 1, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
+      Ray(glm::dvec4(0, 1.5, -2, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)))
+  };
+  std::vector<size_t> expected_intersections = {
+      0, // For Ray 1
+      0, // For Ray 2
+      0, // For Ray 3
+      0, // For Ray 4
+      0, // For Ray 5
+      2  // For Ray 6, intersects the cylinder twice
+  };
 
-/*Cylinder cyl;
+  for (size_t i = 0; i < vr.size(); ++i) {
+    auto xs = cyl.local_intersect(vr[i]);
+    REQUIRE(xs.getList().size() == expected_intersections[i]);
+  }
+}
+
+TEST_CASE("Intersecting the caps of a closed cylinder", "[Cylinder]") {
+  Cylinder cyl;
+  cyl.setMinimum(1);
+  cyl.setMaximum(2);
+  cyl.setClose(true); // Assuming this method is meant to indicate the cylinder has caps
+  std::vector<Ray> vr = {
+      Ray(glm::dvec4(0, 3, 0, 1), glm::normalize(glm::dvec4(0, -1, 0, 0))),
+      Ray(glm::dvec4(0, 3, -2, 1), glm::normalize(glm::dvec4(0, -1, 2, 0))),
+      Ray(glm::dvec4(0, 4, -2, 1), glm::normalize(glm::dvec4(0, -1, 1, 0))),
+      Ray(glm::dvec4(0, 0, -2, 1), glm::normalize(glm::dvec4(0, 1, 2, 0))),
+      Ray(glm::dvec4(0, -1, -2, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)))
+  };
+  std::vector<size_t> expected_intersections = {
+      2, // For Ray 1
+      2, // For Ray 2
+      2, // For Ray 3
+      2, // For Ray 4
+      2  // For Ray 5
+  };
+
+  for (size_t i = 0; i < vr.size(); ++i) {
+    auto xs = cyl.local_intersect(vr[i]);
+    REQUIRE(xs.getList().size() == expected_intersections[i]);
+  }
+}
+
+TEST_CASE("The normal vector on a cylinder's end caps", "[Cylinder]") {
+  Cylinder cyl;
   cyl.setMinimum(1);
   cyl.setMaximum(2);
   cyl.setClose(true);
-  std::vector<Ray> vr;
-  vr.emplace_back(glm::dvec4(0, 3, 0, 1), glm::normalize(glm::dvec4(0, -1, 0, 0)));
-  vr.emplace_back(glm::dvec4(0, 3, -2, 1), glm::normalize(glm::dvec4(0, -1, 2, 0)));
-  vr.emplace_back(glm::dvec4(0, 4, -2, 1), glm::normalize(glm::dvec4(0, -1, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 0, -2, 1), glm::normalize(glm::dvec4(0, 1, 2, 0)));
-  vr.emplace_back(glm::dvec4(0, -1, -2, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
-  for(auto &r : vr) {
-    auto xs = cyl.local_intersect(r);
-    std::cout << xs.getList().size() << "\n";
-  }*/
 
-/*Cylinder cyl;
-  cyl.setMinimum(1);
-  cyl.setMaximum(2);
-  cyl.setClose(true);
-  std::vector<glm::dvec4> vp;
-  vp.emplace_back(0, 1, 0, 1);
-  vp.emplace_back(0.5, 1, 0, 1);
-  vp.emplace_back(0, 1, 0.5, 1);
-  vp.emplace_back(0, 2, 0, 1);
-  vp.emplace_back(0.5, 2, 0, 1);
-  vp.emplace_back(0, 2, 0.5, 1);
-  for(auto &p : vp) {
-    auto n = cyl.local_normal_at(p);
-    std::cout << glm::to_string(n) << "\n";
-  }*/
+  std::vector<glm::dvec4> points = {
+      glm::dvec4(0, 1, 0, 1),    // Bottom cap center
+      glm::dvec4(0.5, 1, 0, 1),  // Bottom cap edge
+      glm::dvec4(0, 1, 0.5, 1),  // Bottom cap edge
+      glm::dvec4(0, 2, 0, 1),    // Top cap center
+      glm::dvec4(0.5, 2, 0, 1),  // Top cap edge
+      glm::dvec4(0, 2, 0.5, 1)   // Top cap edge
+  };
 
-/*Cone shape;
-  std::vector<Ray> vr;
-  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(1, 1, 1, 0)));
-  vr.emplace_back(glm::dvec4(1, 1, -5, 1), glm::normalize(glm::dvec4(-0.5, -1, 1, 0)));
-  for(auto &r : vr) {
-    auto xs = shape.local_intersect(r);
-    if(xs.getList().empty()) std::cout << "Empty\n";
-    else std::cout << xs.getList().at(0).t_ << " " << xs.getList().at(1).t_ << "\n";
-  }*/
+  std::vector<glm::dvec4> expected_normals = {
+      glm::dvec4(0.000000, -1.000000, 0.000000, 0.000000), // Bottom cap
+      glm::dvec4(0.000000, -1.000000, 0.000000, 0.000000), // Bottom cap edge
+      glm::dvec4(0.000000, -1.000000, 0.000000, 0.000000), // Bottom cap edge
+      glm::dvec4(0.000000, 1.000000, 0.000000, 0.000000),  // Top cap
+      glm::dvec4(0.000000, 1.000000, 0.000000, 0.000000),  // Top cap edge
+      glm::dvec4(0.000000, 1.000000, 0.000000, 0.000000)   // Top cap edge
+  };
+
+  for (size_t i = 0; i < points.size(); ++i) {
+    auto n = cyl.local_normal_at(points[i]);
+    REQUIRE(glm::to_string(n) == glm::to_string(expected_normals[i]));
+  }
+}
+
+TEST_CASE("Creating a new group", "[group]") {
+  auto g = std::make_unique<Group>();
+  auto s = std::make_unique<Sphere>();
+  auto s_ptr = s.get();
+  g->addChild(std::move(s));
+  REQUIRE(g->getChild()[0].get() == s_ptr);
+}
+/*TEST_CASE("", "[]") {
+
+}*/
+
+/**/
+
+/**/
 
 /*Cone shape;
   std::vector<Ray> vr;

@@ -36,13 +36,13 @@ public:
 private:
   void render_at_thread(Canvas &image, World &world, const unsigned long &start, const unsigned long &jump);
 private:
+  unsigned int horizontal_size_;
+  unsigned int vertical_size_;
+  double field_of_view_;
   glm::dmat4 transform_matrix_{};
   double half_width_;
   double half_height_;
   double pixel_size_;
-  unsigned int horizontal_size_;
-  unsigned int vertical_size_;
-  double field_of_view_;
   Canvas image_;
 };
 

@@ -6,8 +6,6 @@
 
 #include <utility>
 
-Shape::Shape() = default;
-
 Shape::Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material) : model_(
     Model), radius_(Radius), position_(Position), material_(std::move(Material)) {}
 

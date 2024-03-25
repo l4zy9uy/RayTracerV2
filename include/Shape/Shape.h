@@ -14,8 +14,9 @@ class Intersections;
 
 class Shape {
 public:
-  explicit Shape();
+  Shape() = default;
   Shape(const glm::dmat4 &Model, double Radius, const glm::dvec4 &Position, Material Material);
+  virtual ~Shape() = default;
 public:
   void setTransform(const glm::dmat4 &transform_matrix);
   void setModel(const glm::dmat4 &model);

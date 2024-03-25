@@ -7,7 +7,7 @@
 
 Intersections Group::local_intersect(const Ray &ray) {
   Intersections xs;
-  for(auto &shape : child_vector_) {
+  for(auto &shape : child_) {
     xs.addIntersections(shape->intersect(ray));
   }
   xs.sort();
@@ -16,10 +16,10 @@ Intersections Group::local_intersect(const Ray &ray) {
 glm::dvec4 Group::local_normal_at(const glm::dvec4 &point) const {
   return Shape::local_normal_at(point);
 }
-void Group::addChild(Shape *shape) {
-  child_vector_.push_back(shape);
+void Group::addChild(std::unique_ptr<Shape> shape) {
   shape->setParentPtr(this);
+  child_.push_back(std::move(shape));
 }
-const std::vector<Shape *> & Group::getChildVector() const {
-  return child_vector_;
+const std::vector<std::unique_ptr<Shape>> & Group::getChild() const {
+  return child_;
 }

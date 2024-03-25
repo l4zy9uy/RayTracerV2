@@ -14,7 +14,7 @@ class Ray;
 class Intersections;
 
 struct Intersection {
-  Intersection(double t, Shape* shapePtr);
+  Intersection(const double &t, Shape* shapePtr);
   Intersection(const Intersection& other);
   Intersection& operator=(const Intersection& other);
   Intersection(Intersection&& other) noexcept;
