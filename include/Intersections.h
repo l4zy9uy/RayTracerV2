@@ -18,6 +18,7 @@ public:
   [[nodiscard]] const std::vector<Intersection> &getList() const;
   void setList(const std::vector<Intersection> &list);
   void addIntersection(const double &distance, Shape *shape);
+  void addIntersection(const double &distance, Shape *shape, const double &u, const double &v);
   void addIntersection(const Intersection &intersection);
   void addIntersections(const Intersections &intersections);
   void addList(const Intersections &list);

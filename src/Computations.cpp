@@ -6,7 +6,7 @@
 #include <algorithm>
 Computations prepare_computations(const Intersection &intersection, const Ray &ray, const Intersections &intersections) {
   auto point = ray.at(intersection.t_);
-  auto normal_vector = intersection.shape_ptr_->normal_at(point);
+  auto normal_vector = intersection.shape_ptr_->normal_at(point, intersection);
   Computations comps{};
   comps.t_ = intersection.t_;
   comps.shape_ptr_ = intersection.shape_ptr_;

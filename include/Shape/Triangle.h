@@ -29,11 +29,12 @@ private:
   glm::dvec4 e2_{};
 public:
   Intersections local_intersect(const Ray &ray) override;
-  glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;
+  glm::dvec4 local_normal_at(const glm::dvec4 &point, const Intersection &hit) const override;
 private:
   glm::dvec4 normal_{};
 public:
   Triangle() = default;
+  ~Triangle() override = default;
   Triangle(const glm::dvec4 &p1, const glm::dvec4 &p2, const glm::dvec4 &p3);
 };
 

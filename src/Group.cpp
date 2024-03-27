@@ -13,8 +13,8 @@ Intersections Group::local_intersect(const Ray &ray) {
   xs.sort();
   return xs;
 }
-glm::dvec4 Group::local_normal_at(const glm::dvec4 &point) const {
-  return Shape::local_normal_at(point);
+glm::dvec4 Group::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
+  return Shape::local_normal_at(point, hit);
 }
 void Group::addChild(std::unique_ptr<Shape> shape) {
   shape->setParentPtr(this);

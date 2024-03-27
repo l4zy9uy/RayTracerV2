@@ -11,8 +11,8 @@ Intersections Cone::local_intersect(const Ray &ray) {
   auto c = o.x*o.x - o.y*o.y + o.z*o.z;
   double t0, t1;
   Intersections xs;
-  if(fabs(a) < 0.00001) {
-    if(fabs(b) < 0.00001) return {};
+  if(fabs(a) < Epsilon) {
+    if(fabs(b) < Epsilon) return {};
     else {
       t0 = -c / (2*b);
       xs.addIntersection(t0, this);
@@ -41,34 +41,36 @@ Intersections Cone::local_intersect(const Ray &ray) {
   intersect_cap(ray, xs);
   return xs;
 }
-glm::dvec4 Cone::local_normal_at(const glm::dvec4 &point) const {
-  return Shape::local_normal_at(point);
+glm::dvec4 Cone::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
+  auto y = sqrt(point.x*point.x + point.z*point.z);
+  if(point.y > 0) y = -y;
+  return {point.x, y, point.z, 0};
 }
-double Cone::getMinimum() const {
+const double & Cone::getMinimum() const {
   return minimum_;
 }
-void Cone::setMinimum(double Minimum) {
+void Cone::setMinimum(const double &Minimum) {
   minimum_ = Minimum;
 }
-double Cone::getMaximum() const {
+const double & Cone::getMaximum() const {
   return maximum_;
 }
-void Cone::setMaximum(double Maximum) {
+void Cone::setMaximum(const double &Maximum) {
   maximum_ = Maximum;
 }
-bool Cone::isClose() const {
+const bool & Cone::isClose() const {
   return close_;
 }
 void Cone::setClose(bool Close) {
   close_ = Close;
 }
-bool Cone::checkCap(const Ray &ray, const double &t, const double &y) const {
+bool Cone::checkCap(const Ray &ray, const double &t, const double &y) {
   auto x = ray.getOriginPoint().x + t*ray.getDirectionVector().x;
   auto z = ray.getOriginPoint().z + t*ray.getDirectionVector().z;
   return x*x + z*z <= y*y;
 }
 void Cone::intersect_cap(const Ray &ray, Intersections &xs) {
-  if(!close_ || fabs(ray.getDirectionVector().y) < 0.00001)
+  if(!close_ || fabs(ray.getDirectionVector().y) < Epsilon)
     return;
   auto t = (minimum_ - ray.getOriginPoint().y) / ray.getDirectionVector().y;
   if(checkCap(ray, t, minimum_))

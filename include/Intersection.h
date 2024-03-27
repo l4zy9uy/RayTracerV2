@@ -14,7 +14,9 @@ class Ray;
 class Intersections;
 
 struct Intersection {
+  Intersection() = default;
   Intersection(const double &t, Shape* shapePtr);
+  Intersection(const double &T, const Shape *ShapePtr, const double &U, const double &V);
   Intersection(const Intersection& other);
   Intersection& operator=(const Intersection& other);
   Intersection(Intersection&& other) noexcept;
@@ -23,8 +25,10 @@ struct Intersection {
   ~Intersection() = default;
 
 
-  double t_;
-  const Shape *shape_ptr_;
+  double t_{};
+  const Shape *shape_ptr_{};
+  double u{};
+  double v{};
 };
 
 #endif //RAYTRACERV2_INTERSECTION_H

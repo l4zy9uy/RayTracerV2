@@ -31,10 +31,12 @@ void Intersections::setList(const std::vector<Intersection> &list) {
 }
 
 void Intersections::addIntersection(const Intersection &intersection) {
+  sorted_ = false;
   list_.push_back(intersection);
 }
 
 void Intersections::addIntersections(const Intersections &intersections) {
+  sorted_ = false;
   for (const auto &i : intersections.list_) {
     list_.push_back(i);
   }
@@ -60,4 +62,8 @@ void Intersections::sort() const {
     return lhs.t_ < rhs.t_;
   });
   sorted_ = true;
+}
+void Intersections::addIntersection(const double &distance, Shape *shape, const double &u, const double &v) {
+  sorted_ = false;
+  list_.emplace_back(distance, shape, u, v);
 }

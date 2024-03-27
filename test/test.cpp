@@ -17,8 +17,10 @@
 #include "Shape/Cube.h"
 #include "Shape/Cylinder.h"
 #include "Shape/Group.h"
-
-const double Epsilon = 0.00001;
+#include "Shape/Cone.h"
+#include <iomanip>
+#include <catch2/catch_approx.hpp>
+//const double Epsilon = 0.00001;
 
 TEST_CASE("Compute a point from a distance", "[Ray]") {
   Ray r(glm::dvec4(2.0, 3.0, 4.0, 1.0), glm::dvec4(1.0, 0.0, 0.0, 0.0));
@@ -182,7 +184,7 @@ TEST_CASE("Intersecting a translated sphere with a ray", "[intersect]") {
 TEST_CASE("Computing the normal on a translated sphere", "[Compute normal]") {
   Sphere s;
   s.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 1.0, 0.0)));
-  auto n = s.normal_at(glm::dvec4(0.0, 1.70711, -0.70711, 1.0));
+  auto n = s.normal_at(glm::dvec4(0.0, 1.70711, -0.70711, 1.0), Intersection());
   REQUIRE(n.x == 0.0);
   REQUIRE(fabs(n.y - 0.70711) < 0.00001);
   REQUIRE(fabs(n.z + 0.70711) < 0.00001);
@@ -194,7 +196,7 @@ TEST_CASE("Computing the normal on a transformed sphere", "[Compute normal]") {
   Sphere s;
   s.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(1.0, 0.5, 1.0)) *
                   glm::rotate(glm::dmat4(1.0), glm::pi<double>()/5, glm::dvec3(0.0, 0.0, 1.0)));
-  auto n = s.normal_at(glm::dvec4(0.0, sqrt(2)/2, -sqrt(2)/2, 1.0));
+  auto n = s.normal_at(glm::dvec4(0.0, sqrt(2) / 2, -sqrt(2) / 2, 1.0), Intersection());
   REQUIRE(n.x == 0.0);
   REQUIRE(fabs(n.y - 0.97014) < 0.00001);
   REQUIRE(fabs(n.z + 0.24254) < 0.00001);
@@ -765,7 +767,7 @@ TEST_CASE("The normal on the surface of a cube", "[cube]") {
   v.emplace_back(-1, -1, -1, 1);
   cv.reserve(v.size());
 for (auto &p : v) {
-    cv.emplace_back(c.local_normal_at(p));
+    cv.emplace_back(c.local_normal_at(p, Intersection()));
   }
 
   REQUIRE(fabs(cv[0].r - 1) < Epsilon);
@@ -880,7 +882,7 @@ TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
   };
 
   for (auto &[point, expected_normal] : test_data) {
-    glm::dvec4 computed_normal = cyl.local_normal_at(point);
+    glm::dvec4 computed_normal = cyl.local_normal_at(point, Intersection());
     REQUIRE(glm::to_string(computed_normal) == glm::to_string(expected_normal));
   }
 }
@@ -963,8 +965,69 @@ TEST_CASE("The normal vector on a cylinder's end caps", "[Cylinder]") {
   };
 
   for (size_t i = 0; i < points.size(); ++i) {
-    auto n = cyl.local_normal_at(points[i]);
+    auto n = cyl.local_normal_at(points[i], Intersection());
     REQUIRE(glm::to_string(n) == glm::to_string(expected_normals[i]));
+  }
+}
+
+TEST_CASE("Intersecting a cone with a ray", "[Cone]") {
+  Cone shape;
+  std::vector<Ray> vr = {
+      Ray(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
+      Ray(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(1, 1, 1, 0))),
+      Ray(glm::dvec4(1, 1, -5, 1), glm::normalize(glm::dvec4(-0.5, -1, 1, 0)))
+  };
+
+  std::vector<std::vector<double>> expected_results = {
+      {5.0, 5.0},
+      {8.66025, 8.66025},
+      {4.55006, 49.4499}
+  };
+
+  for (size_t i = 0; i < vr.size(); ++i) {
+    auto xs = shape.local_intersect(vr[i]);
+    if(xs.getList().empty()) {
+      REQUIRE(false); // Fail the test if no intersections are found
+    } else {
+      // Assuming there are at least two intersections, otherwise adjust as needed
+      REQUIRE(xs.getList().at(0).t_ == Catch::Approx(expected_results[i][0]).epsilon(Epsilon));
+      REQUIRE(xs.getList().at(1).t_ == Catch::Approx(expected_results[i][1]).epsilon(Epsilon));
+    }
+  }
+}
+
+
+TEST_CASE("Intersecting a cone with a ray parallel to one of its halves", "[Cone]") {
+  Cone shape;
+  std::vector<Ray> vr = {
+      Ray(glm::dvec4(0, 0, -1, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)))
+  };
+
+  SECTION("Intersection at a single point") {
+    auto xs = shape.local_intersect(vr[0]);
+    REQUIRE_FALSE(xs.getList().empty());
+    REQUIRE(xs.getList().at(0).t_ == Catch::Approx(0.353553).epsilon(Epsilon));
+  }
+}
+
+
+TEST_CASE("Intersecting a cone's end caps", "[Cone]") {
+  Cone shape;
+  shape.setMinimum(-0.5);
+  shape.setMaximum(0.5);
+  shape.setClose(true);
+
+  std::vector<Ray> vr = {
+      Ray(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 1, 0, 0))),
+      Ray(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 1, 0))),
+      Ray(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)))
+  };
+
+  std::vector<std::size_t> expected_results = {0, 2, 4};
+
+  for (size_t i = 0; i < vr.size(); ++i) {
+    auto xs = shape.local_intersect(vr[i]);
+    REQUIRE(xs.getList().size() == expected_results[i]);
   }
 }
 
@@ -975,34 +1038,82 @@ TEST_CASE("Creating a new group", "[group]") {
   g->addChild(std::move(s));
   REQUIRE(g->getChild()[0].get() == s_ptr);
 }
-/*TEST_CASE("", "[]") {
 
-}*/
+TEST_CASE("Intersecting a ray with a nonempty group", "[Group]") {
+  Group g;
+  auto s1 = std::make_unique<Sphere>();
+  auto s2 = std::make_unique<Sphere>();
+  auto s3 = std::make_unique<Sphere>();
+  auto s1_ptr = s1.get();
+  auto s2_ptr = s2.get();
+  auto s3_ptr = s3.get();
 
-/**/
+  s2->setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0, 0, -3)));
+  s3->setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(5, 0, 0)));
 
-/**/
+  g.addChild(std::move(s1));
+  g.addChild(std::move(s2));
+  g.addChild(std::move(s3));
 
-/*Cone shape;
-  std::vector<Ray> vr;
-  vr.emplace_back(glm::dvec4(0, 0, -1, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
-  for(auto &r : vr) {
-    auto xs = shape.local_intersect(r);
-    if(xs.getList().empty()) std::cout << "Empty\n";
-    else std::cout << xs.getList().at(0).t_ << "\n";
-  }*/
+  Ray r(glm::dvec4(0, 0, -5, 1), glm::dvec4(0, 0, 1, 0));
+  auto xs = g.local_intersect(r);
 
-/*Cone shape;
-  shape.setMinimum(-0.5);
-  shape.setMaximum(0.5);
-  shape.setClose(true);
-  std::vector<Ray> vr;
-  vr.emplace_back(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
-  vr.emplace_back(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)));
-  vr.emplace_back(glm::dvec4(0, 0, -0.25, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
+  REQUIRE(xs.getList().size() == 4);
+  REQUIRE(xs.getList()[0].shape_ptr_ == s2_ptr);
+  REQUIRE(xs.getList()[1].shape_ptr_ == s2_ptr);
+  REQUIRE(xs.getList()[2].shape_ptr_ == s1_ptr);
+  REQUIRE(xs.getList()[3].shape_ptr_ == s1_ptr);
+}
 
-  for(auto &r : vr) {
-    auto xs = shape.local_intersect(r);
-    if(xs.getList().empty()) std::cout << "Empty\n";
-    else std::cout << xs.getList().size() << "\n";
-  }*/
+TEST_CASE("Intersecting a transformed group", "[Group][Sphere][Ray]") {
+  Group g;
+  auto s1 = std::make_unique<Sphere>();
+  // Applying scale transformation to the group
+  g.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(2, 2, 2)));
+  // Moving the sphere within the group
+  s1->setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(5, 0, 0)));
+  g.addChild(std::move(s1));
+
+  // Defining a ray that will intersect with the transformed sphere within the group
+  Ray r(glm::dvec4(10, 0, -10, 1), glm::dvec4(0, 0, 1, 0));
+  auto xs = g.intersect(r);
+
+  // Checking the number of intersections
+  REQUIRE(xs.getList().size() == 2);
+}
+
+
+TEST_CASE("Converting a normal from object to world space", "[Group]") {
+  auto g1 = std::make_unique<Group>();
+  auto g1_ptr = g1.get();
+  g1->setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
+  auto g2 = std::make_unique<Group>();
+  auto g2_ptr = g2.get();
+  g2->setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
+  g1->addChild(std::move(g2));
+  auto s = std::make_unique<Sphere>();
+  auto s_ptr = s.get();
+  s->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g2_ptr->addChild(std::move(s));
+  auto n = s_ptr->normal_to_world({sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, 0});
+
+  glm::dvec4 expected_normal = glm::dvec4(0.285714, 0.428571, -0.857143, 0.000000);
+  REQUIRE(glm::length(n - expected_normal) < Epsilon);
+}
+
+TEST_CASE("Finding the normal on a child object", "[group]") {
+  auto g1 = std::make_unique<Group>();
+  auto g1_ptr = g1.get();
+  g1->setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
+  auto g2 = std::make_unique<Group>();
+  auto g2_ptr = g2.get();
+  g2->setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
+  g1->addChild(std::move(g2));
+  auto s = std::make_unique<Sphere>();
+  auto s_ptr = s.get();
+  s->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
+  g2_ptr->addChild(std::move(s));
+  auto n = s_ptr->normal_at({1.7321, 1.1547, -5.5774, 1}, Intersection());
+  glm::dvec4 expected_res{0.285704, 0.428543, -0.857161, 0.000000};
+  REQUIRE(glm::to_string(n) == glm::to_string(expected_res));
+}

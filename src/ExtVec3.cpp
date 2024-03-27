@@ -24,10 +24,10 @@ glm::dmat4 view_transform(const glm::dvec4 &from, const glm::dvec4 &to, const gl
 
   // Construct the orientation matrix
   glm::dmat4 orientation = glm::dmat4(
-      glm::dvec4(left, 0.0),
-      glm::dvec4(true_up, 0.0),
-      glm::dvec4(-forward, 0.0), // Negate forward vector for view direction
-      glm::dvec4(0.0, 0.0, 0.0, 1.0)
+      {left, 0.0},
+      {true_up, 0.0},
+      {-forward, 0.0}, // Negate forward vector for view direction
+      {0.0, 0.0, 0.0, 1.0}
   );
 
   // Apply translation to the orientation matrix

@@ -5,24 +5,24 @@
 #ifndef RAYTRACERV2_INCLUDE_SHAPE_CONE_H
 #define RAYTRACERV2_INCLUDE_SHAPE_CONE_H
 #include "Shape.h"
+#include "myMath.h"
 
 class Cone : public Shape {
 public:
   Intersections local_intersect(const Ray &ray) override;
-  glm::dvec4 local_normal_at(const glm::dvec4 &point) const override;
-  bool checkCap(const Ray &ray, const double &t, const double &y) const;
+  [[nodiscard]] glm::dvec4 local_normal_at(const glm::dvec4 &point, const Intersection &hit) const override;
+  [[nodiscard]] static bool checkCap(const Ray &ray, const double &t, const double &y) ;
   void intersect_cap(const Ray &ray, Intersections &xs);
-private:
-  double minimum_ = -1000000000;
 public:
-  double getMinimum() const;
-  void setMinimum(double Minimum);
-  double getMaximum() const;
-  void setMaximum(double Maximum);
-  bool isClose() const;
+  [[nodiscard]] const double & getMinimum() const;
+  void setMinimum(const double &Minimum);
+  [[nodiscard]] const double & getMaximum() const;
+  void setMaximum(const double &Maximum);
+  [[nodiscard]] const bool & isClose() const;
   void setClose(bool Close);
 private:
-  double maximum_ = 1000000000;
+  double minimum_ = NegInfinity;
+  double maximum_ = PosInfinity;
   bool close_ = false;
 };
 

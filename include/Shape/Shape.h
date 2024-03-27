@@ -10,6 +10,7 @@
 #include "Ray.h"
 
 struct Material;
+class Intersection;
 class Intersections;
 
 class Shape {
@@ -30,8 +31,8 @@ public:
 public:
   virtual Intersections local_intersect(const Ray &ray) = 0;
   Intersections intersect(const Ray &ray);
-  [[nodiscard]] glm::dvec4 normal_at(const glm::dvec4 &point) const;
-  [[nodiscard]] virtual glm::dvec4 local_normal_at(const glm::dvec4 &point) const;
+  [[nodiscard]] glm::dvec4 normal_at(const glm::dvec4 &point, const Intersection &hit) const;
+  [[nodiscard]] virtual glm::dvec4 local_normal_at(const glm::dvec4 &point, const Intersection &hit) const;
   glm::dvec4 world_to_object(glm::dvec4 point) const;
   glm::dvec4 normal_to_world(glm::dvec4 normal) const;
 protected:

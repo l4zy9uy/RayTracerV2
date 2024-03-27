@@ -14,6 +14,6 @@ Intersections Plane::local_intersect(const Ray &ray) {
   return result;
 }
 
-glm::dvec4 Plane::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Plane::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   return {0.0, 1.0, 0.0, 0.0};
 }

@@ -3,6 +3,8 @@
 //
 
 #include "Shape/Cube.h"
+#include "myMath.h"
+
 Intersections Cube::local_intersect(const Ray &ray) {
   auto xt = check_axis(ray.getOriginPoint().x, ray.getDirectionVector().x);
   auto yt = check_axis(ray.getOriginPoint().y, ray.getDirectionVector().y);
@@ -22,18 +24,18 @@ std::pair<double, double> Cube::check_axis(const double &origin, const double &d
   auto tmin_numerator = -1 - origin;
   auto tmax_numerator = 1 - origin;
   double tmin, tmax;
-  if(fabs(direction) > 0.00001) {
+  if(fabs(direction) > Epsilon) {
     tmin = tmin_numerator / direction;
     tmax = tmax_numerator / direction;
   }
   else {
-    tmin = tmin_numerator * 10000000000;
-    tmax = tmax_numerator * 10000000000;
+    tmin = tmin_numerator * PosInfinity;
+    tmax = tmax_numerator * PosInfinity;
   }
   if(tmin > tmax) std::swap(tmin, tmax);
   return {tmin, tmax};
 }
-glm::dvec4 Cube::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Cube::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   auto maxc = fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z)));
   if(maxc == fabs(point.x)) return {point.x, 0, 0, 1};
   else if(maxc == fabs(point.y)) return {0, point.y, 0, 1};

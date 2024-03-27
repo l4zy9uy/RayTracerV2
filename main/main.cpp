@@ -28,10 +28,11 @@
 #include "Shape/Group.h"
 #include "Shape/Triangle.h"
 #include "Parser.h"
+#include "Shape/SmoothTriangle.h"
 
 
 int main() {
-  /*std::ios_base::sync_with_stdio(false);
+  std::ios_base::sync_with_stdio(false);
   std::cin.tie(nullptr);
   Timer timer;
   World world;
@@ -61,80 +62,50 @@ int main() {
       glm::rotate(glm::dmat4(1.0), glm::pi<double>()/2, glm::dvec3(1.0, 0.0, 0.0));
   myWall.setTransform(wallTransform2);
 
+  Cube cube;
+  Material mat3;
+  cube.setMaterial(mat3);
+  cube.setTransform(glm::translate(glm::dmat4(1), {0, 2, 0}) *
+                    glm::scale(glm::dmat4(1), {0.5, 0.5, 0.5}));
+
+  Cone cone;
+  Material mat4;
+  cone.setMaterial(mat4);
+  cone.setMaximum(1);
+  cone.setMinimum(-1);
+  cone.setTransform(glm::translate(glm::dmat4(1), {2, 1, 0}) *
+      glm::scale(glm::dmat4(1), {0.5, 0.5, 0.5}));
   world.addShape(std::make_shared<Plane>(myFloor));
   world.addShape(std::make_shared<Plane>(myWall));
+  world.addShape(std::make_shared<Cube>(cube));
+  world.addShape(std::make_shared<Cone>(cone));
 
-  Camera camera(1920, 1080, glm::pi<double>() / 3);
-  camera.setTransformMatrix(view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
-                                           glm::dvec4(0.0, 1.0, 0.0, 1.0),
-                                           glm::dvec4(0.0, 1.0, 0.0, 0.0)));
-  camera.render(world).canvas_to_ppm();*/
-  /*Parser p = parse_file_obj("../../test.txt");
+  Camera camera(800, 400, glm::pi<double>() / 3);
+  auto camTransform = view_transform(glm::dvec4(2.0, 1.5, -5.0, 1.0),
+                                     glm::dvec4(0.0, 1.0, 0.0, 1.0),
+                                     glm::dvec4(0.0, 1.0, 0.0, 0.0));
+  camera.setTransformMatrix(glm::rotate(camTransform, 0.0, {1, 0, 0}));
+  camera.render(world).canvas_to_ppm();
+
+
+  return 0;
+}
+/*Cone c;
+  auto n = c.local_normal_at({0, 0, 0, 1}, Intersection());
+  std::cout << glm::to_string(n) << "\n";
+  n = c.local_normal_at({1, 1, 1, 1}, Intersection());
+  std::cout << glm::to_string(n) << "\n";
+  n = c.local_normal_at({-1, -1, 0, 1}, Intersection());
+  std::cout << glm::to_string(n) << "\n";*/
+/**/
+/*Parser p;
+  p.test("../../test.txt");
   std::cout << p.num_line_ignored << "\n";
   for(const auto& vt : p.vertices) {
     std::cout << glm::to_string(vt) << "\n";
   }
-  std::cout << "\n" << p.defaultGroup.getChild().size() << "\n";
-
-*/
-  return 0;
-}
-/*auto g = std::make_shared<Group>();
-  auto s = std::make_shared<Sphere>();
-  g->addChild(s);
-  std::cout << "g: " << g << "\n";
-  std::cout << "s: " << s << "\n";
-  std::cout << "first child: " << g->getChild()[0] << "\n";
-  std::cout << "s parent: " << s->getParentPtr() << "\n";*/
-
-/*Group g;
-  auto s1 = std::make_shared<Sphere>();
-  auto s2 = std::make_shared<Sphere>();
-  auto s3 = std::make_shared<Sphere>();
-  s2->setTransform(glm::translate(glm::dmat4(1.0), {0, 0, -3}));
-  s3->setTransform(glm::translate(glm::dmat4(1.0), {5, 0, 0}));
-  g.addChild(s1);
-  g.addChild(s2);
-  g.addChild(s3);
-  Ray r({0, 0, -5, 1}, {0, 0, 1, 0});
-  auto xs = g.local_intersect(r);
-  std::cout << xs.getList().size() << "\n";
-  std::cout << "s1: " << s1 << "\n";
-  std::cout << "s2: " << s2 << "\n";
-  std::cout << "xs[0]: " << xs.getList()[0].shape_ptr_ << "\n";
-  std::cout << "xs[1]: " << xs.getList()[1].shape_ptr_ << "\n";
-  std::cout << "xs[2]: " << xs.getList()[2].shape_ptr_ << "\n";
-  std::cout << "xs[3]: " << xs.getList()[3].shape_ptr_ << "\n";*/
-
-/*Group g;
-  auto s1 = std::make_shared<Sphere>();
-  g.setTransform(glm::scale(glm::dmat4(1), {2, 2, 2}));
-  s1->setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
-  g.addChild(s1);
-  Ray r({10, 0, -10, 1}, {0, 0, 1, 0});
-  auto xs = g.intersect(r);
-  std::cout << xs.getList().size() << "\n";*/
-
-/*Group g1;// = std::make_shared<Group>();
-  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
-  Group g2;// = std::make_shared<Group>();
-  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
-  g1.addChild(&g2);
-  Sphere s;// = std::make_shared<Sphere>();
-  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
-  g2.addChild(&s);
-  auto n = s.normal_to_world({sqrt(3)/3, sqrt(3)/3, sqrt(3)/3, 0});
-  std::cout << glm::to_string(n) << "\n";*/
-
-/*Group g1;// = std::make_shared<Group>();
-  g1.setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
-  Group g2;// = std::make_shared<Group>();
-  g2.setTransform(glm::scale(glm::dmat4(1), {1, 2, 3}));
-  g1.addChild(&g2);
-  Sphere s;// = std::make_shared<Sphere>();
-  s.setTransform(glm::translate(glm::dmat4(1), {5, 0, 0}));
-  g2.addChild(&s);
-  auto n = s.normal_at({1.7321, 1.1547, -5.5774, 1});*/
+  std::cout << "\n" << p.defaultGroup.getChild().size() << "\n";*/
+/**/
 /*glm::dvec4 p1(0, 1, 0, 1);
   glm::dvec4 p2(-1, 0, 0, 1);
   glm::dvec4 p3(1, 0, 0, 1);
@@ -151,3 +122,18 @@ int main() {
   }
   std::cout << "\n" << p.defaultGroup.getChild().size() << "\n";
 */
+/*glm::dvec4 p1(0, 1, 0, 1);
+  glm::dvec4 p2(-1, 0, 0, 1);
+  glm::dvec4 p3(1, 0, 0, 1);
+  glm::dvec4 n1(0, 1, 0, 0);
+  glm::dvec4 n2(-1, 0, 0, 0);
+  glm::dvec4 n3(1, 0, 0, 0);
+  SmoothTriangle tri{p1, p2, p3, n1, n2, n3};
+  Ray r({-0.2, 0.3, -2, 1}, {0, 0, 1, 0});
+  Intersection i{1, &tri, 0.45, 0.25};
+  auto n = tri.normal_at({0, 0, 0, 1}, i);
+  Intersections xs{};
+  xs.addIntersection(i);
+  auto comps = prepare_computations(i, r, xs);
+  //std::cout << xs.getList()[0].u << " " << xs.getList()[0].v << "\n";
+  std::cout << glm::to_string(comps.normal_vector_) << "\n";*/

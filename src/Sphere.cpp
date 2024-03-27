@@ -26,7 +26,7 @@ Intersections Sphere::local_intersect(const Ray &ray) {
   return result;
 }
 
-glm::dvec4 Sphere::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Sphere::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   glm::dvec4 res(point);
   res.w = 0.0;
   return res;

@@ -38,4 +38,6 @@ Intersection& Intersection::operator=(Intersection&& other) noexcept {
 bool Intersection::operator==(const Intersection &rhs) const {
   return fabs(t_ - rhs.t_) < 0.00001 && shape_ptr_ == rhs.shape_ptr_;
 }
+Intersection::Intersection(const double &T, const Shape *ShapePtr, const double &U, const double &V)
+    : t_(T), shape_ptr_(ShapePtr), u(U), v(V) {}
 

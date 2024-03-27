@@ -21,10 +21,10 @@ Intersections Triangle::local_intersect(const Ray &ray) {
   auto v = f * glm::dot(glm::dvec3(ray.getDirectionVector()), origin_cross_e1);
   if(v < 0 || (u+v) > 1) return xs;
   auto t = f * glm::dot(glm::dvec3(e2_), origin_cross_e1);
-  xs.addIntersection(t, this);
+  xs.addIntersection(t, this, u, v);
   return xs;
 }
-glm::dvec4 Triangle::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Triangle::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   return normal_;
 }
 const glm::dvec4 &Triangle::getP1() const {
@@ -63,3 +63,4 @@ const glm::dvec4 &Triangle::getNormal() const {
 void Triangle::setNormal(const glm::dvec4 &Normal) {
   normal_ = Normal;
 }
+

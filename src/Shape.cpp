@@ -43,12 +43,12 @@ Intersections Shape::intersect(const Ray &ray) {
   return local_intersect(local_ray);
 }
 
-glm::dvec4 Shape::normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Shape::normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   auto local_point = world_to_object(point);
-  auto local_normal = local_normal_at(local_point);
+  auto local_normal = local_normal_at(local_point, hit);
   return normal_to_world(local_normal);
 }
-glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Shape::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   return {point.x, point.y, point.z, 0.0};
 }
 const Shape *Shape::getParentPtr() const {

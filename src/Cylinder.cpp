@@ -33,7 +33,7 @@ Intersections Cylinder::local_intersect(const Ray &ray) {
   intersect_cap(ray, xs);
   return xs;
 }
-glm::dvec4 Cylinder::local_normal_at(const glm::dvec4 &point) const {
+glm::dvec4 Cylinder::local_normal_at(const glm::dvec4 &point, const Intersection &hit) const {
   auto dist = point.x*point.x + point.z*point.z;
   if(dist < 1 && point.y >= maximum_ - 0.00001) return {0, 1, 0, 0};
   else if(dist < 1 && point.y <= minimum_ + 0.00001) return {0, -1, 0, 0};
