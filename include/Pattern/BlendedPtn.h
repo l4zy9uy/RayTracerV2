@@ -9,7 +9,6 @@
 
 class BlendedPtn : public Pattern{
 public:
-  //BlendedPtn(CheckerPtn A, CheckerPtn B);
   [[nodiscard]] glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
 private:
   std::shared_ptr<Pattern> a;

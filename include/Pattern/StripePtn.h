@@ -18,8 +18,8 @@ public:
 public:
   [[nodiscard]] glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
 private:
-  glm::dvec3 a;
-  glm::dvec3 b;
+  glm::dvec3 a_;
+  glm::dvec3 b_;
 };
 
 #endif //RAYTRACERV2_INCLUDE_STRIPEPATTERN_H

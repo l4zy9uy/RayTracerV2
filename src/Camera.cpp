@@ -4,6 +4,7 @@
 
 #include "Camera.h"
 #include <thread>
+#include <execution>
 
 Camera::Camera(const unsigned int &horizontal_size,
                const unsigned int &vertical_size,
@@ -97,7 +98,7 @@ void Camera::render_at_thread(Canvas &image, World &world, const unsigned long &
   for (auto y = start; y < horizontal_size_; y+=jump) {
     for (auto x = 0; x < vertical_size_; x++) {
       auto ray = ray_for_pixel(static_cast<double>(y), static_cast<double>(x));
-      auto color = world.color_at(ray, 5);
+      auto color = world.color_at(ray, 3);
         image.writePixel(y, x, color);
     }
   }

@@ -8,7 +8,7 @@
 
 class TestPtn : public Pattern{
 public:
-  glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
+  [[nodiscard]] glm::dvec3 pattern_at(const glm::dvec4 &point) const override;
 };
 
 #endif //RAYTRACERV2_INCLUDE_PATTERN_TESTPTN_H

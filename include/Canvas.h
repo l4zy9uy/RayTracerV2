@@ -23,6 +23,9 @@ private:
   unsigned long window_width_;
   unsigned long window_height_;
   std::vector<std::vector<glm::dvec3>> image_;
+public:
+  const std::vector<std::vector<glm::dvec3>> &getImage() const;
+  void setImage(const std::vector<std::vector<glm::dvec3>> &Image);
 };
 
 #endif //RAYTRACERV2_CANVAS_H

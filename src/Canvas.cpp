@@ -58,6 +58,12 @@ const unsigned long & Canvas::getWindowHeight() const {
 void Canvas::setWindowHeight(const unsigned long &windowHeight) {
   Canvas::window_height_ = windowHeight;
 }
+const std::vector<std::vector<glm::dvec3>> &Canvas::getImage() const {
+  return image_;
+}
+void Canvas::setImage(const std::vector<std::vector<glm::dvec3>> &Image) {
+  image_ = Image;
+}
 
 
 

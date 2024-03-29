@@ -22,7 +22,7 @@
 #include <catch2/catch_approx.hpp>
 //const double Epsilon = 0.00001;
 
-TEST_CASE("Compute a point from a distance", "[Ray]") {
+TEST_CASE("Compute a_ point from a_ distance", "[Ray]") {
   Ray r(glm::dvec4(2.0, 3.0, 4.0, 1.0), glm::dvec4(1.0, 0.0, 0.0, 0.0));
   REQUIRE(r.at(0) == glm::dvec4(2.0, 3.0, 4.0, 1.0));
   REQUIRE(r.at(1) == glm::dvec4(3.0, 3.0, 4.0, 1.0));
@@ -30,7 +30,7 @@ TEST_CASE("Compute a point from a distance", "[Ray]") {
   REQUIRE(r.at(2.5) == glm::dvec4(4.5, 3.0, 4.0, 1.0));
 }
 
-TEST_CASE("A ray intersects a sphere at two points", "[Intersect]") {
+TEST_CASE("A ray intersects a_ sphere at two points", "[Intersect]") {
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   auto xs = s.intersect(r);
@@ -39,7 +39,7 @@ TEST_CASE("A ray intersects a sphere at two points", "[Intersect]") {
   REQUIRE(xs.getList()[1].t_ == 6.0);
 }
 
-TEST_CASE("A ray intersects a sphere at a tangent", "[Intersect]") {
+TEST_CASE("A ray intersects a_ sphere at a_ tangent", "[Intersect]") {
   Ray r(glm::dvec4(0.0, 1.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   auto xs = s.intersect(r);
@@ -48,14 +48,14 @@ TEST_CASE("A ray intersects a sphere at a tangent", "[Intersect]") {
   REQUIRE(xs.getList()[1].t_ == 5.0);
 }
 
-TEST_CASE("A ray misses a sphere", "[Intersect]") {
+TEST_CASE("A ray misses a_ sphere", "[Intersect]") {
   Ray r(glm::dvec4(0.0, 2.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   auto xs = s.intersect(r);
   REQUIRE(xs.getList().empty());
 }
 
-TEST_CASE("A ray originates inside a sphere", "[Intersect]") {
+TEST_CASE("A ray originates inside a_ sphere", "[Intersect]") {
   Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   auto xs = s.intersect(r);
@@ -64,7 +64,7 @@ TEST_CASE("A ray originates inside a sphere", "[Intersect]") {
   REQUIRE(xs.getList()[1].t_ == 1.0);
 }
 
-TEST_CASE("A sphere is behind a ray", "[Intersect]") {
+TEST_CASE("A sphere is behind a_ ray", "[Intersect]") {
   Ray r(glm::dvec4(0.0, 0.0, 5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   auto xs = s.intersect(r);
@@ -141,7 +141,7 @@ TEST_CASE("The hit, hit is always the lowest non-negative intersection", "[hit]"
     REQUIRE(i == std::nullopt);
 }
 
-TEST_CASE("Translating a ray", "[transformation]") {
+TEST_CASE("Translating a_ ray", "[transformation]") {
   Ray r(glm::dvec4(1.0, 2.0, 3.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
   glm::dmat4 m(glm::translate(glm::dmat4(1.0), glm::dvec3(3.0, 4.0, 5.0)));
   auto r2 = r.transform(m);
@@ -149,7 +149,7 @@ TEST_CASE("Translating a ray", "[transformation]") {
   REQUIRE(r2.getDirectionVector() == glm::dvec4(0.0, 1.0, 0.0, 0.0));
 }
 
-TEST_CASE("Scaling a ray", "[transformation]") {
+TEST_CASE("Scaling a_ ray", "[transformation]") {
   Ray r(glm::dvec4(1.0, 2.0, 3.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
   glm::dmat4 m(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0, 3.0, 4.0)));
   auto r2 = r.transform(m);
@@ -157,7 +157,7 @@ TEST_CASE("Scaling a ray", "[transformation]") {
   REQUIRE(r2.getDirectionVector() == glm::dvec4(0.0, 3.0, 0.0, 0.0));
 }
 
-TEST_CASE("Intersecting a scaled sphere with a ray", "[intersect]") {
+TEST_CASE("Intersecting a_ scaled sphere with a_ ray", "[intersect]") {
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   s.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
@@ -169,7 +169,7 @@ TEST_CASE("Intersecting a scaled sphere with a ray", "[intersect]") {
   }
 }
 
-TEST_CASE("Intersecting a translated sphere with a ray", "[intersect]") {
+TEST_CASE("Intersecting a_ translated sphere with a_ ray", "[intersect]") {
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
   Sphere s;
   s.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(5.0, 0.0, 0.0)));
@@ -181,7 +181,7 @@ TEST_CASE("Intersecting a translated sphere with a ray", "[intersect]") {
   }
 }
 
-TEST_CASE("Computing the normal on a translated sphere", "[Compute normal]") {
+TEST_CASE("Computing the normal on a_ translated sphere", "[Compute normal]") {
   Sphere s;
   s.setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, 1.0, 0.0)));
   auto n = s.normal_at(glm::dvec4(0.0, 1.70711, -0.70711, 1.0), Intersection());
@@ -192,7 +192,7 @@ TEST_CASE("Computing the normal on a translated sphere", "[Compute normal]") {
   //REQUIRE(n == glm::dvec4(0.0, 0.70711, -0.70711, 0.0));
 }
 
-TEST_CASE("Computing the normal on a transformed sphere", "[Compute normal]") {
+TEST_CASE("Computing the normal on a_ transformed sphere", "[Compute normal]") {
   Sphere s;
   s.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(1.0, 0.5, 1.0)) *
                   glm::rotate(glm::dmat4(1.0), glm::pi<double>()/5, glm::dvec3(0.0, 0.0, 1.0)));
@@ -273,7 +273,7 @@ TEST_CASE("Lighting with the light behind the surface", "[lighting]") {
   REQUIRE(fabs(result.z - 0.1) < Epsilon);
 }
 
-TEST_CASE("Intersect a world with a ray", "[intersect world]") {
+TEST_CASE("Intersect a_ world with a_ ray", "[intersect world]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
@@ -312,7 +312,7 @@ TEST_CASE("Shading an intersection from the inside", "[shading]") {
   REQUIRE(fabs(c.z - 0.90498) < Epsilon);
 }
 
-TEST_CASE("The color when a ray misses", "[color]") {
+TEST_CASE("The color when a_ ray misses", "[color]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
@@ -322,7 +322,7 @@ TEST_CASE("The color when a ray misses", "[color]") {
   REQUIRE(fabs(c.z - 0.0) < Epsilon);
 }
 
-TEST_CASE("The color when a ray hits", "[color]") {
+TEST_CASE("The color when a_ ray hits", "[color]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -5.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
@@ -332,7 +332,7 @@ TEST_CASE("The color when a ray hits", "[color]") {
   REQUIRE(fabs(c.z - 0.2855) < Epsilon);
 }
 
-TEST_CASE("Constructing a ray through the center of the canvas", "[camera]") {
+TEST_CASE("Constructing a_ ray through the center of the canvas", "[camera]") {
   Camera c(201, 101, glm::pi<double>()/2);
   auto r = c.ray_for_pixel(100, 50);
   REQUIRE(fabs(r.getOriginPoint().x - 0.0) < Epsilon);
@@ -345,7 +345,7 @@ TEST_CASE("Constructing a ray through the center of the canvas", "[camera]") {
   REQUIRE(fabs(r.getDirectionVector().w - 0.0) < Epsilon);
 }
 
-TEST_CASE("Constructing a ray through a corner of the canvas", "[camera]") {
+TEST_CASE("Constructing a_ ray through a_ corner of the canvas", "[camera]") {
   Camera c(201, 101, glm::pi<double>()/2);
   auto r = c.ray_for_pixel(0, 0);
   REQUIRE(fabs(r.getOriginPoint().x - 0.0) < Epsilon);
@@ -358,7 +358,7 @@ TEST_CASE("Constructing a ray through a corner of the canvas", "[camera]") {
   REQUIRE(fabs(r.getDirectionVector().w - 0.0) < Epsilon);
 }
 
-TEST_CASE("Constructing a ray when the camera is transformed", "[camera]") {
+TEST_CASE("Constructing a_ ray when the camera is transformed", "[camera]") {
   Camera c(201, 101, glm::pi<double>()/2);
   c.setTransformMatrix(glm::rotate(glm::dmat4(1.0), glm::pi<double>()/4, glm::dvec3(0.0, 1.0, 0.0)) *
                         glm::translate(glm::dmat4(1.0), glm::dvec3(0.0, -2.0, 5.0)));
@@ -443,7 +443,7 @@ TEST_CASE("A pattern with an object transformation", "[pattern]") {
   REQUIRE(fabs(c.z - 2.0) < Epsilon);
 }
 
-TEST_CASE("A pattern with a pattern transformation", "[pattern]") {
+TEST_CASE("A pattern with a_ pattern transformation", "[pattern]") {
   Sphere shape;
   TestPtn pattern;
   pattern.setTransformationMatrix(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
@@ -453,7 +453,7 @@ TEST_CASE("A pattern with a pattern transformation", "[pattern]") {
   REQUIRE(fabs(c.z - 2.0) < Epsilon);
 }
 
-TEST_CASE("A pattern with both an object and a pattern transformation", "[pattern]") {
+TEST_CASE("A pattern with both an object and a_ pattern transformation", "[pattern]") {
   Sphere shape;
   TestPtn pattern;
   shape.setTransform(glm::scale(glm::dmat4(1.0), glm::dvec3(2.0)));
@@ -475,7 +475,7 @@ TEST_CASE("Precomputing the reflection vector", "[reflection]") {
   REQUIRE(fabs(comps.reflect_vector_.w - 0.0) < Epsilon);
 }
 
-TEST_CASE("The reflected color for a non-reflective material", "[reflection]") {
+TEST_CASE("The reflected color for a_ non-reflective material", "[reflection]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 0.0, 1.0, 0.0));
@@ -490,7 +490,7 @@ TEST_CASE("The reflected color for a non-reflective material", "[reflection]") {
   REQUIRE(fabs(color.z - 0.0) < Epsilon);
 }
 
-TEST_CASE("The reflected color for a reflective material", "[reflection]") {
+TEST_CASE("The reflected color for a_ reflective material", "[reflection]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
@@ -508,7 +508,7 @@ TEST_CASE("The reflected color for a reflective material", "[reflection]") {
   REQUIRE(fabs(color.z - 0.14274) < Epsilon*10);
 }
 
-TEST_CASE("shade_hit() with a reflective material", "[reflection]") {
+TEST_CASE("shade_hit() with a_ reflective material", "[reflection]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
@@ -636,7 +636,7 @@ TEST_CASE("The refracted color under total internal reflection", "[refraction]")
   REQUIRE(fabs(c.z - 0.0) < Epsilon);
 }
 
-TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
+TEST_CASE("The refracted color with a_ refracted ray", "[refraction]") {
   World w;
   w.setDefault();
   Material m;
@@ -661,7 +661,7 @@ TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
   REQUIRE(fabs(c.z - 0.04725) < Epsilon*10);
 }
 
-TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
+TEST_CASE("shade_hit() with a_ transparent material", "[refraction]") {
   World w;
   w.setDefault();
   Plane floor;
@@ -701,7 +701,7 @@ TEST_CASE("The Schlick approximation under total internal reflection", "[schlick
   REQUIRE(fabs(reflectance - 1.0) < Epsilon);
 }
 
-TEST_CASE("The Schlick approximation with a perpendicular viewing angle", "[schlick]") {
+TEST_CASE("The Schlick approximation with a_ perpendicular viewing angle", "[schlick]") {
   Sphere sphere;
   sphere.make_glassy();
   Ray r(glm::dvec4(0.0, 0.0, 0.0, 1.0), glm::dvec4(0.0, 1.0, 0.0, 0.0));
@@ -725,7 +725,7 @@ TEST_CASE("The Schlick approximation with small angle and n2 > n1", "[schlick]")
   REQUIRE(fabs(reflectance - 0.48873) < Epsilon);
 }
 
-TEST_CASE("shade_hit() with a reflective, transparent material", "[schlick]") {
+TEST_CASE("shade_hit() with a_ reflective, transparent material", "[schlick]") {
   World w;
   w.setDefault();
   Ray r(glm::dvec4(0.0, 0.0, -3.0, 1.0), glm::dvec4(0.0, -sqrt(2)/2, sqrt(2)/2, 0.0));
@@ -753,7 +753,7 @@ TEST_CASE("shade_hit() with a reflective, transparent material", "[schlick]") {
   REQUIRE(fabs(c.b - 0.69243) < Epsilon);
 }
 
-TEST_CASE("The normal on the surface of a cube", "[cube]") {
+TEST_CASE("The normal on the surface of a_ cube", "[cube]") {
   std::vector<glm::dvec4> v;
   Cube c;
   std::vector<glm::dvec3> cv;
@@ -803,7 +803,7 @@ for (auto &p : v) {
   REQUIRE(fabs(cv[7].b - 0) < Epsilon);
 }
 
-TEST_CASE("A ray misses a cube", "[cube]") {
+TEST_CASE("A ray misses a_ cube", "[cube]") {
   std::vector<Ray> v;
   Cube c;
   v.emplace_back(glm::dvec4(-2, 0.0, 0, 1), glm::dvec4(0.2673, 0.5345, 0.8018, 0));
@@ -818,7 +818,7 @@ TEST_CASE("A ray misses a cube", "[cube]") {
   }
 }
 
-TEST_CASE("A ray intersects a cube", "[cube]") {
+TEST_CASE("A ray intersects a_ cube", "[cube]") {
   std::vector<Ray> v;
   Cube c;
   v.emplace_back(glm::dvec4(5, 0.5, 0, 1), glm::dvec4(-1, 0, 0, 0));
@@ -841,7 +841,7 @@ TEST_CASE("A ray intersects a cube", "[cube]") {
   }
 }
 
-TEST_CASE("A ray misses a cylinder", "[cylinder]") {
+TEST_CASE("A ray misses a_ cylinder", "[cylinder]") {
   Cylinder cyl;
   std::vector<Ray> vr;
   vr.emplace_back(glm::dvec4(1, 0, 0, 1), glm::normalize(glm::dvec4(0, 1, 0, 0)));
@@ -853,7 +853,7 @@ TEST_CASE("A ray misses a cylinder", "[cylinder]") {
   }
 }
 
-TEST_CASE("A ray strikes a cylinder", "[cylinder]") {
+TEST_CASE("A ray strikes a_ cylinder", "[cylinder]") {
   Cylinder cyl;
   std::vector<Ray> vr;
   vr.emplace_back(glm::dvec4(1, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0)));
@@ -872,7 +872,7 @@ TEST_CASE("A ray strikes a cylinder", "[cylinder]") {
   REQUIRE(fabs(its[2].getList().at(1).t_ - 7.08872) < Epsilon);
 }
 
-TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
+TEST_CASE("Normal vector on a_ cylinder", "[cylinder]") {
   Cylinder cyl;
   std::vector<std::pair<glm::dvec4, glm::dvec4>> test_data = {
       {glm::dvec4(1, 0, 0, 1), glm::dvec4(1, 0, 0, 0)},
@@ -887,7 +887,7 @@ TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
   }
 }
 
-TEST_CASE("Intersecting a constrained cylinder", "[Cylinder]") {
+TEST_CASE("Intersecting a_ constrained cylinder", "[Cylinder]") {
   Cylinder cyl;
   cyl.setMinimum(1);
   cyl.setMaximum(2);
@@ -914,7 +914,7 @@ TEST_CASE("Intersecting a constrained cylinder", "[Cylinder]") {
   }
 }
 
-TEST_CASE("Intersecting the caps of a closed cylinder", "[Cylinder]") {
+TEST_CASE("Intersecting the caps of a_ closed cylinder", "[Cylinder]") {
   Cylinder cyl;
   cyl.setMinimum(1);
   cyl.setMaximum(2);
@@ -940,7 +940,7 @@ TEST_CASE("Intersecting the caps of a closed cylinder", "[Cylinder]") {
   }
 }
 
-TEST_CASE("The normal vector on a cylinder's end caps", "[Cylinder]") {
+TEST_CASE("The normal vector on a_ cylinder's end caps", "[Cylinder]") {
   Cylinder cyl;
   cyl.setMinimum(1);
   cyl.setMaximum(2);
@@ -970,7 +970,7 @@ TEST_CASE("The normal vector on a cylinder's end caps", "[Cylinder]") {
   }
 }
 
-TEST_CASE("Intersecting a cone with a ray", "[Cone]") {
+TEST_CASE("Intersecting a_ cone with a_ ray", "[Cone]") {
   Cone shape;
   std::vector<Ray> vr = {
       Ray(glm::dvec4(0, 0, -5, 1), glm::normalize(glm::dvec4(0, 0, 1, 0))),
@@ -997,13 +997,13 @@ TEST_CASE("Intersecting a cone with a ray", "[Cone]") {
 }
 
 
-TEST_CASE("Intersecting a cone with a ray parallel to one of its halves", "[Cone]") {
+TEST_CASE("Intersecting a_ cone with a_ ray parallel to one of its halves", "[Cone]") {
   Cone shape;
   std::vector<Ray> vr = {
       Ray(glm::dvec4(0, 0, -1, 1), glm::normalize(glm::dvec4(0, 1, 1, 0)))
   };
 
-  SECTION("Intersection at a single point") {
+  SECTION("Intersection at a_ single point") {
     auto xs = shape.local_intersect(vr[0]);
     REQUIRE_FALSE(xs.getList().empty());
     REQUIRE(xs.getList().at(0).t_ == Catch::Approx(0.353553).epsilon(Epsilon));
@@ -1011,7 +1011,7 @@ TEST_CASE("Intersecting a cone with a ray parallel to one of its halves", "[Cone
 }
 
 
-TEST_CASE("Intersecting a cone's end caps", "[Cone]") {
+TEST_CASE("Intersecting a_ cone's end caps", "[Cone]") {
   Cone shape;
   shape.setMinimum(-0.5);
   shape.setMaximum(0.5);
@@ -1031,7 +1031,7 @@ TEST_CASE("Intersecting a cone's end caps", "[Cone]") {
   }
 }
 
-TEST_CASE("Creating a new group", "[group]") {
+TEST_CASE("Creating a_ new group", "[group]") {
   auto g = std::make_unique<Group>();
   auto s = std::make_unique<Sphere>();
   auto s_ptr = s.get();
@@ -1039,7 +1039,7 @@ TEST_CASE("Creating a new group", "[group]") {
   REQUIRE(g->getChild()[0].get() == s_ptr);
 }
 
-TEST_CASE("Intersecting a ray with a nonempty group", "[Group]") {
+TEST_CASE("Intersecting a_ ray with a_ nonempty group", "[Group]") {
   Group g;
   auto s1 = std::make_unique<Sphere>();
   auto s2 = std::make_unique<Sphere>();
@@ -1065,7 +1065,7 @@ TEST_CASE("Intersecting a ray with a nonempty group", "[Group]") {
   REQUIRE(xs.getList()[3].shape_ptr_ == s1_ptr);
 }
 
-TEST_CASE("Intersecting a transformed group", "[Group][Sphere][Ray]") {
+TEST_CASE("Intersecting a_ transformed group", "[Group][Sphere][Ray]") {
   Group g;
   auto s1 = std::make_unique<Sphere>();
   // Applying scale transformation to the group
@@ -1074,7 +1074,7 @@ TEST_CASE("Intersecting a transformed group", "[Group][Sphere][Ray]") {
   s1->setTransform(glm::translate(glm::dmat4(1.0), glm::dvec3(5, 0, 0)));
   g.addChild(std::move(s1));
 
-  // Defining a ray that will intersect with the transformed sphere within the group
+  // Defining a_ ray that will intersect with the transformed sphere within the group
   Ray r(glm::dvec4(10, 0, -10, 1), glm::dvec4(0, 0, 1, 0));
   auto xs = g.intersect(r);
 
@@ -1083,7 +1083,7 @@ TEST_CASE("Intersecting a transformed group", "[Group][Sphere][Ray]") {
 }
 
 
-TEST_CASE("Converting a normal from object to world space", "[Group]") {
+TEST_CASE("Converting a_ normal from object to world space", "[Group]") {
   auto g1 = std::make_unique<Group>();
   auto g1_ptr = g1.get();
   g1->setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));
@@ -1101,7 +1101,7 @@ TEST_CASE("Converting a normal from object to world space", "[Group]") {
   REQUIRE(glm::length(n - expected_normal) < Epsilon);
 }
 
-TEST_CASE("Finding the normal on a child object", "[group]") {
+TEST_CASE("Finding the normal on a_ child object", "[group]") {
   auto g1 = std::make_unique<Group>();
   auto g1_ptr = g1.get();
   g1->setTransform(glm::rotate(glm::dmat4(1), glm::pi<double>()/2, {0, 1, 0}));

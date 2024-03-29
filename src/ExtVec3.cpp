@@ -33,7 +33,7 @@ glm::dmat4 view_transform(const glm::dvec4 &from, const glm::dvec4 &to, const gl
   // Apply translation to the orientation matrix
   glm::dmat4 translation = glm::translate(glm::dmat4(1.0), -from3);
 
-  // The final view matrix is a combination of orientation and translation
+  // The final view matrix is a_ combination of orientation and translation
   return glm::transpose(orientation) * translation;
 }
 

@@ -1,12 +1,12 @@
 # Assuming this is the CMakeLists.txt inside the 'src' directory
 
-# Create a list of header files.
+# Create a_ list of header files.
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.h")
 
-# Create a list of source files.
+# Create a_ list of source files.
 file(GLOB SOURCE_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-# Add a library target called 'classes' to be built from the source and header files.
+# Add a_ library target called 'classes' to be built from the source and header files.
 add_library(classes ${HEADER_LIST} ${SOURCE_LIST}
         ../test/test.cpp)
 

@@ -100,13 +100,13 @@ std::unique_ptr<Group> Parser::processMesh(aiMesh *mesh) {
   auto g = std::make_unique<Group>();
   for(auto i = 0; i < mesh->mNumFaces; i++) {
     auto f = mesh->mFaces[i];
-    std::cout << f.mNumIndices << "\n";
+    //std::cout << f.mNumIndices << "\n";
     auto p1 = convertAiVertex(mesh->mVertices[f.mIndices[0]]);
     auto p2 = convertAiVertex(mesh->mVertices[f.mIndices[1]]);
     auto p3 = convertAiVertex(mesh->mVertices[f.mIndices[2]]);
-    std::cout << mesh->mFaces[i].mIndices[0] << " " << glm::to_string(p1) << "\n";
-    std::cout << mesh->mFaces[i].mIndices[1] << " " << glm::to_string(p2) << "\n";
-    std::cout << mesh->mFaces[i].mIndices[2] << " " << glm::to_string(p3) << "\n";
+    /*std::cout << f.mIndices[0] << " " << glm::to_string(p1) << "\n";
+    std::cout << f.mIndices[1] << " " << glm::to_string(p2) << "\n";
+    std::cout << f.mIndices[2] << " " << glm::to_string(p3) << "\n";*/
     if(mesh->HasNormals()) {
       auto n1 = convertAiVector(mesh->mNormals[f.mIndices[0]]);
       auto n2 = convertAiVector(mesh->mNormals[f.mIndices[1]]);

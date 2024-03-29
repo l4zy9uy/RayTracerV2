@@ -71,23 +71,30 @@ int main() {
   Cone cone;
   Material mat4;
   cone.setMaterial(mat4);
-  cone.setMaximum(1);
+  cone.setMaximum(0);
   cone.setMinimum(-1);
   cone.setTransform(glm::translate(glm::dmat4(1), {2, 1, 0}) *
       glm::scale(glm::dmat4(1), {0.5, 0.5, 0.5}));
   world.addShape(std::make_shared<Plane>(myFloor));
   world.addShape(std::make_shared<Plane>(myWall));
-  world.addShape(std::make_shared<Cube>(cube));
-  world.addShape(std::make_shared<Cone>(cone));
+  /*world.addShape(std::make_shared<Cube>(cube));
+  world.addShape(std::make_shared<Cone>(cone));*/
 
-  Camera camera(800, 400, glm::pi<double>() / 3);
-  auto camTransform = view_transform(glm::dvec4(2.0, 1.5, -5.0, 1.0),
+  Parser p;
+  p.test("../../test.txt");
+  auto gs = std::move(p.groups_);
+  gs[0]->setTransform(glm::translate(glm::dmat4(1), {0, 1, 0}) *
+      glm::scale(glm::dmat4(1), {0.1, 0.1, 0.1  }));
+  std::cout << gs.size() << "\n";
+  for(auto &g : gs) {
+    world.addShape(std::move(g));
+  }
+  Camera camera(1000, 500, glm::pi<double>() / 3);
+  auto camTransform = view_transform(glm::dvec4(0.0, 1.5, -5.0, 1.0),
                                      glm::dvec4(0.0, 1.0, 0.0, 1.0),
                                      glm::dvec4(0.0, 1.0, 0.0, 0.0));
   camera.setTransformMatrix(glm::rotate(camTransform, 0.0, {1, 0, 0}));
   camera.render(world).canvas_to_ppm();
-
-
   return 0;
 }
 /*Cone c;
